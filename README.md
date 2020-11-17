@@ -11,11 +11,19 @@ npm install react-native-wemap-livemap
 ## Usage
 
 ```js
-import WemapLivemap from "react-native-wemap-livemap";
+import Livemap from 'react-native-wemap-livemap';
 
 // ...
 
-const result = await WemapLivemap.multiply(3, 7);
+const MyMap = () => (
+  <View style={{ flex: 1 }}>
+    <Livemap
+      mapId={-1}
+      token={'7ETI43N4ZZGARWPHJ57WQAARW'}
+      style={{ flex: 1 }}
+    />
+  </View>
+);
 ```
 
 ## Contributing
