@@ -13,8 +13,10 @@ Pod::Spec.new do |s|
   s.platforms    = { :ios => "9.0" }
   s.source       = { :git => "https://github.com/wemap/react-native-wemap-livemap.git", :tag => "#{s.version}" }
 
-  
+  s.vendored_frameworks = 'ios/livemap_ios_sdk.framework'
   s.source_files = "ios/**/*.{h,m,mm,swift}"
+  s.requires_arc = true
+  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
   
 
   s.dependency "React"

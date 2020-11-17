@@ -1,0 +1,100 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)
+// swift-module-flags: -target armv7-apple-ios10.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name livemap_ios_sdk
+import AVFoundation
+import Foundation
+import Swift
+import UIKit
+import WebKit
+@_exported import livemap_ios_sdk
+@objc public protocol WemapSDKMapActionsDelegate : AnyObject {
+  @objc optional func regionDidChanged(controller: livemap_ios_sdk.wemapsdk)
+  @objc optional func openPinpoint(controller: livemap_ios_sdk.wemapsdk)
+  @objc optional func openList(controller: livemap_ios_sdk.wemapsdk)
+  @objc optional func bookEvent(controller: livemap_ios_sdk.wemapsdk)
+  @objc optional func sharePinpoint(controller: livemap_ios_sdk.wemapsdk)
+  @objc optional func shareMap(controller: livemap_ios_sdk.wemapsdk)
+}
+@objc @_inheritsConvenienceInitializers public class CustomARView : UIKit.UIView {
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  public func set(isHidden: Swift.Bool)
+  public func set(webMapView: WebKit.WKWebView)
+  @objc override dynamic public func layoutSubviews()
+  @objc deinit
+}
+@objc public protocol wemapsdkViewDelegate : AnyObject {
+  @objc optional func waitForReady(_ wemapController: livemap_ios_sdk.wemapsdk)
+  @objc optional func onEventOpen(_ wemapController: livemap_ios_sdk.wemapsdk, event: livemap_ios_sdk.WemapEvent)
+  @objc optional func onPinpointOpen(_ wemapController: livemap_ios_sdk.wemapsdk, pinpoint: livemap_ios_sdk.WemapPinpoint)
+  @objc optional func onEventClose(_ wemapController: livemap_ios_sdk.wemapsdk)
+  @objc optional func onPinpointClose(_ wemapController: livemap_ios_sdk.wemapsdk)
+  @objc optional func onGuidingStarted(_ wemapController: livemap_ios_sdk.wemapsdk)
+  @objc optional func onGuidingStopped(_ wemapController: livemap_ios_sdk.wemapsdk)
+  @objc optional func onBookEventClicked(_ wemapController: livemap_ios_sdk.wemapsdk, event: livemap_ios_sdk.WemapEvent)
+  @objc optional func onGoToPinpointClicked(_ wemapController: livemap_ios_sdk.wemapsdk, pinpoint: livemap_ios_sdk.WemapPinpoint)
+}
+@objc public class WemapEvent : ObjectiveC.NSObject {
+  final public let id: Swift.Int
+  final public let name: Swift.String
+  final public let eventDescription: Swift.String
+  final public let pinpoint: livemap_ios_sdk.WemapPinpoint?
+  final public let external_data: Foundation.NSDictionary?
+  public init(_ json: Foundation.NSDictionary)
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc public class WemapPinpoint : ObjectiveC.NSObject {
+  final public let id: Swift.Int
+  final public let longitude: Swift.Double
+  final public let latitude: Swift.Double
+  final public let name: Swift.String
+  final public let pinpointDescription: Swift.String
+  final public let external_data: Foundation.NSDictionary?
+  public init(_ json: Foundation.NSDictionary)
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class wemapsdk : UIKit.UIView, WebKit.WKUIDelegate {
+  public static let sharedInstance: livemap_ios_sdk.wemapsdk
+  weak open var delegate: livemap_ios_sdk.wemapsdkViewDelegate?
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic public func layoutSubviews()
+  @objc deinit
+}
+extension wemapsdk : WebKit.WKNavigationDelegate {
+  @objc dynamic open func webView(_ webView: WebKit.WKWebView, didFinish navigation: WebKit.WKNavigation!)
+  @objc dynamic open func webView(_ webView: WebKit.WKWebView, didFail navigation: WebKit.WKNavigation!, withError error: Swift.Error)
+}
+extension wemapsdk {
+  public func configure(config: livemap_ios_sdk.wemapsdk_config) -> livemap_ios_sdk.wemapsdk
+  public func presentIn(view: UIKit.UIView) -> livemap_ios_sdk.wemapsdk
+}
+extension wemapsdk : WebKit.WKScriptMessageHandler {
+  @objc dynamic public func userContentController(_ userContentController: WebKit.WKUserContentController, didReceive message: WebKit.WKScriptMessage)
+}
+extension wemapsdk {
+  public func waitForReady()
+  public func openEvent(WemapEventId id: Swift.Int)
+  public func closeEvent()
+  public func openPinpoint(WemapPinpointId id: Swift.Int)
+  public func closePinpoint()
+  public func setFilters(WemapFilters: livemap_ios_sdk.WemapFilters)
+  public func navigateToPinpoint(WemapPinpointId id: Swift.Int, location: livemap_ios_sdk.WemapLocation? = nil, heading: Swift.Int? = nil)
+  public func stopNavigation()
+}
+public struct WemapFilters : Swift.Codable {
+  public init(tags: Swift.Array<Swift.String>? = nil, query: Swift.String? = nil, startDate: Swift.String? = nil, endDate: Swift.String? = nil)
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct WemapLocation : Swift.Codable {
+  public init(longitude: Swift.Double, latitude: Swift.Double)
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct wemapsdk_config {
+  public init(token: Swift.String, mapId: Swift.Int)
+  public let token: Swift.String
+  public let mapId: Swift.Int
+}
