@@ -1,6 +1,25 @@
 #import <React/RCTViewManager.h>
+#import <React/RCTBridgeModule.h>
+#import "React/RCTEventEmitter.h"
 
 @interface RCT_EXTERN_MODULE(WemapLivemapManager, RCTViewManager)
   RCT_EXPORT_VIEW_PROPERTY(mapId, NSNumber)
   RCT_EXPORT_VIEW_PROPERTY(token, NSString)
+
+  RCT_EXTERN_METHOD(openEventViaManager: (nonnull NSNumber *)node id: (nonnull NSNumber *)id)
+  RCT_EXTERN_METHOD(closeEventViaManager: (nonnull NSNumber *)node)
+  RCT_EXTERN_METHOD(openPinpointViaManager: (nonnull NSNumber *)node id: (nonnull NSNumber *)id)
+  RCT_EXTERN_METHOD(closePinpointViaManager: (nonnull NSNumber *)node)
+  RCT_EXTERN_METHOD(setFiltersViaManager: (nonnull NSNumber *)node startLocation: (nonnull NSDictionary *)startLocation)
+  RCT_EXTERN_METHOD(stopNavigation: (nonnull NSNumber *)node)
+
+  RCT_EXPORT_VIEW_PROPERTY(onMapReady, RCTBubblingEventBlock)
+  RCT_EXPORT_VIEW_PROPERTY(onEventOpen, RCTBubblingEventBlock)
+  RCT_EXPORT_VIEW_PROPERTY(onPinpointOpen, RCTBubblingEventBlock)
+  RCT_EXPORT_VIEW_PROPERTY(onEventClose, RCTBubblingEventBlock)
+  RCT_EXPORT_VIEW_PROPERTY(onPinpointClose, RCTBubblingEventBlock)
+  RCT_EXPORT_VIEW_PROPERTY(onGuidingStarted, RCTBubblingEventBlock)
+  RCT_EXPORT_VIEW_PROPERTY(onGuidingStopped, RCTBubblingEventBlock)
+  RCT_EXPORT_VIEW_PROPERTY(onBookEventClicked, RCTBubblingEventBlock)
+  RCT_EXPORT_VIEW_PROPERTY(onGoToPinpointClicked, RCTBubblingEventBlock)
 @end

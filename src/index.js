@@ -1,12 +1,31 @@
-import React from 'react';
-import { requireNativeComponent, View } from 'react-native';
+import React, { useRef, forwardRef, useImperativeHandle } from 'react';
+import {
+  requireNativeComponent,
+  UIManager,
+  findNodeHandle,
+} from 'react-native';
 
 const WemapLivemap = requireNativeComponent('WemapLivemap', null);
 
-export default ({ mapId, token, ...props }) => {
-  return (
-    <View {...props}>
-      <WemapLivemap mapId={mapId} token={token} style={{ flex: 1 }} />
-    </View>
-  );
+const Livemap = (props, ref) => {
+  const wemapLivemap = useRef();
+  useImperativeHandle(ref, () => ({
+    openPinpoint,
+  }));
+
+  const sendCommand = (command, params) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(wemapLivemap.current),
+      UIManager.WemapLivemap.Commands[command],
+      params
+    );
+  };
+
+  const openPinpoint = (id) => {
+    sendCommand('openPinpointViaManager', [id]);
+  };
+
+  return <WemapLivemap ref={wemapLivemap} style={{ flex: 1 }} {...props} />;
 };
+
+export default forwardRef(Livemap);

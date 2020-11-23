@@ -1,13 +1,22 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useRef, useEffect } from 'react';
 import Livemap from 'react-native-wemap-livemap';
 
-export default () => (
-  <View style={{ flex: 1 }}>
+export default () => {
+  const livemap = useRef();
+
+  useEffect(() => {
+    setTimeout(() => {
+      livemap.current.openPinpoint(36123691);
+    }, 10000);
+  }, [livemap]);
+
+  return (
     <Livemap
+      ref={livemap}
       mapId={-1}
       token={'7ETI43N4ZZGARWPHJ57WQAARW'}
       style={{ flex: 1 }}
+      onPinpointOpen={(e) => alert(e.nativeEvent.value)}
     />
-  </View>
-);
+  );
+};
