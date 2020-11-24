@@ -121,5 +121,5 @@ repositories {
 dependencies {
   // noinspection GradleDynamicVersion
   api 'com.facebook.react:react-native:+'
-  implementation fileTree(dir: 'libs', include: ['livemap-sdk.aar'])
+  compileOnly files('libs/livemap-sdk.aar')
 }
