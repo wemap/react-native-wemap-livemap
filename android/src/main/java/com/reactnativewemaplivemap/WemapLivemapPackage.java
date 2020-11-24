@@ -1,28 +1,27 @@
 package com.reactnativewemaplivemap;
 
-import androidx.annotation.NonNull;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 
-class WemapLivemapPackage implements ReactPackage {
+import androidx.annotation.NonNull;
 
-  @Override
-  public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
-    return Collections.singletonList(new WemapLivemapModule(reactContext));
-  }
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-  @NonNull
-  @Override
-  public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
-    return new ArrayList<>();
-  }
+public class WemapLivemapPackage implements ReactPackage {
 
+    @Override
+    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+        return Arrays.<ViewManager>asList( new WemapLivemapManager() );
+    }
+
+    @Override
+    public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
+        List<NativeModule> modules = new ArrayList<>();
+        return modules;
+    }
 
 }
