@@ -24,7 +24,7 @@ android {
   compileSdkVersion getExtOrIntegerDefault('compileSdkVersion')
   buildToolsVersion getExtOrDefault('buildToolsVersion')
   defaultConfig {
-    minSdkVersion 17
+    minSdkVersion 21
     targetSdkVersion getExtOrIntegerDefault('targetSdkVersion')
     versionCode 1
     versionName "0.1"
@@ -122,4 +122,6 @@ dependencies {
   // noinspection GradleDynamicVersion
   api 'com.facebook.react:react-native:+'
   compileOnly files('libs/livemap-sdk.aar')
+  compileOnly files('libs/commons.aar')
+  compileOnly files('libs/providers.aar')
 }

@@ -211,6 +211,13 @@ dependencies {
 
     implementation project(':reactnativewemaplivemap')
     implementation files('../../../android/libs/livemap-sdk.aar')
+    implementation files('../../../android/libs/commons.aar')
+    implementation files('../../../android/libs/providers.aar')
+
+    // https://stackoverflow.com/a/64235713/2239938
+    implementation ("com.squareup.okhttp3:okhttp:3.12.12"){
+      force = true //API 19 support
+    }
 }
 
 // Run this once to be able to run the application with BUCK
