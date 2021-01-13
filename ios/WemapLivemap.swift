@@ -19,6 +19,8 @@ class WemapLivemap: UIView {
     @objc var onGuidingStopped: RCTBubblingEventBlock?
     @objc var onBookEventClicked: RCTBubblingEventBlock?
     @objc var onGoToPinpointClicked: RCTBubblingEventBlock?
+    @objc var onUserLogin: RCTBubblingEventBlock?
+    @objc var onUserLogout: RCTBubblingEventBlock?
   
     override func didSetProps(_ changedProps: [String]!) {
         wemap.delegate = self
@@ -69,6 +71,10 @@ class WemapLivemap: UIView {
     @objc func stopNavigation() {
         wemap.stopNavigation()
     }
+    
+    @objc func signInByToken(_ params: [String : Any]) {
+        wemap.signInByToken(accessToken: params["accessToken"] as! String, refreshToken: params["refreshToken"]! as! String)
+    }
 }
 
 extension WemapLivemap: wemapsdkViewDelegate {
@@ -116,6 +122,17 @@ extension WemapLivemap: wemapsdkViewDelegate {
         if(self.onGoToPinpointClicked == nil) { return }
         self.onGoToPinpointClicked!(["value": pinpoint.id])
     }
+    
+    @objc func onUserLogin(_ wemapController: wemapsdk) {
+        if(self.onUserLogin == nil) { return }
+        self.onUserLogin!(["value": true])
+    }
+    
+    @objc func onUserLogout(_ wemapController: wemapsdk) {
+        if(self.onUserLogout == nil) { return }
+        self.onUserLogout!(["value": true])
+    }
+
 }
 
 @objc (WemapLivemapManager)
@@ -157,6 +174,10 @@ class WemapLivemapManager: RCTViewManager {
     
     @objc func stopNavigationViaManager(_ node: NSNumber) {
         self.callLivemapMethod(node, selector: "stopNavigation")
+    }
+    
+    @objc func signInByTokenViaManager(_ node: NSNumber, accessToken: NSString, refreshToken: NSString) {
+        self.callLivemapMethod(node, selector: "signInByToken:", params: ["accessToken": accessToken, "refreshToken": refreshToken])
     }
  
     override func view() -> UIView! {

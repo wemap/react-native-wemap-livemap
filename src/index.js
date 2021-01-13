@@ -11,6 +11,7 @@ const Livemap = (props, ref) => {
   const wemapLivemap = useRef();
   useImperativeHandle(ref, () => ({
     openPinpoint,
+    signInByToken,
   }));
 
   const sendCommand = (command, params) => {
@@ -23,6 +24,10 @@ const Livemap = (props, ref) => {
 
   const openPinpoint = (id) => {
     sendCommand('openPinpointViaManager', [id]);
+  };
+
+  const signInByToken = (access_token, refresh_token) => {
+    sendCommand('signInByTokenViaManager', [access_token, refresh_token]);
   };
 
   return <WemapLivemap ref={wemapLivemap} style={{ flex: 1 }} {...props} />;

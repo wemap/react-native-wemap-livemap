@@ -11,7 +11,8 @@
   RCT_EXTERN_METHOD(openPinpointViaManager: (nonnull NSNumber *)node id: (nonnull NSNumber *)id)
   RCT_EXTERN_METHOD(closePinpointViaManager: (nonnull NSNumber *)node)
   RCT_EXTERN_METHOD(setFiltersViaManager: (nonnull NSNumber *)node startLocation: (nonnull NSDictionary *)startLocation)
-  RCT_EXTERN_METHOD(stopNavigation: (nonnull NSNumber *)node)
+  RCT_EXTERN_METHOD(stopNavigationViaManager: (nonnull NSNumber *)node)
+  RCT_EXTERN_METHOD(signInByTokenViaManager: (nonnull NSNumber *)node accessToken: (nonnull NSString *)accessToken refreshToken: (nonnull NSString *)refreshToken)
 
   RCT_EXPORT_VIEW_PROPERTY(onMapReady, RCTBubblingEventBlock)
   RCT_EXPORT_VIEW_PROPERTY(onEventOpen, RCTBubblingEventBlock)
@@ -22,4 +23,6 @@
   RCT_EXPORT_VIEW_PROPERTY(onGuidingStopped, RCTBubblingEventBlock)
   RCT_EXPORT_VIEW_PROPERTY(onBookEventClicked, RCTBubblingEventBlock)
   RCT_EXPORT_VIEW_PROPERTY(onGoToPinpointClicked, RCTBubblingEventBlock)
+  RCT_EXPORT_VIEW_PROPERTY(onUserLogin, RCTBubblingEventBlock)
+  RCT_EXPORT_VIEW_PROPERTY(onUserLogout, RCTBubblingEventBlock)
 @end

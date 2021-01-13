@@ -6,7 +6,11 @@ export default () => {
 
   useEffect(() => {
     setTimeout(() => {
-      livemap.current.openPinpoint(36123691);
+      // livemap.current.openPinpoint(36123691);
+      livemap.current.signInByToken(
+        'BM85HR0HkotCTvzn1gCGof72z81p1N',
+        'i1LCEn7ZGxP6GTnliO0fAxo13KtVxW'
+      );
     }, 10000);
   }, [livemap]);
 
@@ -17,6 +21,8 @@ export default () => {
       token={'7ETI43N4ZZGARWPHJ57WQAARW'}
       style={{ flex: 1 }}
       onPinpointOpen={(e) => alert(e.nativeEvent.value)}
+      onUserLogin={() => alert('userLogin')}
+      onUserLogout={() => alert('userLogout')}
     />
   );
 };
