@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
 // swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name livemap_ios_sdk
 import AVFoundation
 import Foundation
@@ -31,6 +31,8 @@ import WebKit
   @objc optional func onPinpointClose(_ wemapController: livemap_ios_sdk.wemapsdk)
   @objc optional func onGuidingStarted(_ wemapController: livemap_ios_sdk.wemapsdk)
   @objc optional func onGuidingStopped(_ wemapController: livemap_ios_sdk.wemapsdk)
+  @objc optional func onUserLogin(_ wemapController: livemap_ios_sdk.wemapsdk)
+  @objc optional func onUserLogout(_ wemapController: livemap_ios_sdk.wemapsdk)
   @objc optional func onBookEventClicked(_ wemapController: livemap_ios_sdk.wemapsdk, event: livemap_ios_sdk.WemapEvent)
   @objc optional func onGoToPinpointClicked(_ wemapController: livemap_ios_sdk.wemapsdk, pinpoint: livemap_ios_sdk.WemapPinpoint)
 }
@@ -82,6 +84,7 @@ extension wemapsdk {
   public func setFilters(WemapFilters: livemap_ios_sdk.WemapFilters)
   public func navigateToPinpoint(WemapPinpointId id: Swift.Int, location: livemap_ios_sdk.WemapLocation? = nil, heading: Swift.Int? = nil)
   public func stopNavigation()
+  public func signInByToken(accessToken: Swift.String, refreshToken: Swift.String)
 }
 public struct WemapFilters : Swift.Codable {
   public init(tags: Swift.Array<Swift.String>? = nil, query: Swift.String? = nil, startDate: Swift.String? = nil, endDate: Swift.String? = nil)
