@@ -1,28 +1,35 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useCallback } from 'react';
 import Livemap from 'react-native-wemap-livemap';
 
 export default () => {
   const livemap = useRef();
 
-  useEffect(() => {
-    setTimeout(() => {
-      // livemap.current.openPinpoint(36123691);
-      livemap.current.signInByToken(
-        'BM85HR0HkotCTvzn1gCGof72z81p1N',
-        'i1LCEn7ZGxP6GTnliO0fAxo13KtVxW'
-      );
-    }, 10000);
+  const onMapReady = useCallback(() => {
+    livemap.current.openPinpoint(37132482);
   }, [livemap]);
 
   return (
     <Livemap
       ref={livemap}
-      mapId={-1}
-      token={'7ETI43N4ZZGARWPHJ57WQAARW'}
+      mapConfig={{
+        token: '7ETI43N4ZZGARWPHJ57WQAARW',
+        ufe: true,
+        webappEndpoint: 'https://livemapdev.maaap.it',
+      }}
       style={{ flex: 1 }}
-      onPinpointOpen={(e) => alert(e.nativeEvent.value)}
-      onUserLogin={() => alert('userLogin')}
-      onUserLogout={() => alert('userLogout')}
+      onMapReady={onMapReady}
+      onPinpointOpen={({ nativeEvent: { id } }) =>
+        console.log(`pinpoint open: ${id}`)
+      }
+      onPinpointClose={() => console.log('pinpoint close')}
+      onUserLogin={() => console.log('user login')}
+      onUserLogout={() => console.log('user logout')}
+      onEventOpen={({ nativeEvent: { id } }) =>
+        console.log(`event open: ${id}`)
+      }
+      onEventClose={() => console.log('event close')}
+      onGuidingStarted={() => console.log('guiding started')}
+      onGuidingStopped={() => console.log('guiding stopped')}
     />
   );
 };
