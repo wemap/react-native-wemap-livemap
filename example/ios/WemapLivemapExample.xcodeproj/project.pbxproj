@@ -200,7 +200,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-WemapLivemapExample/Pods-WemapLivemapExample-frameworks.sh",
-				"${PODS_ROOT}/../../../ios/livemap_ios_sdk.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/livemap_ios_sdk/livemap_ios_sdk.framework/livemap_ios_sdk",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (

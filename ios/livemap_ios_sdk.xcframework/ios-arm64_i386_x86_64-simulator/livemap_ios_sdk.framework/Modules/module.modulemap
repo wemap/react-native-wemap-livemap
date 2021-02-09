@@ -1,0 +1,11 @@
+framework module livemap_ios_sdk {
+  umbrella header "livemap_ios_sdk.h"
+
+  export *
+  module * { export * }
+}
+
+module livemap_ios_sdk.Swift {
+    header "livemap_ios_sdk-Swift.h"
+    requires objc
+}
