@@ -3,8 +3,7 @@
 #import "React/RCTEventEmitter.h"
 
 @interface RCT_EXTERN_MODULE(WemapLivemapManager, RCTViewManager)
-  RCT_EXPORT_VIEW_PROPERTY(mapId, NSNumber)
-  RCT_EXPORT_VIEW_PROPERTY(token, NSString)
+  RCT_EXPORT_VIEW_PROPERTY(mapConfig, NSDictionary)
 
   RCT_EXTERN_METHOD(openEventViaManager: (nonnull NSNumber *)node id: (nonnull NSNumber *)id)
   RCT_EXTERN_METHOD(closeEventViaManager: (nonnull NSNumber *)node)

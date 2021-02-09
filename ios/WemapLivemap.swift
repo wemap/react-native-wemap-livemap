@@ -6,8 +6,7 @@ class WemapLivemap: UIView {
     let wemap = wemapsdk.sharedInstance
     
     // RN Config Props
-    @objc var mapId: NSNumber!
-    @objc var token: NSString!
+    @objc var mapConfig: NSDictionary!
     
     // RN Event Callback Props
     @objc var onMapReady: RCTBubblingEventBlock?
@@ -24,8 +23,8 @@ class WemapLivemap: UIView {
   
     override func didSetProps(_ changedProps: [String]!) {
         wemap.delegate = self
-      
-        _ = wemap.configure(config: wemapsdk_config(token: self.token! as String, mapId: self.mapId as! Int)).presentIn(view: self)
+              
+        _ = wemap.configure(config: wemapsdk_config(token: self.mapConfig!["token"] as! String, ufe: self.mapConfig["ufe"] as? Bool, emmid: self.mapConfig!["emmid"] as? Int, webappEndpoint: self.mapConfig!["webappEndpoint"] as? String)).presentIn(view: self)
     }
   
     required init?(coder aDecoder: NSCoder) {
