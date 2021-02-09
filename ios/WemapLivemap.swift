@@ -79,57 +79,57 @@ class WemapLivemap: UIView {
 extension WemapLivemap: wemapsdkViewDelegate {
     @objc func waitForReady(_ wemapController: wemapsdk) {
         if(self.onMapReady == nil) { return }
-        self.onMapReady!(["value": true])
+        self.onMapReady!(nil)
     }
     
     @objc func onEventOpen(_ wemapController: wemapsdk, event: WemapEvent) {
         if(self.onEventOpen == nil) { return }
-        self.onEventOpen!(["value": event.id])
+        self.onEventOpen!(["id": event.id])
     }
     
     @objc func onPinpointOpen(_ wemapController: wemapsdk, pinpoint: WemapPinpoint) {
         if(self.onPinpointOpen == nil) { return }
-        self.onPinpointOpen!(["value": pinpoint.id])
+        self.onPinpointOpen!(["id": pinpoint.id])
     }
     
     @objc func onEventClose(_ wemapController: wemapsdk) {
         if(self.onEventClose == nil) { return }
-        self.onEventClose!(["value": true])
+        self.onEventClose!(nil)
     }
     
     @objc func onPinpointClose(_ wemapController: wemapsdk) {
         if(self.onPinpointClose == nil) { return }
-        self.onPinpointClose!(["value": true])
+        self.onPinpointClose!(nil)
     }
     
     @objc func onGuidingStarted(_ wemapController: wemapsdk) {
         if(self.onGuidingStarted == nil) { return }
-        self.onGuidingStarted!(["value": true])
+        self.onGuidingStarted!(nil)
     }
     
     @objc func onGuidingStopped(_ wemapController: wemapsdk) {
         if(self.onGuidingStopped == nil) { return }
-        self.onGuidingStopped!(["value": true])
+        self.onGuidingStopped!(nil)
     }
     
     @objc func onBookEventClicked(_ wemapController: wemapsdk, event: WemapEvent) {
         if(self.onBookEventClicked == nil) { return }
-        self.onBookEventClicked!(["value": event.id])
+        self.onBookEventClicked!(["id": event.id])
     }
     
     @objc func onGoToPinpointClicked(_ wemapController: wemapsdk, pinpoint: WemapPinpoint) {
         if(self.onGoToPinpointClicked == nil) { return }
-        self.onGoToPinpointClicked!(["value": pinpoint.id])
+        self.onGoToPinpointClicked!(["id": pinpoint.id])
     }
     
     @objc func onUserLogin(_ wemapController: wemapsdk) {
         if(self.onUserLogin == nil) { return }
-        self.onUserLogin!(["value": true])
+        self.onUserLogin!(nil)
     }
     
     @objc func onUserLogout(_ wemapController: wemapsdk) {
         if(self.onUserLogout == nil) { return }
-        self.onUserLogout!(["value": true])
+        self.onUserLogout!(nil)
     }
 
 }
