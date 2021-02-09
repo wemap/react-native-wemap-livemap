@@ -37,12 +37,23 @@ class WemapLivemap: UIView {
   
     override func layoutSubviews() {
         super.layoutSubviews()
-        wemap.frame = self.frame
+        
+        if #available(iOS 11.0, *) {
+            wemap.frame.origin.x = -safeAreaInsets.left
+            wemap.frame.origin.y = -safeAreaInsets.top
+            wemap.frame.size.height = self.frame.height + safeAreaInsets.top + safeAreaInsets.bottom
+            wemap.frame.size.width = self.frame.width + safeAreaInsets.left + safeAreaInsets.right
+        } else {
+            wemap.frame.origin.x = -layoutMargins.left
+            wemap.frame.origin.y = -layoutMargins.top
+            wemap.frame.size.height = self.frame.height + layoutMargins.top + layoutMargins.bottom
+            wemap.frame.size.width = self.frame.width + layoutMargins.left + layoutMargins.right
+        }
     }
     
     // RN Methods
-    @objc func openEvent() {
-        wemap.openEvent(WemapEventId: 1)
+    @objc func openEvent(_ params: [String : Any]?) {
+        wemap.openEvent(WemapEventId: params?["id"] as! Int)
     }
     
     @objc func closeEvent() {
