@@ -1,9 +1,5 @@
 import React, { useRef, forwardRef, useImperativeHandle } from 'react';
-import {
-  requireNativeComponent,
-  UIManager,
-  findNodeHandle,
-} from 'react-native';
+import { requireNativeComponent, UIManager, findNodeHandle } from 'react-native';
 
 const WemapLivemap = requireNativeComponent('WemapLivemap', null);
 
@@ -22,11 +18,7 @@ const Livemap = forwardRef((props, ref) => {
   }));
 
   const sendCommand = (command, params) => {
-    UIManager.dispatchViewManagerCommand(
-      findNodeHandle(wemapLivemap.current),
-      command,
-      params
-    );
+    UIManager.dispatchViewManagerCommand(findNodeHandle(wemapLivemap.current), command, params);
   };
 
   const openEvent = (id) => {
