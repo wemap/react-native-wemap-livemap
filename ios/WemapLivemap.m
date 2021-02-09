@@ -10,7 +10,8 @@
   RCT_EXTERN_METHOD(closeEventViaManager: (nonnull NSNumber *)node)
   RCT_EXTERN_METHOD(openPinpointViaManager: (nonnull NSNumber *)node id: (nonnull NSNumber *)id)
   RCT_EXTERN_METHOD(closePinpointViaManager: (nonnull NSNumber *)node)
-  RCT_EXTERN_METHOD(setFiltersViaManager: (nonnull NSNumber *)node startLocation: (nonnull NSDictionary *)startLocation)
+  RCT_EXTERN_METHOD(setFiltersViaManager: (nonnull NSNumber *)node startDate: (nonnull NSString *)startDate endDate: (nonnull NSString *)endDate query: (nonnull NSString *)query tags: (nonnull NSArray *)tags)
+  RCT_EXTERN_METHOD(startNavigationViaManager: (nonnull NSNumber *)node id: (nonnull NSNumber *)id)
   RCT_EXTERN_METHOD(stopNavigationViaManager: (nonnull NSNumber *)node)
   RCT_EXTERN_METHOD(signInByTokenViaManager: (nonnull NSNumber *)node accessToken: (nonnull NSString *)accessToken refreshToken: (nonnull NSString *)refreshToken)
 

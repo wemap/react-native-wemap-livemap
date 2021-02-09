@@ -63,9 +63,8 @@ class WemapLivemap: UIView {
         wemap.setFilters(WemapFilters: filters)
     }
     
-    @objc func navigateToPinpoint(id: NSNumber, startLocation: [NSString: NSNumber]?) {
-        let location = WemapLocation(longitude: Double(startLocation!["longitude"] as! Int), latitude: Double(startLocation!["latitude"] as! Int))
-        wemap.navigateToPinpoint(WemapPinpointId: id as! Int, location: location)
+    @objc func navigateToPinpoint(id: NSNumber) {
+        wemap.navigateToPinpoint(WemapPinpointId: id as! Int)
     }
     
     @objc func stopNavigation() {
@@ -164,12 +163,12 @@ class WemapLivemapManager: RCTViewManager {
         self.callLivemapMethod(node, selector: "closePinpoint")
     }
     
-    @objc func setFiltersViaManager(_ node: NSNumber, tags: NSArray, query: NSString, startDate: NSString, endDate: NSString) {
+    @objc func setFiltersViaManager(_ node: NSNumber, startDate: NSString, endDate: NSString, query: NSString, tags: NSArray) {
         self.callLivemapMethod(node, selector: "setFilters:", params:["tags": tags, "query": query, "startDate": startDate, "endDate": endDate])
     }
     
-    @objc func navigateToPinpointViaManager(_ node: NSNumber, id: NSNumber, startLocation: [NSString: NSNumber]?) {
-        self.callLivemapMethod(node, selector: "navigateToPinpoint:", params: ["id": id, "startLocation": startLocation!])
+    @objc func navigateToPinpointViaManager(_ node: NSNumber, id: NSNumber) {
+        self.callLivemapMethod(node, selector: "navigateToPinpoint:", params: ["id": id])
     }
     
     @objc func stopNavigationViaManager(_ node: NSNumber) {
