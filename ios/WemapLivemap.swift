@@ -24,7 +24,7 @@ class WemapLivemap: UIView {
     override func didSetProps(_ changedProps: [String]!) {
         wemap.delegate = self
               
-        _ = wemap.configure(config: wemapsdk_config(token: self.mapConfig!["token"] as! String, ufe: self.mapConfig["ufe"] as? Bool, emmid: self.mapConfig!["emmid"] as? Int, webappEndpoint: self.mapConfig!["webappEndpoint"] as? String)).presentIn(view: self)
+        _ = wemap.configure(config: wemapsdk_config(token: self.mapConfig!["token"] as? String, ufe: self.mapConfig["ufe"] as? Bool, emmid: self.mapConfig!["emmid"] as? Int, webappEndpoint: self.mapConfig!["webappEndpoint"] as? String)).presentIn(view: self)
     }
   
     required init?(coder aDecoder: NSCoder) {

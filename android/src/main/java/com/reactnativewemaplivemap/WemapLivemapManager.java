@@ -30,18 +30,15 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
 
     LivemapOptions livemapOptions = new LivemapOptions();
 
-    livemapOptions.token = mapConfig.getString("token");
-
     if(mapConfig.hasKey("webappEndpoint")) {
       livemapOptions.webappEndpoint = mapConfig.getString("webappEndpoint");
     }
 
     if(mapConfig.hasKey("ufe")) {
       livemapOptions.ufe = mapConfig.getBoolean("ufe");
-    }
-
-    if(mapConfig.hasKey("emmid")) {
+    } else {
       livemapOptions.emmid = mapConfig.getInt("emmid");
+      livemapOptions.token = mapConfig.getString("token");
     }
 
     view.loadMap(this.mContext, livemapOptions);
