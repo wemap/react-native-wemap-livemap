@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.getwemap.livemap.sdk.LivemapView xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:wemap="http://schemas.android.com/apk/res-auto"
-  android:id="@+id/livemap"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  wemap:emmid="10059"
-  wemap:token="at553a602ec1e011.66072018" />
-
