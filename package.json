@@ -140,5 +140,8 @@
       "module",
       "typescript"
     ]
+  },
+  "dependencies": {
+    "react-docgen": "^5.3.1"
   }
 }
