@@ -17,13 +17,12 @@ export default () => {
           ufe: true,
           webappEndpoint: 'https://livemapdev.maaap.it',
         }}
-        style={{ flex: 1 }}
         onMapReady={onMapReady}
-        onPinpointOpen={({ nativeEvent: { id } }) => console.log(`pinpoint open: ${id}`)}
+        onPinpointOpen={({ id }) => console.log(`pinpoint open: ${id}`)}
         onPinpointClose={() => console.log('pinpoint close')}
         onUserLogin={() => console.log('user login')}
         onUserLogout={() => console.log('user logout')}
-        onEventOpen={({ nativeEvent: { id } }) => console.log(`event open: ${id}`)}
+        onEventOpen={({ id }) => console.log(`event open: ${id}`)}
         onEventClose={() => console.log('event close')}
         onGuidingStarted={() => console.log('guiding started')}
         onGuidingStopped={() => console.log('guiding stopped')}
