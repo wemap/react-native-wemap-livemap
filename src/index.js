@@ -3,57 +3,89 @@ import { requireNativeComponent, UIManager, findNodeHandle } from 'react-native'
 
 const NativeLivemap = requireNativeComponent('WemapLivemap', null);
 
-const Livemap = forwardRef((props, ref) => {
-  const nativeLivemap = useRef();
+const Livemap = forwardRef(
+  (
+    {
+      onMapReady,
+      onPinpointOpen,
+      onPinpointClose,
+      onUserLogin,
+      onUserLogout,
+      onEventOpen,
+      onEventClose,
+      onGuidingStarted,
+      onGuidingStopped,
+      ...rest
+    },
+    ref
+  ) => {
+    const nativeLivemap = useRef();
 
-  useImperativeHandle(ref, () => ({
-    openEvent,
-    closeEvent,
-    openPinpoint,
-    closePinpoint,
-    setFilters,
-    navigateToPinpoint,
-    stopNavigation,
-    signInByToken,
-  }));
+    useImperativeHandle(ref, () => ({
+      openEvent,
+      closeEvent,
+      openPinpoint,
+      closePinpoint,
+      setFilters,
+      navigateToPinpoint,
+      stopNavigation,
+      signInByToken,
+    }));
 
-  const sendCommand = (command, params) => {
-    UIManager.dispatchViewManagerCommand(findNodeHandle(nativeLivemap.current), command, params);
-  };
+    const sendCommand = (command, params) => {
+      UIManager.dispatchViewManagerCommand(findNodeHandle(nativeLivemap.current), command, params);
+    };
 
-  const openEvent = (id) => {
-    sendCommand('openEventViaManager', [id]);
-  };
+    const getNativeEventCallBack = (func) => ({ nativeEvent }) => func(nativeEvent);
 
-  const closeEvent = () => {
-    sendCommand('closeEventViaManager');
-  };
+    const openEvent = (id) => {
+      sendCommand('openEventViaManager', [id]);
+    };
 
-  const openPinpoint = (id) => {
-    sendCommand('openPinpointViaManager', [id]);
-  };
+    const closeEvent = () => {
+      sendCommand('closeEventViaManager');
+    };
 
-  const closePinpoint = (id) => {
-    sendCommand('closePinpointViaManager');
-  };
+    const openPinpoint = (id) => {
+      sendCommand('openPinpointViaManager', [id]);
+    };
 
-  const setFilters = (startDate, endDate, query, tags) => {
-    sendCommand('setFiltersViaManager', [startDate, endDate, query, tags]);
-  };
+    const closePinpoint = (id) => {
+      sendCommand('closePinpointViaManager');
+    };
 
-  const navigateToPinpoint = (id) => {
-    sendCommand('navigateToPinpointViaManager', [id]);
-  };
+    const setFilters = (startDate, endDate, query, tags) => {
+      sendCommand('setFiltersViaManager', [startDate, endDate, query, tags]);
+    };
 
-  const stopNavigation = () => {
-    sendCommand('stopNavigationViaManager');
-  };
+    const navigateToPinpoint = (id) => {
+      sendCommand('navigateToPinpointViaManager', [id]);
+    };
 
-  const signInByToken = (access_token, refresh_token) => {
-    sendCommand('signInByTokenViaManager', [access_token, refresh_token]);
-  };
+    const stopNavigation = () => {
+      sendCommand('stopNavigationViaManager');
+    };
 
-  return <NativeLivemap ref={nativeLivemap} {...props} />;
-});
+    const signInByToken = (access_token, refresh_token) => {
+      sendCommand('signInByTokenViaManager', [access_token, refresh_token]);
+    };
+
+    return (
+      <NativeLivemap
+        ref={nativeLivemap}
+        onMapReady={getNativeEventCallBack(onMapReady)}
+        onPinpointOpen={getNativeEventCallBack(onPinpointOpen)}
+        onPinpointClose={getNativeEventCallBack(onPinpointClose)}
+        onUserLogin={getNativeEventCallBack(onUserLogin)}
+        onUserLogout={getNativeEventCallBack(onUserLogout)}
+        onEventOpen={getNativeEventCallBack(onEventOpen)}
+        onEventClose={getNativeEventCallBack(onEventClose)}
+        onGuidingStarted={getNativeEventCallBack(onGuidingStarted)}
+        onGuidingStopped={getNativeEventCallBack(onGuidingStopped)}
+        {...rest}
+      />
+    );
+  }
+);
 
 export default Livemap;
