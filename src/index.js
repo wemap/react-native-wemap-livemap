@@ -1,10 +1,10 @@
 import React, { useRef, forwardRef, useImperativeHandle } from 'react';
 import { requireNativeComponent, UIManager, findNodeHandle } from 'react-native';
 
-const WemapLivemap = requireNativeComponent('WemapLivemap', null);
+const NativeLivemap = requireNativeComponent('WemapLivemap', null);
 
 const Livemap = forwardRef((props, ref) => {
-  const wemapLivemap = useRef();
+  const nativeLivemap = useRef();
 
   useImperativeHandle(ref, () => ({
     openEvent,
@@ -18,7 +18,7 @@ const Livemap = forwardRef((props, ref) => {
   }));
 
   const sendCommand = (command, params) => {
-    UIManager.dispatchViewManagerCommand(findNodeHandle(wemapLivemap.current), command, params);
+    UIManager.dispatchViewManagerCommand(findNodeHandle(nativeLivemap.current), command, params);
   };
 
   const openEvent = (id) => {
@@ -53,7 +53,7 @@ const Livemap = forwardRef((props, ref) => {
     sendCommand('signInByTokenViaManager', [access_token, refresh_token]);
   };
 
-  return <WemapLivemap ref={wemapLivemap} {...props} />;
+  return <NativeLivemap ref={nativeLivemap} {...props} />;
 });
 
 export default Livemap;
