@@ -1,20 +1,22 @@
 module.exports = (data) => {
   const props = Object.entries(data.props).reduce(
     (a, e) => {
-      switch (e[1].type?.name) {
-        case 'shape':
-          a.shape = [...a.shape, e];
-          break;
-        case 'func':
-          a.func = [...a.func, e];
-          break;
-        case 'custom':
-          a.custom = [...a.custom, e];
-          break;
+      if (e[1].type) {
+        switch (e[1].type.name) {
+          case 'shape':
+            a.shape = [...a.shape, e];
+            break;
+          case 'func':
+            a.func = [...a.func, e];
+            break;
+          case 'custom':
+            a.custom = [...a.custom, e];
+            break;
 
-        default:
-          a.others = [...a.others, e];
-          break;
+          default:
+            a.others = [...a.others, e];
+            break;
+        }
       }
       return a;
     },
@@ -39,7 +41,8 @@ ${props.shape
 **Required:** *${required}*  
 **Description:** *${description}*
 ${
-  type?.value &&
+  type &&
+  type.value &&
   `
 **Properties:**
 
@@ -63,7 +66,7 @@ prop | default | required | description
 ---- | :-------: | :--------: | -----------
 ${props.func
   .map(([propName, { defaultValue, required, description }]) => {
-    return `${propName} | ${defaultValue?.value} | ${required} | ${description}`;
+    return `${propName} | ${defaultValue && defaultValue.value} | ${required} | ${description}`;
   })
   .join('\n')}
 
@@ -73,7 +76,7 @@ prop | default | required | description
 ---- | :-------: | :--------: | -----------
 ${props.custom
   .map(([propName, { type, defaultValue, required, description }]) => {
-    return `${propName} | ${defaultValue?.value} | ${required} | ${description}`;
+    return `${propName} | ${defaultValue && defaultValue.value} | ${required} | ${description}`;
   })
   .join('\n')}
 
@@ -101,7 +104,7 @@ name | type | optional | description
 ${params
   .map(
     ({ name, type, optional, description }) =>
-      `${name} | ${type?.name} | ${optional} | ${description}`
+      `${name} | ${type && type.name} | ${optional} | ${description}`
   )
   .join('\n')}
   `
