@@ -28,7 +28,7 @@
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
     "bootstrap": "yarn example && yarn && yarn pods",
-    "docs": "node tools/react-docgen-markdown-renderer"
+    "docs": "node utils/react-docgen-markdown-renderer"
   },
   "keywords": [
     "react-native",
