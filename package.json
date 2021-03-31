@@ -1,6 +1,9 @@
 {
-  "name": "react-native-wemap-livemap",
+  "name": "@wemap/react-native-wemap-livemap",
   "version": "0.1.0",
+  "publishConfig": {
+    "access": "restricted"
+  },
   "description": "Wemap Livemap",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
