@@ -30,13 +30,12 @@ module.exports = (data) => {
 
 
 ## Props
-
 ### Shape
 
 ${props.shape
   .map(
     ([propName, { type, required, description }]) => `
-> ${propName}  
+### ${propName}  
 
 **Required:** *${required}*  
 **Description:** *${description}*
@@ -85,17 +84,15 @@ ${props.custom
 *All the methods of the livemap are available from its reference.
 For more information see the <a href="https://github.com/wemap/react-native-wemap-livemap/tree/master/example/" target="_blank">example</a>.*
 
-<br/>
-
 ${data.methods
   .filter(({ description }) => description)
   .map(
     ({ name, params, description }) => `
-> ${name}
+### ${name}
 
 **Description:** *${description}*
 ${
-  params.length > 0 &&
+  params.length > 0 ? 
   `
 **Parameters:**  
 
@@ -107,7 +104,7 @@ ${params
       `${name} | ${type && type.name} | ${optional} | ${description}`
   )
   .join('\n')}
-  `
+  ` : ``
 }
 `
   )
