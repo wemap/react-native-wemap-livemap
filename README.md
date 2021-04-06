@@ -1,28 +1,34 @@
-# react-native-wemap-livemap
+# @wemap/react-native-wemap-livemap
 
-Wemap Livemap
+A React Native embed of the IOS and Android SDK from Wemap.
+It allows the developper to interact with them from the Livemap Component.
 
 ## Installation
 
 ```sh
-npm install react-native-wemap-livemap
+npm install @wemap/react-native-wemap-livemap
 ```
 
-## Usage
+## Basic Usage
 
 ```js
-import Livemap from 'react-native-wemap-livemap';
+import Livemap from '@wemap/react-native-wemap-livemap';
 
 // ...
 
-const MyMap = () => (
-  <Livemap mapId={-1} token={'7ETI43N4ZZGARWPHJ57WQAARW'} style={{ flex: 1 }} />
+const MyLivemap = () => (
+  <Livemap
+    mapConfig={{
+      emmid: 12606,
+      token: 'XXXXXXXXXXXXXXXXXXXXXXXXX',
+    }}
+  />
 );
 ```
 
-## Contributing
+## Documentation
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+To view all methods and props of the Livemap Component, please see the [documentation](https://developers.getwemap.com/docs/react-native/livemap)
 
 ## License
 
