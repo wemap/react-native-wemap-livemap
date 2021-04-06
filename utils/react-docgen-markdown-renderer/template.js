@@ -92,8 +92,8 @@ ${data.methods
 
 **Description:** *${description}*
 ${
-  params.length > 0 ? 
-  `
+  params.length > 0
+    ? `
 **Parameters:**  
 
 name | type | optional | description
@@ -104,7 +104,8 @@ ${params
       `${name} | ${type && type.name} | ${optional} | ${description}`
   )
   .join('\n')}
-  ` : ``
+  `
+    : ``
 }
 `
   )
