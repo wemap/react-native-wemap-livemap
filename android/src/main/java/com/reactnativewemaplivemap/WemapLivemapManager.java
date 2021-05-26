@@ -43,15 +43,15 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
 
     LivemapOptions livemapOptions = new LivemapOptions();
 
-    if(mapConfig.hasKey("webappEndpoint")) {
+    if (mapConfig.hasKey("webappEndpoint")) {
       livemapOptions.webappEndpoint = mapConfig.getString("webappEndpoint");
     }
 
-    if(mapConfig.hasKey("enableProviders")) {
+    if (mapConfig.hasKey("enableProviders")) {
       livemapOptions.enableProviders = mapConfig.getBoolean("enableProviders");
     }
 
-    if(mapConfig.hasKey("ufe")) {
+    if (mapConfig.hasKey("ufe")) {
       livemapOptions.ufe = mapConfig.getBoolean("ufe");
     } else {
       livemapOptions.emmid = mapConfig.getInt("emmid");
