@@ -1,9 +1,12 @@
 package com.reactnativewemaplivemap;
 
 
+import android.app.Activity;
+
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
+import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.getwemap.livemap.sdk.LivemapOptions;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -23,6 +26,16 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
   @Override
   public String getName() {
     return REACT_CLASS;
+  }
+
+  private PermissionAwareActivity getPermissionAwareActivity() {
+    Activity activity = mContext.getCurrentActivity();
+    if (activity == null) {
+      throw new IllegalStateException("Tried to use permissions API while not attached to an Activity.");
+    } else if (!(activity instanceof PermissionAwareActivity)) {
+      throw new IllegalStateException("Tried to use permissions API but the host Activity doesn't implement PermissionAwareActivity.");
+    }
+    return (PermissionAwareActivity) activity;
   }
 
   @ReactProp(name = "mapConfig")
@@ -46,6 +59,18 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
     }
 
     view.loadMap(this.mContext, livemapOptions);
+    initializePermissionsManager(view);
+  }
+
+  private void initializePermissionsManager(WemapLivemap view) {
+    view.setRequestPermissionsListener((sdkPermissions, sdkRequestCode) -> {
+      PermissionAwareActivity activity = getPermissionAwareActivity();
+      activity.requestPermissions(sdkPermissions, sdkRequestCode,
+        (requestCode, permissions, grantResults) -> {
+          view.onRequestPermissionsResult(requestCode, permissions, grantResults);
+          return false;
+        });
+    });
   }
 
   @NonNull
