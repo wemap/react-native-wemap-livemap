@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from 'react';
 import { SafeAreaView } from 'react-native';
-import Livemap from 'react-native-wemap-livemap';
+import Livemap from '@wemap/react-native-wemap-livemap';
 
 export default () => {
   const livemap = useRef();
