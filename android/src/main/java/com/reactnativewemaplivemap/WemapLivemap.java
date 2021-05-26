@@ -1,20 +1,15 @@
 package com.reactnativewemaplivemap;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.util.Log;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.getwemap.livemap.sdk.Livemap;
 import com.getwemap.livemap.sdk.LivemapView;
 import com.getwemap.livemap.sdk.OnLivemapReadyCallback;
-import com.getwemap.livemap.sdk.callbacks.PinpointOpenListener;
-
-import java.util.concurrent.Callable;
 
 public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback {
 
@@ -30,7 +25,7 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
 
     buildEvent.build(event);
 
-    ReactContext reactContext = (ReactContext)getContext();
+    ReactContext reactContext = (ReactContext) getContext();
     reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), name + "Event", event);
   }
 
@@ -50,8 +45,8 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
     livemap.addGuidingStartedListener(() -> sendNativeEvent("onGuidingStarted", e -> e = null));
     livemap.addGuidingStoppedListener(() -> sendNativeEvent("onGuidingStopped", e -> e = null));
   }
-}
 
-interface BuildEvent {
-  void build(WritableMap event);
+  interface BuildEvent {
+    void build(WritableMap event);
+  }
 }
