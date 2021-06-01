@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
 // swift-module-flags: -target armv7-apple-ios10.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name livemap_ios_sdk
 import AVFoundation
 import Foundation
@@ -7,7 +7,7 @@ import Swift
 import UIKit
 import WebKit
 @_exported import livemap_ios_sdk
-@objc public protocol WemapSDKMapActionsDelegate : AnyObject {
+@objc public protocol WemapSDKMapActionsDelegate {
   @objc optional func regionDidChanged(controller: livemap_ios_sdk.wemapsdk)
   @objc optional func openPinpoint(controller: livemap_ios_sdk.wemapsdk)
   @objc optional func openList(controller: livemap_ios_sdk.wemapsdk)
@@ -23,7 +23,7 @@ import WebKit
   @objc override dynamic public func layoutSubviews()
   @objc deinit
 }
-@objc public protocol wemapsdkViewDelegate : AnyObject {
+@objc public protocol wemapsdkViewDelegate {
   @objc optional func waitForReady(_ wemapController: livemap_ios_sdk.wemapsdk)
   @objc optional func onEventOpen(_ wemapController: livemap_ios_sdk.wemapsdk, event: livemap_ios_sdk.WemapEvent)
   @objc optional func onPinpointOpen(_ wemapController: livemap_ios_sdk.wemapsdk, pinpoint: livemap_ios_sdk.WemapPinpoint)
@@ -43,8 +43,8 @@ import WebKit
   final public let pinpoint: livemap_ios_sdk.WemapPinpoint?
   final public let external_data: Foundation.NSDictionary?
   public init(_ json: Foundation.NSDictionary)
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc public class WemapPinpoint : ObjectiveC.NSObject {
   final public let id: Swift.Int
@@ -54,8 +54,8 @@ import WebKit
   final public let pinpointDescription: Swift.String
   final public let external_data: Foundation.NSDictionary?
   public init(_ json: Foundation.NSDictionary)
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class wemapsdk : UIKit.UIView, WebKit.WKUIDelegate {
   public static let sharedInstance: livemap_ios_sdk.wemapsdk
@@ -88,13 +88,13 @@ extension wemapsdk {
 }
 public struct WemapFilters : Swift.Codable {
   public init(tags: Swift.Array<Swift.String>? = nil, query: Swift.String? = nil, startDate: Swift.String? = nil, endDate: Swift.String? = nil)
-  public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct WemapLocation : Swift.Codable {
   public init(longitude: Swift.Double, latitude: Swift.Double)
-  public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct wemapsdk_config {
   public init(token: Swift.String?, ufe: Swift.Bool?, emmid: Swift.Int?, webappEndpoint: Swift.String?)
