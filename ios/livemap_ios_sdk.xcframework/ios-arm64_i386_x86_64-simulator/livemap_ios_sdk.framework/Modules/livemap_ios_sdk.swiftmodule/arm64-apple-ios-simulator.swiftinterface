@@ -97,9 +97,10 @@ public struct WemapLocation : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
 }
 public struct wemapsdk_config {
-  public init(token: Swift.String?, ufe: Swift.Bool?, emmid: Swift.Int?, webappEndpoint: Swift.String?)
+  public init(token: Swift.String?, mapId: Swift.Int? = nil, livemapRootUrl: Swift.String? = nil)
+  public static let defaultLivemapRootUrl: Swift.String
   public let token: Swift.String
   public let emmid: Swift.Int
-  public let ufe: Swift.Bool
-  public let webappEndpoint: Swift.String
+  public var ufe: Swift.Bool
+  public let livemapRootUrl: Swift.String
 }
