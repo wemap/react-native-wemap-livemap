@@ -1,5 +1,5 @@
 import React, { PureComponent, createRef } from 'react';
-import { requireNativeComponent, UIManager, findNodeHandle } from 'react-native';
+import { requireNativeComponent, UIManager, findNodeHandle, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 
 const NativeLivemap = requireNativeComponent('WemapLivemap', null);
@@ -189,7 +189,7 @@ Livemap.propTypes = {
   /**
    * By default, your Livemap's instance fill with its container.
    */
-  style: PropTypes.shape,
+  style: ViewPropTypes.style,
 };
 
 export default Livemap;
