@@ -2,21 +2,23 @@ import React, { useRef, useCallback } from 'react';
 import { SafeAreaView } from 'react-native';
 import Livemap from '@wemap/react-native-wemap-livemap';
 
+const INITIAL_MAP_CONFIG = {
+  // token: 'XXXXXXXXXXXXXXXXXXXX',
+  // emmid: XXXXX,
+};
+
 export default () => {
   const livemap = useRef();
 
-  const onMapReady = useCallback(() => {
-    livemap.current.openPinpoint(37132482);
-  }, [livemap]);
+  const onMapReady = () => {
+    console.info('Livemap ready');
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Livemap
         ref={livemap}
-        mapConfig={{
-          ufe: true,
-          webappEndpoint: 'https://livemapdev.maaap.it',
-        }}
+        mapConfig={INITIAL_MAP_CONFIG}
         onMapReady={onMapReady}
         onPinpointOpen={({ id }) => console.log(`pinpoint open: ${id}`)}
         onPinpointClose={() => console.log('pinpoint close')}
