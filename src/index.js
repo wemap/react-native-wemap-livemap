@@ -100,12 +100,14 @@ class Livemap extends PureComponent {
       onEventClose,
       onGuidingStarted,
       onGuidingStopped,
+      mapConfig,
       ...rest
     } = this.props;
 
     return (
       <NativeLivemap
         ref={this.nativeLivemap}
+        mapConfig={{ ...mapConfig, ufe: !mapConfig.emmid }}
         onMapReady={this.getNativeEventCallBack(onMapReady)}
         onPinpointOpen={this.getNativeEventCallBack(onPinpointOpen)}
         onPinpointClose={this.getNativeEventCallBack(onPinpointClose)}
@@ -121,6 +123,13 @@ class Livemap extends PureComponent {
   }
 }
 
+const INITIAL_MAP_CONFIG = {
+  ufe: true,
+  webappEndpoint: 'https://livemap.getwemap.com',
+  emmid: null,
+  token: '',
+};
+
 Livemap.defaultProps = {
   onMapReady: () => {},
   onPinpointOpen: ({ id }) => {},
@@ -132,6 +141,7 @@ Livemap.defaultProps = {
   onGuidingStarted: () => {},
   onGuidingStopped: () => {},
   style: { flex: 1 },
+  mapConfig: INITIAL_MAP_CONFIG,
 };
 
 Livemap.propTypes = {
