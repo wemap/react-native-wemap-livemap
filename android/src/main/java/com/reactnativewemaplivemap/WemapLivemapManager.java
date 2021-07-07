@@ -3,9 +3,11 @@ package com.reactnativewemaplivemap;
 
 import android.app.Activity;
 
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
+import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.getwemap.livemap.sdk.LivemapOptions;
 import com.facebook.react.uimanager.SimpleViewManager;
@@ -18,6 +20,7 @@ import androidx.annotation.Nullable;
 
 import java.util.Map;
 
+@ReactModule(name = WemapLivemapManager.REACT_CLASS)
 public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
 
   public static final String REACT_CLASS = "WemapLivemap";
@@ -26,6 +29,10 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
   @Override
   public String getName() {
     return REACT_CLASS;
+  }
+
+  public static WemapLivemapModule getModule(ReactContext reactContext) {
+    return reactContext.getNativeModule(WemapLivemapModule.class);
   }
 
   private PermissionAwareActivity getPermissionAwareActivity() {
@@ -60,6 +67,7 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
 
     view.loadMap(this.mContext, livemapOptions);
     initializePermissionsManager(view);
+    initializeStartActivityForResult(view);
   }
 
   private void initializePermissionsManager(WemapLivemap view) {
@@ -71,6 +79,12 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
           return false;
         });
     });
+  }
+
+  private void initializeStartActivityForResult(WemapLivemap view) {
+    getModule(mContext).setLivemapView(view);
+    view.setStartActivityForResultListener((intent, requestCode)
+      -> mContext.getCurrentActivity().startActivityForResult(intent, requestCode));
   }
 
   @NonNull
@@ -138,5 +152,4 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
         break;
     }
   }
-
 }
