@@ -89,6 +89,10 @@ class Livemap extends PureComponent {
     this.sendCommand('signInByTokenViaManager', [access_token, refresh_token]);
   };
 
+  loadMapUrl = () => {
+    this.sendCommand('loadMapUrlViaManager');
+  };
+
   render() {
     const {
       onMapReady,
@@ -100,6 +104,7 @@ class Livemap extends PureComponent {
       onEventClose,
       onGuidingStarted,
       onGuidingStopped,
+      onUrlChange,
       mapConfig,
       ...rest
     } = this.props;
@@ -117,6 +122,7 @@ class Livemap extends PureComponent {
         onEventClose={this.getNativeEventCallBack(onEventClose)}
         onGuidingStarted={this.getNativeEventCallBack(onGuidingStarted)}
         onGuidingStopped={this.getNativeEventCallBack(onGuidingStopped)}
+        onUrlChange={this.getNativeEventCallBack(onUrlChange)}
         {...rest}
       />
     );
