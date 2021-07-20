@@ -65,7 +65,8 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
       livemapOptions.token = mapConfig.getString("token");
     }
 
-    view.loadMap(this.mContext, livemapOptions);
+    view.setLivemapOptions(livemapOptions);
+    view.loadMap(this.mContext);
     initializePermissionsManager(view);
     initializeStartActivityForResult(view);
   }
@@ -109,7 +110,8 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
       "onEventOpen",
       "onEventClose",
       "onGuidingStarted",
-      "onGuidingStopped"
+      "onGuidingStopped",
+      "onUrlChange"
     };
 
     for (String eventName : eventNames) {
@@ -149,6 +151,9 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
         break;
       case "signInByTokenViaManager":
         root.livemap.signInByToken(args.getString(0), args.getString(1));
+        break;
+      case "loadMapUrlViaManager":
+        root.loadMapUrl();
         break;
     }
   }

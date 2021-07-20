@@ -44,6 +44,11 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
     livemap.addEventCloseListener(() -> sendNativeEvent("onEventClose", e -> e = null));
     livemap.addGuidingStartedListener(() -> sendNativeEvent("onGuidingStarted", e -> e = null));
     livemap.addGuidingStoppedListener(() -> sendNativeEvent("onGuidingStopped", e -> e = null));
+
+    this.setUrlChangeListener((previousUrl, nexUrl) -> sendNativeEvent("onUrlChange", e -> {
+      e.putString("previousUrl", previousUrl);
+      e.putString("nexUrl", nexUrl);
+    }));
   }
 
   interface BuildEvent {
