@@ -1,6 +1,6 @@
 {
   "name": "@wemap/react-native-wemap-livemap",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "publishConfig": {
     "access": "restricted"
   },
