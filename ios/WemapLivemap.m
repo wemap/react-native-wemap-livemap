@@ -13,6 +13,8 @@
   RCT_EXTERN_METHOD(startNavigationViaManager: (nonnull NSNumber *)node id: (nonnull NSNumber *)id)
   RCT_EXTERN_METHOD(stopNavigationViaManager: (nonnull NSNumber *)node)
   RCT_EXTERN_METHOD(signInByTokenViaManager: (nonnull NSNumber *)node accessToken: (nonnull NSString *)accessToken refreshToken: (nonnull NSString *)refreshToken)
+  RCT_EXTERN_METHOD(loadMapUrlViaManager: (nonnull NSNumber *)node)
+
 
   RCT_EXPORT_VIEW_PROPERTY(onMapReady, RCTBubblingEventBlock)
   RCT_EXPORT_VIEW_PROPERTY(onEventOpen, RCTBubblingEventBlock)
@@ -25,4 +27,5 @@
   RCT_EXPORT_VIEW_PROPERTY(onGoToPinpointClicked, RCTBubblingEventBlock)
   RCT_EXPORT_VIEW_PROPERTY(onUserLogin, RCTBubblingEventBlock)
   RCT_EXPORT_VIEW_PROPERTY(onUserLogout, RCTBubblingEventBlock)
+  RCT_EXPORT_VIEW_PROPERTY(onUrlChange, RCTBubblingEventBlock)
 @end

@@ -20,6 +20,7 @@ class WemapLivemap: UIView {
     @objc var onGoToPinpointClicked: RCTBubblingEventBlock?
     @objc var onUserLogin: RCTBubblingEventBlock?
     @objc var onUserLogout: RCTBubblingEventBlock?
+    @objc var onUrlChange: RCTBubblingEventBlock?
   
     override func didSetProps(_ changedProps: [String]!) {
         wemap.delegate = self
@@ -84,6 +85,10 @@ class WemapLivemap: UIView {
     @objc func signInByToken(_ params: [String : Any]) {
         wemap.signInByToken(accessToken: params["accessToken"] as! String, refreshToken: params["refreshToken"]! as! String)
     }
+
+    @objc func loadMapUrl() {
+        wemap.loadMapUrl()
+    }
 }
 
 extension WemapLivemap: wemapsdkViewDelegate {
@@ -142,6 +147,11 @@ extension WemapLivemap: wemapsdkViewDelegate {
         self.onUserLogout!(nil)
     }
 
+    @objc func onUrlChange(_ wemapController: wemapsdk, previousUrl: String, nextUrl: String) {
+        if(self.onUrlChange == nil) { return }
+        self.onUrlChange!(["previousUrl": previousUrl, "nextUrl": nextUrl])
+    }
+
 }
 
 @objc (WemapLivemapManager)
@@ -187,6 +197,10 @@ class WemapLivemapManager: RCTViewManager {
     
     @objc func signInByTokenViaManager(_ node: NSNumber, accessToken: NSString, refreshToken: NSString) {
         self.callLivemapMethod(node, selector: "signInByToken:", params: ["accessToken": accessToken, "refreshToken": refreshToken])
+    }
+
+    @objc func loadMapUrlViaManager(_ node: NSNumber) {
+        self.callLivemapMethod(node, selector: "loadMapUrl")
     }
  
     override func view() -> UIView! {
