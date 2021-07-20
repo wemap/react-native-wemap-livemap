@@ -33,6 +33,7 @@ import WebKit
   @objc optional func onGuidingStopped(_ wemapController: livemap_ios_sdk.wemapsdk)
   @objc optional func onUserLogin(_ wemapController: livemap_ios_sdk.wemapsdk)
   @objc optional func onUserLogout(_ wemapController: livemap_ios_sdk.wemapsdk)
+  @objc optional func onUrlChange(_ wemapController: livemap_ios_sdk.wemapsdk, previousUrl: Swift.String, nextUrl: Swift.String)
   @objc optional func onBookEventClicked(_ wemapController: livemap_ios_sdk.wemapsdk, event: livemap_ios_sdk.WemapEvent)
   @objc optional func onGoToPinpointClicked(_ wemapController: livemap_ios_sdk.wemapsdk, pinpoint: livemap_ios_sdk.WemapPinpoint)
 }
@@ -59,6 +60,7 @@ import WebKit
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class wemapsdk : UIKit.UIView, WebKit.WKUIDelegate {
   public static let sharedInstance: livemap_ios_sdk.wemapsdk
+  @objc override dynamic public func observeValue(forKeyPath keyPath: Swift.String?, of object: Any?, change: [Foundation.NSKeyValueChangeKey : Any]?, context: Swift.UnsafeMutableRawPointer?)
   weak open var delegate: livemap_ios_sdk.wemapsdkViewDelegate?
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override dynamic public func layoutSubviews()
@@ -71,6 +73,7 @@ extension wemapsdk : WebKit.WKNavigationDelegate {
 extension wemapsdk {
   public func configure(config: livemap_ios_sdk.wemapsdk_config) -> livemap_ios_sdk.wemapsdk
   public func presentIn(view: UIKit.UIView) -> livemap_ios_sdk.wemapsdk
+  public func loadMapUrl()
 }
 extension wemapsdk : WebKit.WKScriptMessageHandler {
   @objc dynamic public func userContentController(_ userContentController: WebKit.WKUserContentController, didReceive message: WebKit.WKScriptMessage)

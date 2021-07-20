@@ -191,6 +191,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import CoreGraphics;
+@import Foundation;
 @import ObjectiveC;
 @import UIKit;
 @import WebKit;
@@ -285,9 +286,11 @@ SWIFT_PROTOCOL("_TtP15livemap_ios_sdk26WemapSDKMapActionsDelegate_")
 - (void)shareMapWithController:(wemapsdk * _Nonnull)controller;
 @end
 
+@class NSString;
 
 SWIFT_CLASS("_TtC15livemap_ios_sdk8wemapsdk")
 @interface wemapsdk : UIView <WKUIDelegate>
+- (void)observeValueForKeyPath:(NSString * _Nullable)keyPath ofObject:(id _Nullable)object change:(NSDictionary<NSKeyValueChangeKey, id> * _Nullable)change context:(void * _Nullable)context;
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (void)layoutSubviews;
@@ -300,7 +303,6 @@ SWIFT_CLASS("_TtC15livemap_ios_sdk8wemapsdk")
 - (void)userContentController:(WKUserContentController * _Nonnull)userContentController didReceiveScriptMessage:(WKScriptMessage * _Nonnull)message;
 @end
 
-
 @class WKWebView;
 @class WKNavigation;
 
@@ -308,6 +310,7 @@ SWIFT_CLASS("_TtC15livemap_ios_sdk8wemapsdk")
 - (void)webView:(WKWebView * _Nonnull)webView didFinishNavigation:(WKNavigation * _Null_unspecified)navigation;
 - (void)webView:(WKWebView * _Nonnull)webView didFailNavigation:(WKNavigation * _Null_unspecified)navigation withError:(NSError * _Nonnull)error;
 @end
+
 
 
 
@@ -323,6 +326,7 @@ SWIFT_PROTOCOL("_TtP15livemap_ios_sdk20wemapsdkViewDelegate_")
 - (void)onGuidingStopped:(wemapsdk * _Nonnull)wemapController;
 - (void)onUserLogin:(wemapsdk * _Nonnull)wemapController;
 - (void)onUserLogout:(wemapsdk * _Nonnull)wemapController;
+- (void)onUrlChange:(wemapsdk * _Nonnull)wemapController previousUrl:(NSString * _Nonnull)previousUrl nextUrl:(NSString * _Nonnull)nextUrl;
 - (void)onBookEventClicked:(wemapsdk * _Nonnull)wemapController event:(WemapEvent * _Nonnull)event;
 - (void)onGoToPinpointClicked:(wemapsdk * _Nonnull)wemapController pinpoint:(WemapPinpoint * _Nonnull)pinpoint;
 @end
@@ -525,6 +529,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import CoreGraphics;
+@import Foundation;
 @import ObjectiveC;
 @import UIKit;
 @import WebKit;
@@ -619,9 +624,11 @@ SWIFT_PROTOCOL("_TtP15livemap_ios_sdk26WemapSDKMapActionsDelegate_")
 - (void)shareMapWithController:(wemapsdk * _Nonnull)controller;
 @end
 
+@class NSString;
 
 SWIFT_CLASS("_TtC15livemap_ios_sdk8wemapsdk")
 @interface wemapsdk : UIView <WKUIDelegate>
+- (void)observeValueForKeyPath:(NSString * _Nullable)keyPath ofObject:(id _Nullable)object change:(NSDictionary<NSKeyValueChangeKey, id> * _Nullable)change context:(void * _Nullable)context;
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (void)layoutSubviews;
@@ -634,7 +641,6 @@ SWIFT_CLASS("_TtC15livemap_ios_sdk8wemapsdk")
 - (void)userContentController:(WKUserContentController * _Nonnull)userContentController didReceiveScriptMessage:(WKScriptMessage * _Nonnull)message;
 @end
 
-
 @class WKWebView;
 @class WKNavigation;
 
@@ -642,6 +648,7 @@ SWIFT_CLASS("_TtC15livemap_ios_sdk8wemapsdk")
 - (void)webView:(WKWebView * _Nonnull)webView didFinishNavigation:(WKNavigation * _Null_unspecified)navigation;
 - (void)webView:(WKWebView * _Nonnull)webView didFailNavigation:(WKNavigation * _Null_unspecified)navigation withError:(NSError * _Nonnull)error;
 @end
+
 
 
 
@@ -657,6 +664,7 @@ SWIFT_PROTOCOL("_TtP15livemap_ios_sdk20wemapsdkViewDelegate_")
 - (void)onGuidingStopped:(wemapsdk * _Nonnull)wemapController;
 - (void)onUserLogin:(wemapsdk * _Nonnull)wemapController;
 - (void)onUserLogout:(wemapsdk * _Nonnull)wemapController;
+- (void)onUrlChange:(wemapsdk * _Nonnull)wemapController previousUrl:(NSString * _Nonnull)previousUrl nextUrl:(NSString * _Nonnull)nextUrl;
 - (void)onBookEventClicked:(wemapsdk * _Nonnull)wemapController event:(WemapEvent * _Nonnull)event;
 - (void)onGoToPinpointClicked:(wemapsdk * _Nonnull)wemapController pinpoint:(WemapPinpoint * _Nonnull)pinpoint;
 @end
