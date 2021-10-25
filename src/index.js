@@ -146,6 +146,7 @@ Livemap.defaultProps = {
   onEventClose: () => {},
   onGuidingStarted: () => {},
   onGuidingStopped: () => {},
+  onUrlChange: ({ previousUrl, nextUrl }) => {},
   style: { flex: 1 },
   mapConfig: INITIAL_MAP_CONFIG,
 };
