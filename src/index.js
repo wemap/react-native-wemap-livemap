@@ -138,7 +138,7 @@ const INITIAL_MAP_CONFIG = {
 
 Livemap.defaultProps = {
   onMapReady: () => {},
-  onPinpointOpen: ({ id }) => {},
+  onPinpointOpen: ({ id, name, description, latitude, longitude, external_data }) => {},
   onPinpointClose: () => {},
   onUserLogin: () => {},
   onUserLogout: () => {},

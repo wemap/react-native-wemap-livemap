@@ -20,7 +20,7 @@ export default () => {
         ref={livemap}
         mapConfig={INITIAL_MAP_CONFIG}
         onMapReady={onMapReady}
-        onPinpointOpen={({ id }) => console.log(`pinpoint open: ${id}`)}
+        onPinpointOpen={(pp) => console.log(JSON.stringify(pp))}
         onPinpointClose={() => console.log('pinpoint close')}
         onUserLogin={() => console.log('user login')}
         onUserLogout={() => console.log('user logout')}

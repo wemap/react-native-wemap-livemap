@@ -104,7 +104,7 @@ extension WemapLivemap: wemapsdkViewDelegate {
     
     @objc func onPinpointOpen(_ wemapController: wemapsdk, pinpoint: WemapPinpoint) {
         if(self.onPinpointOpen == nil) { return }
-        self.onPinpointOpen!(["id": pinpoint.id])
+        self.onPinpointOpen!(["id": pinpoint.id, "name": pinpoint.name, "description": pinpoint.pinpointDescription, "latitude": pinpoint.latitude, "longitude": pinpoint.longitude, "external_data": pinpoint.external_data])
     }
     
     @objc func onEventClose(_ wemapController: wemapsdk) {

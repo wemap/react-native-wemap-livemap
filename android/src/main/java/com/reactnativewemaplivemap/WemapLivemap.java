@@ -10,6 +10,9 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.getwemap.livemap.sdk.Livemap;
 import com.getwemap.livemap.sdk.LivemapView;
 import com.getwemap.livemap.sdk.OnLivemapReadyCallback;
+import com.reactnativewemaplivemap.utils.ReactNativeJson;
+
+import org.json.JSONException;
 
 public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback {
 
@@ -36,7 +39,18 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
 
     sendNativeEvent("onMapReady", event -> event.putNull("value"));
 
-    livemap.addPinpointOpenListener((pinpoint) -> sendNativeEvent("onPinpointOpen", e -> e.putInt("id", pinpoint.getId())));
+    livemap.addPinpointOpenListener((pinpoint) -> sendNativeEvent("onPinpointOpen", e -> {
+      e.putInt("id", pinpoint.getId());
+      e.putString("name", pinpoint.getName());
+      e.putString("description", pinpoint.getDescription());
+      e.putDouble("latitude", pinpoint.getLatLngAlt().getLat());
+      e.putDouble("longitude", pinpoint.getLatLngAlt().getLng());
+      try {
+        e.putMap("external_data", ReactNativeJson.convertJsonToMap(pinpoint.getExternalData()));
+      } catch (JSONException jsonProcessingException) {
+        jsonProcessingException.printStackTrace();
+      }
+    }));
     livemap.addPinpointCloseListener(() -> sendNativeEvent("onPinpointClose", e -> e = null));
     livemap.addUserLoginListener(() -> sendNativeEvent("onUserLogin", e -> e = null));
     livemap.addUserLogoutListener(() -> sendNativeEvent("onUserLogout", e -> e = null));
