@@ -122,7 +122,5 @@ dependencies {
   // noinspection GradleDynamicVersion
   api 'com.facebook.react:react-native:+'
     implementation 'org.jetbrains:annotations:15.0'
-    compileOnly files('libs/livemap-sdk.aar')
-  compileOnly files('libs/commons.aar')
-  compileOnly files('libs/providers.aar')
+  implementation fileTree(dir: "libs", include: ["*.aar"])
 }
