@@ -3,15 +3,32 @@ import { SafeAreaView } from 'react-native';
 import Livemap from '@wemap/react-native-wemap-livemap';
 
 const INITIAL_MAP_CONFIG = {
-  // token: 'XXXXXXXXXXXXXXXXXXXX',
-  // emmid: XXXXX,
+  emmid: 7087,
 };
+
+const pinpoints = [
+  {
+    id: 1,
+    name: 'Wemap Office',
+    latitude: 43.609138,
+    longitude: 3.884193,
+    description: 'Where magic happens',
+  },
+  {
+    id: 2,
+    name: 'Effeil Tower',
+    latitude: 48.85837,
+    longitude: 2.294481,
+    description: 'What is that ?',
+  },
+];
 
 export default () => {
   const livemap = useRef();
 
   const onMapReady = () => {
     console.info('Livemap ready');
+    livemap.current.setPinpoints(pinpoints);
   };
 
   return (
