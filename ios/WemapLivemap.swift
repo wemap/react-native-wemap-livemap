@@ -89,6 +89,10 @@ class WemapLivemap: UIView {
     @objc func loadMapUrl() {
         wemap.loadMapUrl()
     }
+
+    @objc func setPinpoints(_ params: [String : Any]) {
+        wemap.setPinpoints(WemapPinpoints: params["wemapPinpoints"] as! [WemapPinpoint])
+    }
 }
 
 extension WemapLivemap: wemapsdkViewDelegate {
@@ -104,7 +108,7 @@ extension WemapLivemap: wemapsdkViewDelegate {
     
     @objc func onPinpointOpen(_ wemapController: wemapsdk, pinpoint: WemapPinpoint) {
         if(self.onPinpointOpen == nil) { return }
-        self.onPinpointOpen!(["id": pinpoint.id, "name": pinpoint.name, "description": pinpoint.pinpointDescription, "latitude": pinpoint.latitude, "longitude": pinpoint.longitude, "external_data": pinpoint.external_data])
+        self.onPinpointOpen!(pinpoint.data as? [AnyHashable : Any])
     }
     
     @objc func onEventClose(_ wemapController: wemapsdk) {
@@ -201,6 +205,11 @@ class WemapLivemapManager: RCTViewManager {
 
     @objc func loadMapUrlViaManager(_ node: NSNumber) {
         self.callLivemapMethod(node, selector: "loadMapUrl")
+    }
+
+    @objc func setPinpointsViaManager(_ node: NSNumber, pinpoints: [NSDictionary]) {
+        let wemapPinpoints = pinpoints.map{ WemapPinpoint($0) }
+        self.callLivemapMethod(node, selector: "setPinpoints:", params: ["wemapPinpoints": wemapPinpoints])
     }
  
     override func view() -> UIView! {
