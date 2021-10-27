@@ -14,10 +14,17 @@ import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.getwemap.livemap.sdk.model.Filters;
+import com.getwemap.livemap.sdk.model.Pinpoint;
+import com.reactnativewemaplivemap.utils.ReactNativeJson;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @ReactModule(name = WemapLivemapManager.REACT_CLASS)
@@ -151,6 +158,22 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
         break;
       case "signInByTokenViaManager":
         root.livemap.signInByToken(args.getString(0), args.getString(1));
+        break;
+      case "setPinpointsViaManager":
+        List<Pinpoint> pinpoints = new ArrayList();
+        ReadableArray readableArray = args.getArray(0);
+
+        for (int i = 0; i < readableArray.size(); i++) {
+          ReadableMap pinpointMap = readableArray.getMap(i);
+          try {
+            JSONObject json = ReactNativeJson.convertMapToJson(pinpointMap);
+            Pinpoint pinpoint = Pinpoint.fromJson(json);
+            pinpoints.add(pinpoint);
+          } catch (JSONException e) {
+            e.printStackTrace();
+          }
+        }
+        root.livemap.setPinpoints(pinpoints);
         break;
       case "loadMapUrlViaManager":
         root.loadMapUrl();
