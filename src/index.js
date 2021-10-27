@@ -93,6 +93,10 @@ class Livemap extends PureComponent {
     this.sendCommand('loadMapUrlViaManager');
   };
 
+  setPinpoints = (pinpoints) => {
+    this.sendCommand('setPinpointsViaManager', [pinpoints]);
+  };
+
   render() {
     const {
       onMapReady,
