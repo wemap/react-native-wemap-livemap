@@ -13,6 +13,7 @@ import com.getwemap.livemap.sdk.OnLivemapReadyCallback;
 import com.reactnativewemaplivemap.utils.ReactNativeJson;
 
 import org.json.JSONException;
+import java.lang.NullPointerException;
 
 public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback {
 
@@ -45,9 +46,22 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
       e.putString("description", pinpoint.getDescription());
       e.putDouble("latitude", pinpoint.getLatLngAlt().getLat());
       e.putDouble("longitude", pinpoint.getLatLngAlt().getLng());
+      e.putString("image_url", pinpoint.getImageUrl());
+      e.putString("media_url", pinpoint.getMediaUrl());
+      e.putString("media_type", pinpoint.getMediaType());
+      try {
+        e.putArray("tags", ReactNativeJson.convertJsonToArray(pinpoint.getTags()));
+      } catch (JSONException | NullPointerException jsonProcessingException) {
+        jsonProcessingException.printStackTrace();
+      }
+      try {
+        e.putMap("geo_entity_shape", ReactNativeJson.convertJsonToMap(pinpoint.getGeoEntityShape()));
+      } catch (JSONException | NullPointerException jsonProcessingException) {
+        jsonProcessingException.printStackTrace();
+      }
       try {
         e.putMap("external_data", ReactNativeJson.convertJsonToMap(pinpoint.getExternalData()));
-      } catch (JSONException jsonProcessingException) {
+      } catch (JSONException | NullPointerException jsonProcessingException) {
         jsonProcessingException.printStackTrace();
       }
     }));
