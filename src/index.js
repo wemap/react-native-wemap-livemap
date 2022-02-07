@@ -93,11 +93,11 @@ class Livemap extends PureComponent {
   };
 
   enableSidebar = () => {
-    this.sendCommand('enableSidebar');
+    this.sendCommand('enableSidebarViaManager');
   };
 
   disableSidebar = () => {
-    this.sendCommand('disableSidebar');
+    this.sendCommand('disableSidebarViaManager');
   };
 
   loadMapUrl = () => {

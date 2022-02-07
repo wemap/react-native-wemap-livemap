@@ -1,3 +1,6 @@
+// IMPORTANT:
+// selectors wihtout parameters must not have a column ":"
+
 import UIKit
 import livemap_ios_sdk
 
@@ -84,6 +87,14 @@ class WemapLivemap: UIView {
     
     @objc func signInByToken(_ params: [String : Any]) {
         wemap.signInByToken(accessToken: params["accessToken"] as! String, refreshToken: params["refreshToken"]! as! String)
+    }
+
+    @objc func enableSidebar() {
+        wemap.enableSidebar()
+    }
+
+    @objc func disableSidebar() {
+        wemap.disableSidebar()
     }
 
     @objc func loadMapUrl() {
@@ -201,6 +212,14 @@ class WemapLivemapManager: RCTViewManager {
     
     @objc func signInByTokenViaManager(_ node: NSNumber, accessToken: NSString, refreshToken: NSString) {
         self.callLivemapMethod(node, selector: "signInByToken:", params: ["accessToken": accessToken, "refreshToken": refreshToken])
+    }
+
+    @objc func enableSidebarViaManager(_ node: NSNumber) {
+        self.callLivemapMethod(node, selector: "enableSidebar")
+    }
+
+    @objc func disableSidebarViaManager(_ node: NSNumber) {
+        self.callLivemapMethod(node, selector: "disableSidebar")
     }
 
     @objc func loadMapUrlViaManager(_ node: NSNumber) {

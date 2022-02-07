@@ -159,6 +159,12 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
       case "signInByTokenViaManager":
         root.livemap.signInByToken(args.getString(0), args.getString(1));
         break;
+      case "enableSidebarViaManager":
+          root.livemap.enableSidebar();
+        break;
+      case "disableSidebarViaManager":
+          root.livemap.disableSidebar();
+        break;
       case "setPinpointsViaManager":
         List<Pinpoint> pinpoints = new ArrayList();
         ReadableArray readableArray = args.getArray(0);
