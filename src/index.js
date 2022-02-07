@@ -105,10 +105,21 @@ class Livemap extends PureComponent {
     this.sendCommand('disableSidebarViaManager');
   };
 
+  /**
+   * Load the map in the webview using default parameters.
+   */
   loadMapUrl = () => {
     this.sendCommand('loadMapUrlViaManager');
   };
 
+  /**
+   * Populates the map with given pinpoints.
+   * @param {Pinpoint[]} pinpoints Pinpoints to populate the map.
+   * @param {Object} options options to populate map
+   * @returns {Promise<object>} a promise which resolves if no exception is raised.
+   * The resolved object contains the bounds property that encompasses all the points given as input.
+   Facilitates the use of the fitBounds{@link fitBounds} method.
+  */
   setPinpoints = (pinpoints) => {
     this.sendCommand('setPinpointsViaManager', [pinpoints]);
   };
