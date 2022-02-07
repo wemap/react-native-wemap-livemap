@@ -2,7 +2,7 @@
   "name": "@wemap/react-native-wemap-livemap",
   "version": "0.1.6",
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "description": "Wemap Livemap",
   "main": "lib/commonjs/index",

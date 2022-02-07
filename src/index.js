@@ -7,7 +7,6 @@ const NativeLivemap = requireNativeComponent('WemapLivemap', null);
 /**
  * This component represents a React Native embed of the [IOS](https://developers.getwemap.com/docs/ios/getting-started) and the [Android](https://developers.getwemap.com/docs/android/Livemap/) SDK.
  * It allows the developper to interact with it. This document mainly presents the props of the Livemap as well as its methods.
- * To see the source code and an exemple, please check its <a href="https://github.com/wemap/react-native-wemap-livemap" target="_blank">repository</a>.
  */
 class Livemap extends PureComponent {
   nativeLivemap = createRef();
