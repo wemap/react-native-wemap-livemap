@@ -20,7 +20,10 @@ class Livemap extends PureComponent {
     );
   };
 
-  getNativeEventCallBack = (func) => ({ nativeEvent }) => func(nativeEvent);
+  getNativeEventCallBack =
+    (func) =>
+    ({ nativeEvent }) =>
+      func(nativeEvent);
 
   /**
    * Open an event on the map. This can only be used for maps which use events.
@@ -87,6 +90,14 @@ class Livemap extends PureComponent {
    */
   signInByToken = (access_token, refresh_token) => {
     this.sendCommand('signInByTokenViaManager', [access_token, refresh_token]);
+  };
+
+  enableSidebar = () => {
+    this.sendCommand('enableSidebar');
+  };
+
+  disableSidebar = () => {
+    this.sendCommand('disableSidebar');
   };
 
   loadMapUrl = () => {
