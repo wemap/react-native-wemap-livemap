@@ -13,6 +13,8 @@
   RCT_EXTERN_METHOD(startNavigationViaManager: (nonnull NSNumber *)node id: (nonnull NSNumber *)id)
   RCT_EXTERN_METHOD(stopNavigationViaManager: (nonnull NSNumber *)node)
   RCT_EXTERN_METHOD(signInByTokenViaManager: (nonnull NSNumber *)node accessToken: (nonnull NSString *)accessToken refreshToken: (nonnull NSString *)refreshToken)
+  RCT_EXTERN_METHOD(enableSidebarViaManager: (nonnull NSNumber *)node)
+  RCT_EXTERN_METHOD(disableSidebarViaManager: (nonnull NSNumber *)node)
   RCT_EXTERN_METHOD(loadMapUrlViaManager: (nonnull NSNumber *)node)
   RCT_EXTERN_METHOD(setPinpointsViaManager: (nonnull NSNumber *)node pinpoints: (nonnull NSArray *)pinpoints)
 
