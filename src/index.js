@@ -91,10 +91,16 @@ class Livemap extends PureComponent {
     this.sendCommand('signInByTokenViaManager', [access_token, refresh_token]);
   };
 
+  /**
+   * Activate the bar with several rows of content (of events, pinpoints, list, etc).
+   */
   enableSidebar = () => {
     this.sendCommand('enableSidebarViaManager');
   };
 
+  /**
+   * Deactivate the bar with several rows of content (of events, pinpoints, list, etc).
+   */
   disableSidebar = () => {
     this.sendCommand('disableSidebarViaManager');
   };
