@@ -10,6 +10,7 @@ const modules = Object.keys({
 });
 
 module.exports = {
+  sourceExts: ['cjs', 'js', 'ts', 'jsx', 'tsx'], // Adding here all needed extensions in your app
   projectRoot: __dirname,
   watchFolders: [root],
 
