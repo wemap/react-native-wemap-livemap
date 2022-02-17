@@ -109,6 +109,9 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
     MapBuilder.Builder events = MapBuilder.builder();
 
     String[] eventNames = new String[]{
+      "onMapMoved",
+      "onMapClick",
+      "onMapLongClick",
       "onMapReady",
       "onPinpointOpen",
       "onPinpointClose",
@@ -183,6 +186,12 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
         break;
       case "loadMapUrlViaManager":
         root.loadMapUrl();
+        break;
+      case "signOutViaManager":
+          root.livemap.signOut();
+        break;
+      case "setSourceListsViaManager":
+        root.livemap.setSourceLists(args.getArray(0));
         break;
     }
   }

@@ -120,6 +120,20 @@ class Livemap extends PureComponent {
     this.sendCommand('setPinpointsViaManager', [pinpoints]);
   };
 
+  /**
+   * Sign out the current user.
+   */
+  signOut = () => {
+    this.sendCommand('signOutViaManager', []);
+  };
+
+  /**
+   * Define one or more lists to be displayed on the map in addition of the current pinpoints of the map.                                                                                      *                                                                                                                                                                                           * @param sourceLists The ids of the lists
+   */
+  setSourceLists = (sourceLists) => {
+    this.sendCommand('setSourceListsViaManager', [sourceLists]);
+  };
+
   render() {
     const {
       onMapReady,
@@ -133,6 +147,9 @@ class Livemap extends PureComponent {
       onGuidingStopped,
       onUrlChange,
       mapConfig,
+      onMapMoved,
+      onMapClick,
+      onMapLongClick,
       ...rest
     } = this.props;
 
@@ -150,6 +167,9 @@ class Livemap extends PureComponent {
         onGuidingStarted={this.getNativeEventCallBack(onGuidingStarted)}
         onGuidingStopped={this.getNativeEventCallBack(onGuidingStopped)}
         onUrlChange={this.getNativeEventCallBack(onUrlChange)}
+        onMapMoved={this.getNativeEventCallBack(onMapMoved)}
+        onMapClick={this.getNativeEventCallBack(onMapClick)}
+        onMapLongClick={this.getNativeEventCallBack(onMapLongClick)}
         {...rest}
       />
     );
@@ -176,6 +196,9 @@ Livemap.defaultProps = {
   onUrlChange: ({ previousUrl, nextUrl }) => {},
   style: { flex: 1 },
   mapConfig: INITIAL_MAP_CONFIG,
+  onMapMoved: () => {},
+  onMapClick: () => {},
+  onMapLongClick: () => {},
 };
 
 Livemap.propTypes = {
