@@ -5,9 +5,8 @@ import { SafeAreaView } from 'react-native';
 import Livemap from '@wemap/react-native-wemap-livemap';
 
 const INITIAL_MAP_CONFIG = {
-  //emmid: 7087,
-  emmid: 10059,
-  maxbounds: "{\"_northEast\":{\"lat\":52.526714,\"lng\":13.37477},\"_southWest\":{\"lat\":52.522667,\"lng\":13.364878}}",
+  emmid: 19158,
+  //maxbounds: "{\"_northEast\":{\"lat\":52.526714,\"lng\":13.37477},\"_southWest\":{\"lat\":52.522667,\"lng\":13.364878}}",
 };
 
 const pinpoints = [
@@ -36,7 +35,7 @@ export default () => {
     // to test a signout after 60s
     //setTimeout(() => { livemap.current.signOut(); }, 60000)
     // ceci fait apparaître le pinpoint (à chercher) Clermont Auvergne Tourisme
-    //livemap.current.setSourceLists([73655]);
+    // livemap.current.setSourceLists([74878]);
   };
 
   return (
