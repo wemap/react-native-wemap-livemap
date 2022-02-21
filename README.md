@@ -1,5 +1,7 @@
 # @wemap/react-native-wemap-livemap
 
+https://developers.getwemap.com/docs/react-native/getting-started
+
 A React Native embed of the IOS and Android SDK from Wemap.
 It allows the developper to interact with them from the Livemap Component.
 
@@ -36,7 +38,7 @@ To view all methods and props of the Livemap Component, please see the [document
 
 MIT
 
-# setup
+# setup for a macbook M1
 
 macBook M1,
 pod install dans le dossier example/ios
@@ -59,3 +61,5 @@ remove warnings in the excample folder:
 sed -i '' s'/IPHONEOS_DEPLOYMENT_TARGET = 8/IPHONEOS_DEPLOYMENT_TARGET = 9/g' ./ios/Pods/Pods.xcodeproj/project.pbxproj && sed -i '' s'/IPHONEOS_DEPLOYMENT_TARGET = 9·4/IPHONEOS_DEPLOYMENT_TARGET = 9\.0/g' ./ios/Pods/Pods.xcodeproj/project.pbxproj
 ```
 
+To see the console logs:
+npx react-native log-android

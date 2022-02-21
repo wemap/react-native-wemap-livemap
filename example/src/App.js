@@ -6,7 +6,16 @@ import Livemap from '@wemap/react-native-wemap-livemap';
 
 const INITIAL_MAP_CONFIG = {
   emmid: 19158,
-  //maxbounds: "{\"_northEast\":{\"lat\":52.526714,\"lng\":13.37477},\"_southWest\":{\"lat\":52.522667,\"lng\":13.364878}}",
+  maxbounds: {
+    northEast: {
+      latitude: 52.526714,
+      longitude: 13.37477
+    },
+    southWest: {
+      latitude: 52.522667,
+      longitude: 13.364878
+    }
+  },
 };
 
 const pinpoints = [
@@ -31,11 +40,11 @@ export default () => {
 
   const onMapReady = () => {
     console.info('Livemap ready');
-    livemap.current.setPinpoints(pinpoints);
+    //livemap.current.setPinpoints(pinpoints);
     // to test a signout after 60s
     //setTimeout(() => { livemap.current.signOut(); }, 60000)
     // ceci fait apparaître le pinpoint (à chercher) Clermont Auvergne Tourisme
-    // livemap.current.setSourceLists([74878]);
+    //livemap.current.setSourceLists([74878]);
   };
 
   return (
@@ -51,9 +60,9 @@ export default () => {
         onEventOpen={({ id }) => console.log(`event open: ${id}`)}
         onEventClose={() => console.log('event close')}
         onGuidingStarted={() => console.log('guiding started')}
-        onMapMoved={({ jsonString }) => console.log('map moved', JSON.parse(jsonString))}
-        onMapClick={({ jsonString }) => console.log('map click', JSON.parse(jsonString))}
-        onMapLongClick={({ jsonString }) => console.log('map long click', JSON.parse(jsonString))}
+        onMapMoved={(json) => console.log('map moved', json)}
+        onMapClick={(json) => console.log('map click', json)}
+        onMapLongClick={(json) => console.log('map long click', json)}
       />
     </SafeAreaView>
   );

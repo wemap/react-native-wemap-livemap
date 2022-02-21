@@ -7,15 +7,19 @@ example/src/App.js
 
 - New parameter maxbounds
 maxbounds defines the map boundaries
-The format is similar to the url parameter (with "\ instead of ")
-maxbounds in a URL:
-https://livemap.getwemap.com/dom.html?emmid=19158&maxbounds={"_northEast":{"lat":52.526714,"lng":13.37477},"_southWest":{"lat":52.522667,"lng":13.364878}}
-maxbounds in a URL using percent encoding (via encodeURIComponent)
-https://livemap.getwemap.com/dom.html?emmid=19158&maxbounds=%7B%22_northEast%22%3A%7B%22lat%22%3A52.526714%2C%22lng%22%3A13.37477%7D%2C%22_southWest%22%3A%7B%22lat%22%3A52.522667%2C%22lng%22%3A13.364878%7D%7D
 
 const INITIAL_MAP_CONFIG = {
   emmid: 19158,
-  //maxbounds: "{\"_northEast\":{\"lat\":52.526714,\"lng\":13.37477},\"_southWest\":{\"lat\":52.522667,\"lng\":13.364878}}",
+  maxbounds: {
+    northEast: {
+      latitude: 52.526714,
+      longitude: 13.37477
+    },
+    southWest: {
+      latitude: 52.522667,
+      longitude: 13.364878
+    }
+  },
 };
 
 - New functions:
@@ -23,15 +27,15 @@ signOut()
 You need to sign in in the menu. Then this function can sign you out
 It was tested using a long setTimeout timer.
 
-setSourceLists([1221, 1277])
+setSourceLists([74878])
 Add new lists of pinpoints, where each parameter is a list id
 
 - New events:
 When moving the map:
-onMapMoved={({ jsonString }) => console.log('map moved', JSON.parse(jsonString))}
+onMapMoved={(json) => console.log('map moved', json)}
 When clicking:
-onMapClick={({ jsonString }) => console.log('map click', JSON.parse(jsonString))}
+onMapClick={(json) => console.log('map click', json)}
 When performing a long click:
-onMapLongClick={({ jsonString }) => console.log('map long click', JSON.parse(jsonString))}
+onMapLongClick={(json) => console.log('map long click', jsonString)}
 
 ---------------------------------------------------------------------

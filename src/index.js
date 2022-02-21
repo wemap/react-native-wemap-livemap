@@ -21,8 +21,11 @@ class Livemap extends PureComponent {
 
   getNativeEventCallBack =
     (func) =>
-    ({ nativeEvent }) =>
+    ({ nativeEvent }) => {
+      // necessary to avoid pollution with a parameter "target" in the custom events
+      delete nativeEvent.target;
       func(nativeEvent);
+    };
 
   /**
    * Open an event on the map. This can only be used for maps which use events.

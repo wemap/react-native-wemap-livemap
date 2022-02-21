@@ -31,7 +31,18 @@ class WemapLivemap: UIView {
     override func didSetProps(_ changedProps: [String]!) {
         wemap.delegate = self
 
-        _ = wemap.configure(config: wemapsdk_config(token: self.mapConfig!["token"] as? String, mapId: self.mapConfig!["emmid"] as? Int, livemapRootUrl: self.mapConfig!["webappEndpoint"] as? String)).presentIn(view: self)
+        var bounds: BoundingBox? = nil
+        if let boundsDict = self.mapConfig!["maxbounds"] as? NSDictionary {
+            if let parsedStruct: BoundingBox = wemapsdk_config.boundingBoxFromNSDictionary(dict: boundsDict) {
+                bounds = parsedStruct
+            }
+        }
+        _ = wemap.configure(config: wemapsdk_config(
+            token: self.mapConfig!["token"] as? String,
+            mapId: self.mapConfig!["emmid"] as? Int,
+            livemapRootUrl: self.mapConfig!["webappEndpoint"] as? String,
+            maxbounds: bounds
+        )).presentIn(view: self)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -119,19 +130,19 @@ class WemapLivemap: UIView {
 
 extension WemapLivemap: wemapsdkViewDelegate {
 
-    @objc func onMapMoved(_ wemapController: wemapsdk, jsonString: String) {
-        if(self.onMapMoved == nil) { return }
-        self.onMapMoved!(["jsonString": jsonString])
+    @objc func onMapMoved(_ wemapController: wemapsdk, json: NSDictionary) {
+        if (self.onMapMoved == nil) { return }
+        self.onMapMoved!(json as? [AnyHashable : Any])
     }
 
-    @objc func onMapClick(_ wemapController: wemapsdk, jsonString: String) {
-        if(self.onMapClick == nil) { return }
-        self.onMapClick!(["jsonString": jsonString])
+    @objc func onMapClick(_ wemapController: wemapsdk, json: NSDictionary) {
+        if (self.onMapClick == nil) { return }
+        self.onMapClick!(json as? [AnyHashable : Any])
     }
 
-    @objc func onMapLongClick(_ wemapController: wemapsdk, jsonString: String) {
-        if(self.onMapLongClick == nil) { return }
-        self.onMapLongClick!(["jsonString": jsonString])
+    @objc func onMapLongClick(_ wemapController: wemapsdk, json: NSDictionary) {
+        if (self.onMapLongClick == nil) { return }
+        self.onMapLongClick!(json as? [AnyHashable : Any])
     }
 
     @objc func waitForReady(_ wemapController: wemapsdk) {
