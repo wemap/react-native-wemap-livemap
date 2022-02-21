@@ -17,6 +17,8 @@
   RCT_EXTERN_METHOD(disableSidebarViaManager: (nonnull NSNumber *)node)
   RCT_EXTERN_METHOD(loadMapUrlViaManager: (nonnull NSNumber *)node)
   RCT_EXTERN_METHOD(setPinpointsViaManager: (nonnull NSNumber *)node pinpoints: (nonnull NSArray *)pinpoints)
+  RCT_EXTERN_METHOD(signOutViaManager: (nonnull NSNumber *)node)
+  RCT_EXTERN_METHOD(setSourceListsViaManager: (nonnull NSNumber *)node sourceLists: (nonnull NSArray *)sourceLists)
 
 
   RCT_EXPORT_VIEW_PROPERTY(onMapReady, RCTBubblingEventBlock)
@@ -31,4 +33,7 @@
   RCT_EXPORT_VIEW_PROPERTY(onUserLogin, RCTBubblingEventBlock)
   RCT_EXPORT_VIEW_PROPERTY(onUserLogout, RCTBubblingEventBlock)
   RCT_EXPORT_VIEW_PROPERTY(onUrlChange, RCTBubblingEventBlock)
+  RCT_EXPORT_VIEW_PROPERTY(onMapMoved, RCTBubblingEventBlock)
+  RCT_EXPORT_VIEW_PROPERTY(onMapClick, RCTBubblingEventBlock)
+  RCT_EXPORT_VIEW_PROPERTY(onMapLongClick, RCTBubblingEventBlock)
 @end

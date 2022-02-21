@@ -329,6 +329,9 @@ SWIFT_PROTOCOL("_TtP15livemap_ios_sdk20wemapsdkViewDelegate_")
 - (void)onUrlChange:(wemapsdk * _Nonnull)wemapController previousUrl:(NSString * _Nonnull)previousUrl nextUrl:(NSString * _Nonnull)nextUrl;
 - (void)onBookEventClicked:(wemapsdk * _Nonnull)wemapController event:(WemapEvent * _Nonnull)event;
 - (void)onGoToPinpointClicked:(wemapsdk * _Nonnull)wemapController pinpoint:(WemapPinpoint * _Nonnull)pinpoint;
+- (void)onMapMoved:(wemapsdk * _Nonnull)wemapController json:(NSDictionary * _Nonnull)json;
+- (void)onMapClick:(wemapsdk * _Nonnull)wemapController json:(NSDictionary * _Nonnull)json;
+- (void)onMapLongClick:(wemapsdk * _Nonnull)wemapController json:(NSDictionary * _Nonnull)json;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -667,6 +670,9 @@ SWIFT_PROTOCOL("_TtP15livemap_ios_sdk20wemapsdkViewDelegate_")
 - (void)onUrlChange:(wemapsdk * _Nonnull)wemapController previousUrl:(NSString * _Nonnull)previousUrl nextUrl:(NSString * _Nonnull)nextUrl;
 - (void)onBookEventClicked:(wemapsdk * _Nonnull)wemapController event:(WemapEvent * _Nonnull)event;
 - (void)onGoToPinpointClicked:(wemapsdk * _Nonnull)wemapController pinpoint:(WemapPinpoint * _Nonnull)pinpoint;
+- (void)onMapMoved:(wemapsdk * _Nonnull)wemapController json:(NSDictionary * _Nonnull)json;
+- (void)onMapClick:(wemapsdk * _Nonnull)wemapController json:(NSDictionary * _Nonnull)json;
+- (void)onMapLongClick:(wemapsdk * _Nonnull)wemapController json:(NSDictionary * _Nonnull)json;
 @end
 
 #if __has_attribute(external_source_symbol)

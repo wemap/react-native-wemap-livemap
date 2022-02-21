@@ -1,0 +1,41 @@
+
+---------------------------------------------------------------------
+
+release v1.7.0
+see the code sample here:
+example/src/App.js
+
+- New parameter maxbounds
+maxbounds defines the map boundaries
+
+const INITIAL_MAP_CONFIG = {
+  emmid: 19158,
+  maxbounds: {
+    northEast: {
+      latitude: 52.526714,
+      longitude: 13.37477
+    },
+    southWest: {
+      latitude: 52.522667,
+      longitude: 13.364878
+    }
+  },
+};
+
+- New functions:
+signOut()
+You need to sign in in the menu. Then this function can sign you out
+It was tested using a long setTimeout timer.
+
+setSourceLists([74878])
+Add new lists of pinpoints, where each parameter is a list id
+
+- New events:
+When moving the map:
+onMapMoved={(json) => console.log('map moved', json)}
+When clicking:
+onMapClick={(json) => console.log('map click', json)}
+When performing a long click:
+onMapLongClick={(json) => console.log('map long click', jsonString)}
+
+---------------------------------------------------------------------

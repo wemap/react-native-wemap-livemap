@@ -72,6 +72,25 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
     livemap.addEventCloseListener(() -> sendNativeEvent("onEventClose", e -> e = null));
     livemap.addGuidingStartedListener(() -> sendNativeEvent("onGuidingStarted", e -> e = null));
     livemap.addGuidingStoppedListener(() -> sendNativeEvent("onGuidingStopped", e -> e = null));
+    livemap.addMapMovedListener((mapMoved) -> sendNativeEvent("onMapMoved", e -> {
+      e.putDouble("zoom", mapMoved.zoom);
+      //e.put("bounds", mapMoved.bounds.toJson());
+      e.putDouble("latitude", mapMoved.point.getLat());
+      e.putDouble("longitude", mapMoved.point.getLng());
+      try {
+          e.putMap("bounds", ReactNativeJson.convertJsonToMap(mapMoved.bounds.toJson(mapMoved.bounds)));
+      } catch (JSONException | NullPointerException jsonProcessingException) {
+          jsonProcessingException.printStackTrace();
+      }
+    }));
+    livemap.addMapClickListener((point) -> sendNativeEvent("onMapClick", e -> {
+        e.putDouble("latitude", point.getLat());
+        e.putDouble("longitude", point.getLng());
+    }));
+    livemap.addMapLongClickListener((point) -> sendNativeEvent("onMapLongClick", e -> {
+        e.putDouble("latitude", point.getLat());
+        e.putDouble("longitude", point.getLng());
+    }));
 
     this.setUrlChangeListener((previousUrl, nextUrl) -> sendNativeEvent("onUrlChange", e -> {
       e.putString("previousUrl", previousUrl);

@@ -70,6 +70,15 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
     } else {
       livemapOptions.emmid = mapConfig.getInt("emmid");
       livemapOptions.token = mapConfig.getString("token");
+      try {
+          ReadableMap boundsMap = mapConfig.getMap("maxbounds");
+          if (boundsMap != null) {
+              JSONObject maxbounds = ReactNativeJson.convertMapToJson(boundsMap);
+              livemapOptions.maxbounds = livemapOptions.maxbounds.fromJson(maxbounds);
+          }
+      } catch (JSONException | NullPointerException jsonProcessingException) {
+          jsonProcessingException.printStackTrace();
+      }
     }
 
     view.setLivemapOptions(livemapOptions);
@@ -109,6 +118,9 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
     MapBuilder.Builder events = MapBuilder.builder();
 
     String[] eventNames = new String[]{
+      "onMapMoved",
+      "onMapClick",
+      "onMapLongClick",
       "onMapReady",
       "onPinpointOpen",
       "onPinpointClose",
@@ -183,6 +195,24 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
         break;
       case "loadMapUrlViaManager":
         root.loadMapUrl();
+        break;
+      case "signOutViaManager":
+          root.livemap.signOut();
+        break;
+      case "setSourceListsViaManager":
+          List<Integer> result = new ArrayList();
+          try {
+              ReadableArray readableArray2 = args.getArray(0);
+              ArrayList<Object> array2 = readableArray2.toArrayList();
+              for (int i = 0; i < array2.size(); i++) {
+                  Double val1 = (Double)array2.get(i);
+                  Integer val2 = val1.intValue();
+                  result.add(val2);
+              }
+          } catch (Exception e) {
+              e.printStackTrace();
+          }
+          root.livemap.setSourceLists(result);
         break;
     }
   }

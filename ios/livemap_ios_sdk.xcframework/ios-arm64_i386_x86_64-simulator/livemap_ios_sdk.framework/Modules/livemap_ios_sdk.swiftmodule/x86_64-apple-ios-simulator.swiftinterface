@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
-// swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name livemap_ios_sdk
+// swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name livemap_ios_sdk
 import AVFoundation
 import Foundation
 import Swift
@@ -37,6 +37,9 @@ import _Concurrency
   @objc optional func onUrlChange(_ wemapController: livemap_ios_sdk.wemapsdk, previousUrl: Swift.String, nextUrl: Swift.String)
   @objc optional func onBookEventClicked(_ wemapController: livemap_ios_sdk.wemapsdk, event: livemap_ios_sdk.WemapEvent)
   @objc optional func onGoToPinpointClicked(_ wemapController: livemap_ios_sdk.wemapsdk, pinpoint: livemap_ios_sdk.WemapPinpoint)
+  @objc optional func onMapMoved(_ wemapController: livemap_ios_sdk.wemapsdk, json: Foundation.NSDictionary)
+  @objc optional func onMapClick(_ wemapController: livemap_ios_sdk.wemapsdk, json: Foundation.NSDictionary)
+  @objc optional func onMapLongClick(_ wemapController: livemap_ios_sdk.wemapsdk, json: Foundation.NSDictionary)
 }
 @objc public class WemapEvent : ObjectiveC.NSObject {
   final public let id: Swift.Int
@@ -93,6 +96,8 @@ extension livemap_ios_sdk.wemapsdk {
   @_Concurrency.MainActor(unsafe) public func signInByToken(accessToken: Swift.String, refreshToken: Swift.String)
   @_Concurrency.MainActor(unsafe) public func enableSidebar()
   @_Concurrency.MainActor(unsafe) public func disableSidebar()
+  @_Concurrency.MainActor(unsafe) public func signOut()
+  @_Concurrency.MainActor(unsafe) public func setSourceLists(sourceLists: Swift.Array<Swift.Int>)
 }
 public struct WemapFilters : Swift.Codable {
   public init(tags: Swift.Array<Swift.String>? = nil, query: Swift.String? = nil, startDate: Swift.String? = nil, endDate: Swift.String? = nil)
@@ -105,10 +110,37 @@ public struct WemapLocation : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
 }
 public struct wemapsdk_config {
-  public init(token: Swift.String?, mapId: Swift.Int? = nil, livemapRootUrl: Swift.String? = nil)
+  public init(token: Swift.String?, mapId: Swift.Int? = nil, livemapRootUrl: Swift.String? = nil, maxbounds: livemap_ios_sdk.BoundingBox? = nil)
   public static let defaultLivemapRootUrl: Swift.String
+  public static func boundingBoxFromNSDictionary(dict: Foundation.NSDictionary) -> livemap_ios_sdk.BoundingBox?
+  public static func maxBoundsFromUrl(maxbounds: Swift.String) -> livemap_ios_sdk.BoundingBox?
+  public static func maxBoundsToUrl(maxbounds: livemap_ios_sdk.BoundingBox?) -> Swift.String?
   public let token: Swift.String
   public let emmid: Swift.Int
   public var ufe: Swift.Bool
   public let livemapRootUrl: Swift.String
+  public let maxbounds: livemap_ios_sdk.BoundingBox?
+}
+public struct Coordinates : Swift.Codable {
+  public init(latitude: Swift.Double? = nil, longitude: Swift.Double? = nil, altitude: Swift.Double? = nil)
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct BoundingBox : Swift.Codable {
+  public init(northEast: livemap_ios_sdk.Coordinates? = nil, southWest: livemap_ios_sdk.Coordinates? = nil)
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct MapMoved : Swift.Codable {
+  public init(zoom: Swift.Double? = nil, bounds: livemap_ios_sdk.BoundingBox? = nil, latitude: Swift.Double? = nil, longitude: Swift.Double? = nil)
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct MaxBoundsSnippet : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct MaxBoundsSnippetCoords : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
