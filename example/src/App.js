@@ -6,6 +6,7 @@ import Livemap from '@wemap/react-native-wemap-livemap';
 
 const INITIAL_MAP_CONFIG = {
   emmid: 19158,
+  /*
   maxbounds: {
     northEast: {
       latitude: 52.526714,
@@ -16,6 +17,7 @@ const INITIAL_MAP_CONFIG = {
       longitude: 13.364878
     }
   },
+  */
 };
 
 const pinpoints = [
