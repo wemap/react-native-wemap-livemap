@@ -6,6 +6,7 @@ import Livemap from '@wemap/react-native-wemap-livemap';
 
 const INITIAL_MAP_CONFIG = {
   emmid: 19158,
+  token: 'GUHTU6TYAWWQHUSR5Z5JZNMXX',
   /*
   maxbounds: {
     northEast: {
