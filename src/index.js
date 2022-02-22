@@ -131,7 +131,8 @@ class Livemap extends PureComponent {
   };
 
   /**
-   * Define one or more lists to be displayed on the map in addition of the current pinpoints of the map.                                                                                      *                                                                                                                                                                                           * @param sourceLists The ids of the lists
+   * Define one or more lists to be displayed on the map in addition of the current pinpoints of the map.
+   * @param {integer[]} sourceLists id of lists to be added to the map.
    */
   setSourceLists = (sourceLists) => {
     this.sendCommand('setSourceListsViaManager', [sourceLists]);
