@@ -243,6 +243,18 @@ Livemap.propTypes = {
    */
   onGuidingStopped: PropTypes.func,
   /**
+   * Dispatched when the map is moved. {latitude, longitude, zoom, bounds}
+   */
+  onMapMoved: PropTypes.func,
+  /**
+   * Dispatched when the map is clicked. {latitude, longitude}
+   */
+  onMapClick: PropTypes.func,
+  /**
+   * Dispatched when the map is long clicked {latitude, longitude}
+   */
+  onMapLongClick: PropTypes.func,
+  /**
    * Your Livemap config. You have the choice between UFE and emmid mode.
    * If you don't provide any emmid, the default mode will be UFE.
    * If you want to display your map via an emmid, your config will need your personal token.
@@ -253,9 +265,20 @@ Livemap.propTypes = {
     /** the Wemap endpoint you want to request */
     webappEndpoint: PropTypes.string,
     /** the emmid of your map */
-    emmid: PropTypes.number,
+    emmid: PropTypes.number.isRequired,
     /** your personal token which is needed if you want to display your map */
-    token: PropTypes.string,
+    token: PropTypes.string.isRequired,
+    /** maxbounds defines the map boundaries */
+    maxbounds: PropTypes.shape({
+      northEast: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+      }).isRequired,
+      southWest: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+      }).isRequired,
+    }),
   }).isRequired,
   /**
    * By default, your Livemap's instance fill with its container.
