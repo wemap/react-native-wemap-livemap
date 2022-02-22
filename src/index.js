@@ -86,15 +86,6 @@ class Livemap extends PureComponent {
   };
 
   /**
-   * Sign in to the UFE with a Wemap token.
-   * @param {string} access_token the acces_token property of your Wemap token
-   * @param {string} refresh_token the refresh_token property of your Wemap token
-   */
-  signInByToken = (access_token, refresh_token) => {
-    this.sendCommand('signInByTokenViaManager', [access_token, refresh_token]);
-  };
-
-  /**
    * Activate the bar with several rows of content (of events, pinpoints, list, etc).
    */
   enableSidebar = () => {
@@ -116,11 +107,12 @@ class Livemap extends PureComponent {
   };
 
   /**
-   * Populates the map with given pinpoints.
-   * @param {Pinpoint[]} pinpoints Pinpoints to populate the map.
+   * Sign in to the UFE with a Wemap token.
+   * @param {string} access_token the acces_token property of your Wemap token
+   * @param {string} refresh_token the refresh_token property of your Wemap token
    */
-  setPinpoints = (pinpoints) => {
-    this.sendCommand('setPinpointsViaManager', [pinpoints]);
+  signInByToken = (access_token, refresh_token) => {
+    this.sendCommand('signInByTokenViaManager', [access_token, refresh_token]);
   };
 
   /**
@@ -128,6 +120,14 @@ class Livemap extends PureComponent {
    */
   signOut = () => {
     this.sendCommand('signOutViaManager', []);
+  };
+
+  /**
+   * Populates the map with given pinpoints.
+   * @param {Pinpoint[]} pinpoints Pinpoints to populate the map.
+   */
+  setPinpoints = (pinpoints) => {
+    this.sendCommand('setPinpointsViaManager', [pinpoints]);
   };
 
   /**
@@ -200,9 +200,9 @@ Livemap.defaultProps = {
   onUrlChange: ({ previousUrl, nextUrl }) => {},
   style: { flex: 1 },
   mapConfig: INITIAL_MAP_CONFIG,
-  onMapMoved: () => {},
-  onMapClick: () => {},
-  onMapLongClick: () => {},
+  onMapMoved: ({ latitude, longitude, zoom, bounds }) => {},
+  onMapClick: ({ latitude, longitude }) => {},
+  onMapLongClick: ({ latitude, longitude }) => {},
 };
 
 Livemap.propTypes = {
@@ -243,15 +243,15 @@ Livemap.propTypes = {
    */
   onGuidingStopped: PropTypes.func,
   /**
-   * Dispatched when the map is moved. {latitude, longitude, zoom, bounds}
+   * Dispatched when the map is moved.
    */
   onMapMoved: PropTypes.func,
   /**
-   * Dispatched when the map is clicked. {latitude, longitude}
+   * Dispatched when the map is clicked.
    */
   onMapClick: PropTypes.func,
   /**
-   * Dispatched when the map is long clicked {latitude, longitude}
+   * Dispatched when the map is long clicked
    */
   onMapLongClick: PropTypes.func,
   /**
