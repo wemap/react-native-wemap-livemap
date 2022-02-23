@@ -1,9 +1,26 @@
+see the code sample here:
+example/src/App.js
+
+
+
+
+
+---------------------------------------------------------------------
+
+release v1.8.0
+
+- Modified function arguments:
+Remove the refreshToken parameter from signInByToken
+It was decided to remove it since it is not useful and since it was
+never made to work initially.
+
+- New function:
+add the function aroundMe() centering on the user via geolocation
+
 
 ---------------------------------------------------------------------
 
 release v1.7.0
-see the code sample here:
-example/src/App.js
 
 - New parameter maxbounds
 maxbounds defines the map boundaries

@@ -111,8 +111,8 @@ class Livemap extends PureComponent {
    * @param {string} access_token the acces_token property of your Wemap token
    * @param {string} refresh_token the refresh_token property of your Wemap token
    */
-  signInByToken = (access_token, refresh_token) => {
-    this.sendCommand('signInByTokenViaManager', [access_token, refresh_token]);
+  signInByToken = (access_token) => {
+    this.sendCommand('signInByTokenViaManager', [access_token]);
   };
 
   /**
@@ -136,6 +136,13 @@ class Livemap extends PureComponent {
    */
   setSourceLists = (sourceLists) => {
     this.sendCommand('setSourceListsViaManager', [sourceLists]);
+  };
+
+  /**
+   * Center the map on the user's location.
+   */
+  aroundMe = () => {
+    this.sendCommand('aroundMeViaManager', []);
   };
 
   render() {

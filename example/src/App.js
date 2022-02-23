@@ -48,6 +48,7 @@ export default () => {
     //setTimeout(() => { livemap.current.signOut(); }, 60000)
     // ceci fait apparaître le pinpoint (à chercher) Clermont Auvergne Tourisme
     //livemap.current.setSourceLists([74878]);
+    //livemap.current.aroundMe();
   };
 
   return (

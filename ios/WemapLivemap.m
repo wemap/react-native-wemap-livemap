@@ -12,13 +12,14 @@
   RCT_EXTERN_METHOD(setFiltersViaManager: (nonnull NSNumber *)node startDate: (nonnull NSString *)startDate endDate: (nonnull NSString *)endDate query: (nonnull NSString *)query tags: (nonnull NSArray *)tags)
   RCT_EXTERN_METHOD(startNavigationViaManager: (nonnull NSNumber *)node id: (nonnull NSNumber *)id)
   RCT_EXTERN_METHOD(stopNavigationViaManager: (nonnull NSNumber *)node)
-  RCT_EXTERN_METHOD(signInByTokenViaManager: (nonnull NSNumber *)node accessToken: (nonnull NSString *)accessToken refreshToken: (nonnull NSString *)refreshToken)
+  RCT_EXTERN_METHOD(signInByTokenViaManager: (nonnull NSNumber *)node accessToken: (nonnull NSString *)accessToken)
   RCT_EXTERN_METHOD(enableSidebarViaManager: (nonnull NSNumber *)node)
   RCT_EXTERN_METHOD(disableSidebarViaManager: (nonnull NSNumber *)node)
   RCT_EXTERN_METHOD(loadMapUrlViaManager: (nonnull NSNumber *)node)
   RCT_EXTERN_METHOD(setPinpointsViaManager: (nonnull NSNumber *)node pinpoints: (nonnull NSArray *)pinpoints)
   RCT_EXTERN_METHOD(signOutViaManager: (nonnull NSNumber *)node)
   RCT_EXTERN_METHOD(setSourceListsViaManager: (nonnull NSNumber *)node sourceLists: (nonnull NSArray *)sourceLists)
+  RCT_EXTERN_METHOD(aroundMeViaManager: (nonnull NSNumber *)node)
 
 
   RCT_EXPORT_VIEW_PROPERTY(onMapReady, RCTBubblingEventBlock)
