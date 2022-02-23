@@ -38,13 +38,20 @@ To view all methods and props of the Livemap Component, please see the [document
 
 MIT
 
-# setup for a macbook M1
+# setup for the iOS simulator
+
+If it does not work on the command line, please try using XCode
+
+Sometimes, DerivedData needs to be cleared
+(dangerous command that can be misused and remove everything, rm -rf ~/Library/Developer/Xcode/DerivedData/*)
+
+# setup for a macbook M1 (not an Intel processor)
 
 macBook M1,
 pod install dans le dossier example/ios
 arch -x86_64 pod install
 
-Sometimes, DerivedData need to be cleared
+Sometimes, DerivedData needs to be cleared
 (dangerous command that can be misused and remove everything, rm -rf ~/Library/Developer/Xcode/DerivedData/*)
 
 Node 14 is recommended

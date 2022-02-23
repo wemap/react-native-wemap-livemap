@@ -100,7 +100,7 @@ class WemapLivemap: UIView {
     }
 
     @objc func signInByToken(_ params: [String : Any]) {
-        wemap.signInByToken(accessToken: params["accessToken"] as! String, refreshToken: params["refreshToken"]! as! String)
+        wemap.signInByToken(accessToken: params["accessToken"] as! String)
     }
 
     @objc func enableSidebar() {
@@ -125,6 +125,10 @@ class WemapLivemap: UIView {
 
     @objc func setSourceLists(_ params: [String : Any]) {
         wemap.setSourceLists(sourceLists: params["sourceLists"] as! [Int])
+    }
+
+    @objc func aroundMe() {
+        wemap.aroundMe()
     }
 }
 
@@ -248,8 +252,8 @@ class WemapLivemapManager: RCTViewManager {
         self.callLivemapMethod(node, selector: "stopNavigation")
     }
 
-    @objc func signInByTokenViaManager(_ node: NSNumber, accessToken: NSString, refreshToken: NSString) {
-        self.callLivemapMethod(node, selector: "signInByToken:", params: ["accessToken": accessToken, "refreshToken": refreshToken])
+    @objc func signInByTokenViaManager(_ node: NSNumber, accessToken: NSString) {
+        self.callLivemapMethod(node, selector: "signInByToken:", params: ["accessToken": accessToken])
     }
 
     @objc func enableSidebarViaManager(_ node: NSNumber) {
@@ -275,6 +279,10 @@ class WemapLivemapManager: RCTViewManager {
 
     @objc func setSourceListsViaManager(_ node: NSNumber, sourceLists: [NSInteger]) {
         self.callLivemapMethod(node, selector: "setSourceLists:", params: ["sourceLists": sourceLists])
+    }
+
+    @objc func aroundMeViaManager(_ node: NSNumber) {
+        self.callLivemapMethod(node, selector: "aroundMe")
     }
 
     override func view() -> UIView! {

@@ -93,11 +93,12 @@ extension livemap_ios_sdk.wemapsdk {
   @_Concurrency.MainActor(unsafe) public func setFilters(WemapFilters: livemap_ios_sdk.WemapFilters)
   @_Concurrency.MainActor(unsafe) public func navigateToPinpoint(WemapPinpointId id: Swift.Int, location: livemap_ios_sdk.WemapLocation? = nil, heading: Swift.Int? = nil)
   @_Concurrency.MainActor(unsafe) public func stopNavigation()
-  @_Concurrency.MainActor(unsafe) public func signInByToken(accessToken: Swift.String, refreshToken: Swift.String)
+  @_Concurrency.MainActor(unsafe) public func signInByToken(accessToken: Swift.String)
   @_Concurrency.MainActor(unsafe) public func enableSidebar()
   @_Concurrency.MainActor(unsafe) public func disableSidebar()
   @_Concurrency.MainActor(unsafe) public func signOut()
   @_Concurrency.MainActor(unsafe) public func setSourceLists(sourceLists: Swift.Array<Swift.Int>)
+  @_Concurrency.MainActor(unsafe) public func aroundMe()
 }
 public struct WemapFilters : Swift.Codable {
   public init(tags: Swift.Array<Swift.String>? = nil, query: Swift.String? = nil, startDate: Swift.String? = nil, endDate: Swift.String? = nil)

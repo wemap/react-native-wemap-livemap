@@ -169,7 +169,7 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
         root.livemap.stopNavigation();
         break;
       case "signInByTokenViaManager":
-        root.livemap.signInByToken(args.getString(0), args.getString(1));
+        root.livemap.signInByToken(args.getString(0));
         break;
       case "enableSidebarViaManager":
           root.livemap.enableSidebar();
@@ -213,6 +213,9 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
               e.printStackTrace();
           }
           root.livemap.setSourceLists(result);
+        break;
+      case "aroundMeViaManager":
+          root.livemap.aroundMe();
         break;
     }
   }
