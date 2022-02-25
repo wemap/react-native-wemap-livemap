@@ -31,8 +31,7 @@
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
     "bootstrap": "yarn example && yarn && yarn pods",
-    "docs": "node utils/react-docgen-markdown-renderer",
-    "typedoc": "typedoc"
+    "docs": "typedoc --out docs --plugin typedoc-plugin-markdown ./src/components/index.tsx ./src/types/index.tsx"
   },
   "keywords": [
     "react-native",
