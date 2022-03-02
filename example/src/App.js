@@ -49,6 +49,13 @@ export default () => {
     // ceci fait apparaître le pinpoint (à chercher) Clermont Auvergne Tourisme
     //livemap.current.setSourceLists([74878]);
     //livemap.current.aroundMe();
+    // var filters = [
+    //   '2017-02-01',
+    //   '2017-02-05',
+    //   'arts décoratifs',
+    //   ['monument-historique', 'musee-de-france'],
+    // ];
+    // livemap.current.setFilters(...filters);
   };
 
   return (
