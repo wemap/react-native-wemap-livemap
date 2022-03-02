@@ -23,7 +23,6 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = WemapLivemapExample/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = WemapLivemapExample/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = WemapLivemapExample/main.m; sourceTree = "<group>"; };
-		20F357AD24636CDE00C146DC /* WemapLivemapExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WemapLivemapExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		20F357AE24636CDF00C146DC /* WemapLivemapExample-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WemapLivemapExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		A589BFC52D9719B3EDBDA984 /* Pods-WemapLivemapExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WemapLivemapExample.debug.xcconfig"; path = "Target Support Files/Pods-WemapLivemapExample/Pods-WemapLivemapExample.debug.xcconfig"; sourceTree = "<group>"; };
 		A8B33611E8A3F650644AF0E5 /* libPods-WemapLivemapExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WemapLivemapExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,7 +90,6 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				1CFFDEF7170271C97B8B7E5A /* Pods */,
-				20F357AD24636CDE00C146DC /* WemapLivemapExample-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -302,6 +300,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A589BFC52D9719B3EDBDA984 /* Pods-WemapLivemapExample.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ARCHS = (
 					"$(ARCHS_STANDARD)",
 					x86_64,
@@ -314,6 +313,10 @@
 				DEVELOPMENT_TEAM = 5PQJ73JT76;
 				INFOPLIST_FILE = WemapLivemapExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DFB_SONARKIT_ENABLED=1",
@@ -336,6 +339,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D164E6D49D463CBB1A2AD0DA /* Pods-WemapLivemapExample.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ARCHS = (
 					"$(ARCHS_STANDARD)",
 					x86_64,
@@ -346,7 +350,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5PQJ73JT76;
 				INFOPLIST_FILE = WemapLivemapExample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DFB_SONARKIT_ENABLED=1",
@@ -396,7 +404,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -413,6 +421,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -451,7 +464,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
