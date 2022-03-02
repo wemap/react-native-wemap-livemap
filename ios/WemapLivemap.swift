@@ -86,8 +86,8 @@ class WemapLivemap: UIView {
         wemap.closePinpoint()
     }
 
-    @objc func setFilters(tags: NSArray, query: NSString, startDate: NSString, endDate: NSString) {
-        let filters = WemapFilters(tags: tags as? Array<String>, query: query as String, startDate: startDate as String, endDate: endDate as String)
+    @objc func setFilters(_ params: [String : Any]) {
+        let filters = WemapFilters(tags: params["tags"] as? Array<String>, query: params["query"] as? String, startDate: params["startDate"] as? String, endDate: params["endDate"] as? String)
         wemap.setFilters(WemapFilters: filters)
     }
 
