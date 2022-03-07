@@ -145,6 +145,20 @@ class Livemap extends PureComponent {
     this.sendCommand('aroundMeViaManager', []);
   };
 
+  /**
+   * Disable analytics tracking
+   */
+  disableAnalytics = () => {
+    this.sendCommand('disableAnalyticsViaManager', []);
+  };
+
+  /**
+   * Enable analytics tracking
+   */
+  enableAnalytics = () => {
+    this.sendCommand('enableAnalyticsViaManager', []);
+  };
+
   render() {
     const {
       onMapReady,
@@ -286,9 +300,18 @@ Livemap.propTypes = {
         longitude: PropTypes.number.isRequired,
       }).isRequired,
     }),
+    /** introcard allows to remove the intro card that is present by default */
+    introcard: PropTypes.shape({
+      active: PropTypes.bool.isRequired,
+    }),
+    /** urlParameters allows to pass the same query parameters as in the browser url,
+        and arranged in a list
+        ex: ['introcard={"active":false}']
+    */
+    urlParameters: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
   /**
-   * By default, your Livemap's instance fill with its container.
+   * By default, the Livemap's instance fills in its container.
    */
   style: ViewPropTypes.style,
 };

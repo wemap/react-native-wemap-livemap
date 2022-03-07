@@ -99,6 +99,8 @@ extension livemap_ios_sdk.wemapsdk {
   @_Concurrency.MainActor(unsafe) public func signOut()
   @_Concurrency.MainActor(unsafe) public func setSourceLists(sourceLists: Swift.Array<Swift.Int>)
   @_Concurrency.MainActor(unsafe) public func aroundMe()
+  @_Concurrency.MainActor(unsafe) public func disableAnalytics()
+  @_Concurrency.MainActor(unsafe) public func enableAnalytics()
 }
 public struct WemapFilters : Swift.Codable {
   public init(tags: Swift.Array<Swift.String>? = nil, query: Swift.String? = nil, startDate: Swift.String? = nil, endDate: Swift.String? = nil)
@@ -111,16 +113,20 @@ public struct WemapLocation : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
 }
 public struct wemapsdk_config {
-  public init(token: Swift.String?, mapId: Swift.Int? = nil, livemapRootUrl: Swift.String? = nil, maxbounds: livemap_ios_sdk.BoundingBox? = nil)
+  public init(token: Swift.String?, mapId: Swift.Int? = nil, livemapRootUrl: Swift.String? = nil, maxbounds: livemap_ios_sdk.BoundingBox? = nil, introcard: livemap_ios_sdk.IntroCardParameter? = nil, urlParameters: [Swift.String]? = nil)
   public static let defaultLivemapRootUrl: Swift.String
   public static func boundingBoxFromNSDictionary(dict: Foundation.NSDictionary) -> livemap_ios_sdk.BoundingBox?
+  public static func introcardFromNSDictionary(dict: Foundation.NSDictionary) -> livemap_ios_sdk.IntroCardParameter?
   public static func maxBoundsFromUrl(maxbounds: Swift.String) -> livemap_ios_sdk.BoundingBox?
   public static func maxBoundsToUrl(maxbounds: livemap_ios_sdk.BoundingBox?) -> Swift.String?
+  public static func introcardToUrl(introcard: livemap_ios_sdk.IntroCardParameter?) -> Swift.String?
   public let token: Swift.String
   public let emmid: Swift.Int
   public var ufe: Swift.Bool
   public let livemapRootUrl: Swift.String
   public let maxbounds: livemap_ios_sdk.BoundingBox?
+  public let introcard: livemap_ios_sdk.IntroCardParameter?
+  public let urlParameters: [Swift.String]?
 }
 public struct Coordinates : Swift.Codable {
   public init(latitude: Swift.Double? = nil, longitude: Swift.Double? = nil, altitude: Swift.Double? = nil)
@@ -142,6 +148,11 @@ public struct MaxBoundsSnippet : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
 }
 public struct MaxBoundsSnippetCoords : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct IntroCardParameter : Swift.Codable {
+  public init(active: Swift.Bool? = nil)
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }

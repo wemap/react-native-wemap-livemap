@@ -19,6 +19,12 @@ const INITIAL_MAP_CONFIG = {
     }
   },
   */
+  //introcard: { 'active': false },
+  /*
+  urlParameters: [
+    'introcard={"active":false}'
+  ],
+  */
 };
 
 const pinpoints = [
@@ -56,6 +62,7 @@ export default () => {
     //   ['monument-historique', 'musee-de-france'],
     // ];
     // livemap.current.setFilters(...filters);
+    // livemap.current.disableAnalytics();
   };
 
   return (
@@ -78,3 +85,4 @@ export default () => {
     </SafeAreaView>
   );
 };
+
