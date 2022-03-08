@@ -114,6 +114,7 @@ interface LivemapProps {
    * Dispatched when the map is long clicked
    */
   onMapLongClick?: (event: Coordinates) => void;
+  onLikePinpointClicked?: (pinpoint: Pinpoint) => void;
 }
 
 type LivemapState = {};

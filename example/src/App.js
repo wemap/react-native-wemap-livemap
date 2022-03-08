@@ -81,6 +81,7 @@ export default () => {
         onMapMoved={(json) => console.log('map moved', json)}
         onMapClick={(json) => console.log('map click', json)}
         onMapLongClick={(json) => console.log('map long click', json)}
+        onLikePinpointClicked={(json) => console.log('like click', json)}
       />
     </SafeAreaView>
   );

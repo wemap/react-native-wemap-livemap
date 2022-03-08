@@ -37,6 +37,7 @@ import _Concurrency
   @objc optional func onUrlChange(_ wemapController: livemap_ios_sdk.wemapsdk, previousUrl: Swift.String, nextUrl: Swift.String)
   @objc optional func onBookEventClicked(_ wemapController: livemap_ios_sdk.wemapsdk, event: livemap_ios_sdk.WemapEvent)
   @objc optional func onGoToPinpointClicked(_ wemapController: livemap_ios_sdk.wemapsdk, pinpoint: livemap_ios_sdk.WemapPinpoint)
+  @objc optional func onLikePinpointClicked(_ wemapController: livemap_ios_sdk.wemapsdk, pinpoint: livemap_ios_sdk.WemapPinpoint)
   @objc optional func onMapMoved(_ wemapController: livemap_ios_sdk.wemapsdk, json: Foundation.NSDictionary)
   @objc optional func onMapClick(_ wemapController: livemap_ios_sdk.wemapsdk, json: Foundation.NSDictionary)
   @objc optional func onMapLongClick(_ wemapController: livemap_ios_sdk.wemapsdk, json: Foundation.NSDictionary)

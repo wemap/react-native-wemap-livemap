@@ -39,4 +39,5 @@
   RCT_EXPORT_VIEW_PROPERTY(onMapMoved, RCTBubblingEventBlock)
   RCT_EXPORT_VIEW_PROPERTY(onMapClick, RCTBubblingEventBlock)
   RCT_EXPORT_VIEW_PROPERTY(onMapLongClick, RCTBubblingEventBlock)
+  RCT_EXPORT_VIEW_PROPERTY(onLikePinpointClicked, RCTBubblingEventBlock)
 @end

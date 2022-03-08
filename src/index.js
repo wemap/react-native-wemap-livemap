@@ -175,6 +175,7 @@ class Livemap extends PureComponent {
       onMapMoved,
       onMapClick,
       onMapLongClick,
+      onLikePinpointClicked,
       ...rest
     } = this.props;
 
@@ -195,6 +196,7 @@ class Livemap extends PureComponent {
         onMapMoved={this.getNativeEventCallBack(onMapMoved)}
         onMapClick={this.getNativeEventCallBack(onMapClick)}
         onMapLongClick={this.getNativeEventCallBack(onMapLongClick)}
+        onLikePinpointClicked={this.getNativeEventCallBack(onLikePinpointClicked)}
         {...rest}
       />
     );
@@ -224,6 +226,7 @@ Livemap.defaultProps = {
   onMapMoved: ({ latitude, longitude, zoom, bounds }) => {},
   onMapClick: ({ latitude, longitude }) => {},
   onMapLongClick: ({ latitude, longitude }) => {},
+  onLikePinpointClicked: (pintpoint) => {},
 };
 
 Livemap.propTypes = {
@@ -275,6 +278,7 @@ Livemap.propTypes = {
    * Dispatched when the map is long clicked
    */
   onMapLongClick: PropTypes.func,
+  onLikePinpointClicked: PropTypes.func,
   /**
    * Your Livemap config. You have the choice between UFE and emmid mode.
    * If you don't provide any emmid, the default mode will be UFE.

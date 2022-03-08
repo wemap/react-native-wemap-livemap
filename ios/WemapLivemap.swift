@@ -27,6 +27,7 @@ class WemapLivemap: UIView {
     @objc var onMapMoved: RCTBubblingEventBlock?
     @objc var onMapClick: RCTBubblingEventBlock?
     @objc var onMapLongClick: RCTBubblingEventBlock?
+    @objc var onLikePinpointClicked: RCTBubblingEventBlock?
 
     override func didSetProps(_ changedProps: [String]!) {
         wemap.delegate = self
@@ -225,6 +226,10 @@ extension WemapLivemap: wemapsdkViewDelegate {
         self.onUrlChange!(["previousUrl": previousUrl, "nextUrl": nextUrl])
     }
 
+    @objc func onLikePinpointClicked(_ wemapController: wemapsdk, pinpoint: WemapPinpoint) {
+        if(self.onLikePinpointClicked == nil) { return }
+        self.onLikePinpointClicked!(pinpoint.data as? [AnyHashable : Any])
+    }
 }
 
 @objc (WemapLivemapManager)
