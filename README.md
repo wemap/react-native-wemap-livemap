@@ -3,12 +3,26 @@
 https://developers.getwemap.com/docs/react-native/getting-started
 
 A React Native embed of the IOS and Android SDK from Wemap.
-It allows the developper to interact with them from the Livemap Component.
+It allows the developper to interact with them from the Livemap component.
 
 ## Installation
 
-```sh
+### Add the module
+
+```
+yarn add @wemap/react-native-wemap-livemap
+```
+
+OR
+
+```
 npm install @wemap/react-native-wemap-livemap
+```
+
+### Install pods
+
+```
+cd ios && pod install
 ```
 
 ## Basic Usage
@@ -16,57 +30,41 @@ npm install @wemap/react-native-wemap-livemap
 ```js
 import Livemap from '@wemap/react-native-wemap-livemap';
 
-// ...
+const MAP_CONFIG = {
+  emmid: 12606,
+  token: 'XXXXXXXXXXXXXXXXXXXXXXXXX',
+};
 
-const MyLivemap = () => (
-  <Livemap
-    mapConfig={{
-      emmid: 12606,
-      token: 'XXXXXXXXXXXXXXXXXXXXXXXXX',
-    }}
-  />
-);
+const MyLivemap = () => <Livemap mapConfig={MAP_CONFIG} />;
 ```
 
-Code samples are available in the folder example
+## Sample app
+
+A sample app is available from the [example](https://github.com/wemap/react-native-wemap-livemap/tree/master/example) folder.
+
+You can run it as a regular RN project by typing (from root):
+
+```
+cd example && yarn android|ios
+```
+
+OR with the shortcut
+
+```
+yarn example android|ios
+```
 
 ## Documentation
 
-To view all methods and props of the Livemap Component, please see the [documentation](https://developers.getwemap.com/docs/react-native/livemap)
+To view all methods and props of the Livemap component, please see the [documentation](https://developers.getwemap.com/docs/react-native/livemap)
+
+## Know issues
+
+- If you are using a Macbook M1, you may get some problems to install pods. Please see: https://stackoverflow.com/questions/64901180/how-to-running-cocoapods-on-apple-silicon-m1
+- If you are using the Expo framework, you have to eject your project to install this module. This SDK is not part of the Expo Go app and contains native dependencies. For more informations see: https://docs.expo.dev/workflow/customizing/
+- If you encounter some environment issues (related to Node.js for example), please be aware of React Native requirements before posting any new issue. You can check your project by running `react-native doctor` or `expo doctor`
+- If you don't succeed to run your project from your terminal, you may have to clear the Xcode DerivedData. You can remove it using Xcode interface or by running the following command: `rm -rf ~/Library/Developer/Xcode/DerivedData`
 
 ## License
 
 MIT
-
-# setup for the iOS simulator
-
-If it does not work on the command line, please try using XCode
-
-Sometimes, DerivedData needs to be cleared
-(dangerous command that can be misused and remove everything, rm -rf ~/Library/Developer/Xcode/DerivedData/*)
-
-# setup for a macbook M1 (not an Intel processor)
-
-macBook M1,
-pod install dans le dossier example/ios
-arch -x86_64 pod install
-
-Sometimes, DerivedData needs to be cleared
-(dangerous command that can be misused and remove everything, rm -rf ~/Library/Developer/Xcode/DerivedData/*)
-
-Node 14 is recommended
-npm i -g react-native
-
-in the folder example:
-react-native run-ios
-
-The Pods folder is generated
-Add the architectures x86_64 and arm64 in the Pods Project if it does not work
-
-remove warnings in the excample folder:
-```sh
-sed -i '' s'/IPHONEOS_DEPLOYMENT_TARGET = 8/IPHONEOS_DEPLOYMENT_TARGET = 9/g' ./ios/Pods/Pods.xcodeproj/project.pbxproj && sed -i '' s'/IPHONEOS_DEPLOYMENT_TARGET = 9·4/IPHONEOS_DEPLOYMENT_TARGET = 9\.0/g' ./ios/Pods/Pods.xcodeproj/project.pbxproj
-```
-
-To see the console logs:
-npx react-native log-android
