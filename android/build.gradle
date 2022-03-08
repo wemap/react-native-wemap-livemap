@@ -119,8 +119,7 @@ repositories {
 
 
 dependencies {
-  // noinspection GradleDynamicVersion
-  api 'com.facebook.react:react-native:+'
-    implementation 'org.jetbrains:annotations:15.0'
+  //noinspection GradleDynamicVersion
+  implementation "com.facebook.react:react-native:+"  // From node_modules
   implementation fileTree(dir: "libs", include: ["*.aar"])
 }
