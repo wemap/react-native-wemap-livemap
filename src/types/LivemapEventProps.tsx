@@ -1,33 +1,8 @@
-import type { ViewStyle } from 'react-native';
-
 import type Pinpoint from './Pinpoint';
 import type MapView from './MapView';
 import type Coordinates from './Coordinates';
-import type NativeLivemapProps from './NativeLivemapProps';
-import type LivemapDefaultStyle from './LivemapDefaultStyle';
 
-export default interface LivemapProps
-  extends Omit<
-    NativeLivemapProps,
-    | 'onMapReady'
-    | 'onPinpointOpen'
-    | 'onPinpointClose'
-    | 'onUserLogin'
-    | 'onUserLogout'
-    | 'onEventOpen'
-    | 'onEventClose'
-    | 'onGuidingStarted'
-    | 'onGuidingStopped'
-    | 'onUrlChange'
-    | 'onMapMoved'
-    | 'onMapClick'
-    | 'onMapLongClick'
-  > {
-  /**
-   * By default, your Livemap's instance fill with its container.
-   */
-  style: ViewStyle & LivemapDefaultStyle;
-
+export default interface LivemapEventProps {
   /**
    * The map is ready.
    *

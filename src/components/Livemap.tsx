@@ -1,9 +1,15 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import { requireNativeComponent, HostComponent, UIManager, findNodeHandle } from 'react-native';
 
-import type { Pinpoint, LivemapProps, LivemapRef } from '../types';
+import type {
+  Pinpoint,
+  NativeLivemapProps,
+  LivemapProps,
+  LivemapRef,
+  LivemapEvent,
+} from '../types';
 
-const NativeLivemap: HostComponent<LivemapProps> = requireNativeComponent('WemapLivemap');
+const NativeLivemap: HostComponent<NativeLivemapProps> = requireNativeComponent('WemapLivemap');
 
 /**
  * This component represents a React Native embed of the [IOS](https://developers.getwemap.com/docs/ios/getting-started) and the [Android](https://developers.getwemap.com/docs/android/Livemap/) SDK.
@@ -16,6 +22,14 @@ const Livemap = forwardRef<LivemapRef, LivemapProps>((props, ref) => {
 
   const sendCommand = (command: string, params?: any) => {
     UIManager.dispatchViewManagerCommand(findNodeHandle(nativeLivemap.current), command, params);
+  };
+
+  const getNativeEventCallBack = (
+    func: (nativeEvent: LivemapEvent['nativeEvent']['value']) => void = () => {}
+  ) => {
+    return (livemapEvent: LivemapEvent) => {
+      func(livemapEvent.nativeEvent.value);
+    };
   };
 
   useImperativeHandle(ref, () => ({
@@ -96,21 +110,27 @@ const Livemap = forwardRef<LivemapRef, LivemapProps>((props, ref) => {
       ref={nativeLivemap}
       mapConfig={{ ...props.mapConfig, ufe: !props.mapConfig.emmid }}
       style={props.style}
-      onMapReady={props.onMapReady}
-      onPinpointOpen={props.onPinpointOpen}
-      onPinpointClose={props.onPinpointClose}
-      onUserLogin={props.onUserLogin}
-      onUserLogout={props.onUserLogout}
-      onEventOpen={props.onEventOpen}
-      onEventClose={props.onEventClose}
-      onGuidingStarted={props.onGuidingStarted}
-      onGuidingStopped={props.onGuidingStopped}
-      onUrlChange={props.onUrlChange}
-      onMapMoved={props.onMapMoved}
-      onMapClick={props.onMapClick}
-      onMapLongClick={props.onMapLongClick}
+      onMapReady={getNativeEventCallBack(props.onMapReady)}
+      onPinpointOpen={getNativeEventCallBack(props.onPinpointOpen)}
+      onPinpointClose={getNativeEventCallBack(props.onPinpointClose)}
+      onUserLogin={getNativeEventCallBack(props.onUserLogin)}
+      onUserLogout={getNativeEventCallBack(props.onUserLogout)}
+      onEventOpen={getNativeEventCallBack(props.onEventOpen)}
+      onEventClose={getNativeEventCallBack(props.onEventClose)}
+      onGuidingStarted={getNativeEventCallBack(props.onGuidingStarted)}
+      onGuidingStopped={getNativeEventCallBack(props.onGuidingStopped)}
+      onUrlChange={getNativeEventCallBack(props.onUrlChange)}
+      onMapMoved={getNativeEventCallBack(props.onMapMoved)}
+      onMapClick={getNativeEventCallBack(props.onMapClick)}
+      onMapLongClick={getNativeEventCallBack(props.onMapLongClick)}
     />
   );
 });
+
+Livemap.defaultProps = {
+  style: {
+    flex: 1,
+  },
+};
 
 export default Livemap;
