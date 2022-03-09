@@ -133,20 +133,26 @@ class WemapLivemap: UIView {
 }
 
 extension WemapLivemap: wemapsdkViewDelegate {
+    private func getLivemapEvent (json: [AnyHashable : Any]) -> [String: [AnyHashable : Any]] {
+        return ["value": json]
+    }
 
     @objc func onMapMoved(_ wemapController: wemapsdk, json: NSDictionary) {
         if (self.onMapMoved == nil) { return }
-        self.onMapMoved!(json as? [AnyHashable : Any])
+        let livemapEvent = getLivemapEvent(json: (json as? [AnyHashable : Any])!)
+        self.onMapMoved!(livemapEvent)
     }
 
     @objc func onMapClick(_ wemapController: wemapsdk, json: NSDictionary) {
         if (self.onMapClick == nil) { return }
-        self.onMapClick!(json as? [AnyHashable : Any])
+        let livemapEvent = getLivemapEvent(json: (json as? [AnyHashable : Any])!)
+        self.onMapClick!(livemapEvent)
     }
 
     @objc func onMapLongClick(_ wemapController: wemapsdk, json: NSDictionary) {
         if (self.onMapLongClick == nil) { return }
-        self.onMapLongClick!(json as? [AnyHashable : Any])
+        let livemapEvent = getLivemapEvent(json: (json as? [AnyHashable : Any])!)
+        self.onMapLongClick!(livemapEvent)
     }
 
     @objc func waitForReady(_ wemapController: wemapsdk) {
@@ -156,12 +162,14 @@ extension WemapLivemap: wemapsdkViewDelegate {
 
     @objc func onEventOpen(_ wemapController: wemapsdk, event: WemapEvent) {
         if(self.onEventOpen == nil) { return }
-        self.onEventOpen!(["id": event.id])
+        let livemapEvent = getLivemapEvent(json: ["id": event.id])
+        self.onEventOpen!(livemapEvent)
     }
 
     @objc func onPinpointOpen(_ wemapController: wemapsdk, pinpoint: WemapPinpoint) {
         if(self.onPinpointOpen == nil) { return }
-        self.onPinpointOpen!(pinpoint.data as? [AnyHashable : Any])
+        let livemapEvent = getLivemapEvent(json: (pinpoint.data as? [AnyHashable : Any])!)
+        self.onPinpointOpen!(livemapEvent)
     }
 
     @objc func onEventClose(_ wemapController: wemapsdk) {
@@ -186,12 +194,14 @@ extension WemapLivemap: wemapsdkViewDelegate {
 
     @objc func onBookEventClicked(_ wemapController: wemapsdk, event: WemapEvent) {
         if(self.onBookEventClicked == nil) { return }
-        self.onBookEventClicked!(["id": event.id])
+        let livemapEvent = getLivemapEvent(json: ["id": event.id])
+        self.onBookEventClicked!(livemapEvent)
     }
 
     @objc func onGoToPinpointClicked(_ wemapController: wemapsdk, pinpoint: WemapPinpoint) {
         if(self.onGoToPinpointClicked == nil) { return }
-        self.onGoToPinpointClicked!(["id": pinpoint.id])
+        let livemapEvent = getLivemapEvent(json: ["id": pinpoint.id])
+        self.onGoToPinpointClicked!(livemapEvent)
     }
 
     @objc func onUserLogin(_ wemapController: wemapsdk) {
@@ -206,7 +216,8 @@ extension WemapLivemap: wemapsdkViewDelegate {
 
     @objc func onUrlChange(_ wemapController: wemapsdk, previousUrl: String, nextUrl: String) {
         if(self.onUrlChange == nil) { return }
-        self.onUrlChange!(["previousUrl": previousUrl, "nextUrl": nextUrl])
+        let livemapEvent = getLivemapEvent(json: ["previousUrl": previousUrl, "nextUrl": nextUrl])
+        self.onUrlChange!(livemapEvent)
     }
 
 }

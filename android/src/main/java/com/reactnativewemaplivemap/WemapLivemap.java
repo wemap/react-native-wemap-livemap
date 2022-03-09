@@ -26,11 +26,18 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
 
   private void sendNativeEvent(String name, BuildEvent buildEvent) {
     WritableMap event = Arguments.createMap();
+    WritableMap eventValue = Arguments.createMap();
 
-    buildEvent.build(event);
+    buildEvent.build(eventValue);
+    event.putMap("value", eventValue);
 
     ReactContext reactContext = (ReactContext) getContext();
     reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), name + "Event", event);
+  }
+
+  private void sendNativeEvent(String name) {
+    ReactContext reactContext = (ReactContext) getContext();
+    reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), name + "Event", null);
   }
 
   @Override
@@ -38,7 +45,7 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
     Log.e("onLivemapReady", "map ready");
     this.livemap = livemap;
 
-    sendNativeEvent("onMapReady", event -> event.putNull("value"));
+    sendNativeEvent("onMapReady");
 
     livemap.addPinpointOpenListener((pinpoint) -> sendNativeEvent("onPinpointOpen", e -> {
       e.putInt("id", pinpoint.getId());
