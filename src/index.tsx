@@ -43,12 +43,12 @@ interface MapConfig {
   /** the Wemap endpoint you want to request */
   webappEndpoint?: string;
   /** introcard allows to remove the intro card that is present by default */
-  introcard?: any
+  introcard?: any;
   /** urlParameters allows to pass the same query parameters as in the browser url,
       and arranged in a list
       ex: ['introcard={"active":false}']
   */
-  urlParameters?: Array<string>,
+  urlParameters?: Array<string>;
 }
 
 interface LivemapProps {

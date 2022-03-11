@@ -96,6 +96,14 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
       e.putString("previousUrl", previousUrl);
       e.putString("nextUrl", nextUrl);
     }));
+
+    livemap.addLivemapLikeListener((pinpoint) -> sendNativeEvent("onLikePinpointClicked", e -> {
+      try {
+          e.putMap("pinpoint", ReactNativeJson.convertJsonToMap(pinpoint.toJson()));
+      } catch (JSONException | NullPointerException jsonProcessingException) {
+          jsonProcessingException.printStackTrace();
+      }
+    }));
   }
 
   interface BuildEvent {

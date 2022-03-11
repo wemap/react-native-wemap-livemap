@@ -137,6 +137,7 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
     MapBuilder.Builder events = MapBuilder.builder();
 
     String[] eventNames = new String[]{
+      "onLikePinpointClicked",
       "onMapMoved",
       "onMapClick",
       "onMapLongClick",
