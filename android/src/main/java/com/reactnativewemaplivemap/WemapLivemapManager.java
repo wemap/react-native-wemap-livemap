@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,24 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
           if (boundsMap != null) {
               JSONObject maxbounds = ReactNativeJson.convertMapToJson(boundsMap);
               livemapOptions.maxbounds = livemapOptions.maxbounds.fromJson(maxbounds);
+          }
+      } catch (JSONException | NullPointerException jsonProcessingException) {
+          jsonProcessingException.printStackTrace();
+      }
+      try {
+          ReadableMap introcardMap = mapConfig.getMap("introcard");
+          if (introcardMap != null) {
+              JSONObject introcard = ReactNativeJson.convertMapToJson(introcardMap);
+              livemapOptions.introcard = livemapOptions.introcard.fromJson(introcard);
+          }
+      } catch (JSONException | NullPointerException jsonProcessingException) {
+          jsonProcessingException.printStackTrace();
+      }
+      try {
+          ReadableArray urlParametersArray = mapConfig.getArray("urlParameters");
+          if (urlParametersArray != null) {
+              JSONArray urlParameters = ReactNativeJson.convertArrayToJson(urlParametersArray);
+              livemapOptions.urlParameter = livemapOptions.urlParameter.fromJson(urlParameters);
           }
       } catch (JSONException | NullPointerException jsonProcessingException) {
           jsonProcessingException.printStackTrace();
@@ -216,6 +235,12 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
         break;
       case "aroundMeViaManager":
           root.livemap.aroundMe();
+        break;
+      case "disableAnalyticsViaManager":
+          root.livemap.disableAnalytics();
+        break;
+      case "enableAnalyticsViaManager":
+          root.livemap.enableAnalytics();
         break;
     }
   }

@@ -42,6 +42,13 @@ interface MapConfig {
   ufe?: boolean;
   /** the Wemap endpoint you want to request */
   webappEndpoint?: string;
+  /** introcard allows to remove the intro card that is present by default */
+  introcard?: any;
+  /** urlParameters allows to pass the same query parameters as in the browser url,
+      and arranged in a list
+      ex: ['introcard={"active":false}']
+  */
+  urlParameters?: Array<string>;
 }
 
 interface LivemapProps {
@@ -230,6 +237,20 @@ class Livemap extends PureComponent<LivemapProps, LivemapState> {
    */
   setSourceLists = (sourceLists: number[]): void => {
     this.sendCommand('setSourceListsViaManager', [sourceLists]);
+  };
+
+  /**
+   * Disable analytics tracking
+   */
+  disableAnalytics = () => {
+    this.sendCommand('disableAnalyticsViaManager', []);
+  };
+
+  /**
+   * Enable analytics tracking
+   */
+  enableAnalytics = () => {
+    this.sendCommand('enableAnalyticsViaManager', []);
   };
 
   render() {

@@ -35,7 +35,7 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
 
   @Override
   public void onLivemapReady(Livemap livemap) {
-    Log.e("onLivemapReady", "map ready");
+    Log.d("onLivemapReady", "map ready");
     this.livemap = livemap;
 
     sendNativeEvent("onMapReady", event -> event.putNull("value"));

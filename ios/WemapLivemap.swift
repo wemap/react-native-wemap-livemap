@@ -31,6 +31,12 @@ class WemapLivemap: UIView {
     override func didSetProps(_ changedProps: [String]!) {
         wemap.delegate = self
 
+        var introcard: IntroCardParameter? = nil
+        if let introcardDict = self.mapConfig!["introcard"] as? NSDictionary {
+            if let parsedStruct: IntroCardParameter = wemapsdk_config.introcardFromNSDictionary(dict: introcardDict) {
+                introcard = parsedStruct
+            }
+        }
         var bounds: BoundingBox? = nil
         if let boundsDict = self.mapConfig!["maxbounds"] as? NSDictionary {
             if let parsedStruct: BoundingBox = wemapsdk_config.boundingBoxFromNSDictionary(dict: boundsDict) {
@@ -41,7 +47,9 @@ class WemapLivemap: UIView {
             token: self.mapConfig!["token"] as? String,
             mapId: self.mapConfig!["emmid"] as? Int,
             livemapRootUrl: self.mapConfig!["webappEndpoint"] as? String,
-            maxbounds: bounds
+            maxbounds: bounds,
+            introcard: introcard,
+            urlParameters: self.mapConfig!["urlParameters"] as? [String]
         )).presentIn(view: self)
     }
 
@@ -129,6 +137,14 @@ class WemapLivemap: UIView {
 
     @objc func aroundMe() {
         wemap.aroundMe()
+    }
+
+    @objc func disableAnalytics() {
+        wemap.disableAnalytics()
+    }
+
+    @objc func enableAnalytics() {
+        wemap.enableAnalytics()
     }
 }
 
@@ -283,6 +299,14 @@ class WemapLivemapManager: RCTViewManager {
 
     @objc func aroundMeViaManager(_ node: NSNumber) {
         self.callLivemapMethod(node, selector: "aroundMe")
+    }
+
+    @objc func disableAnalyticsViaManager(_ node: NSNumber) {
+        self.callLivemapMethod(node, selector: "disableAnalytics")
+    }
+
+    @objc func enableAnalyticsViaManager(_ node: NSNumber) {
+        self.callLivemapMethod(node, selector: "enableAnalytics")
     }
 
     override func view() -> UIView! {
