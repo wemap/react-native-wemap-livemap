@@ -55,7 +55,7 @@ npm run example android|ios
 
 ## Documentation
 
-To view all methods and props of the Livemap component, please see the [documentation](https://developers.getwemap.com/docs/react-native/livemap)
+To view all methods and props of the Livemap component, please see the [documentation](https://developers.getwemap.com/docs/react-native)
 
 ## Know issues
 
