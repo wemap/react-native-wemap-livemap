@@ -1,25 +1,24 @@
 # @wemap/react-native-wemap-livemap
 
-https://developers.getwemap.com/docs/react-native/getting-started
+The Wemap react-native SDK is a library that will handle communication with the Wemap application.
 
-A React Native embed of the IOS and Android SDK from Wemap.
-It allows the developper to interact with them from the Livemap component.
+The SDK offers an interface to manage the Livemap Mapview and to subscribe to events that happen on the map.
+
+Please get your emmid and token from your pro account. You may ask for one if necessary or you can test with our developers credentials if you lack time.
 
 ## Installation
 
-### Add the module
+### Commons steps
 
-```
-yarn add @wemap/react-native-wemap-livemap
-```
-
-OR
+#### Add the module
 
 ```
 npm install @wemap/react-native-wemap-livemap
 ```
 
-### Install pods
+### IOS steps
+
+#### Install the pods
 
 ```
 cd ios && pod install
@@ -45,13 +44,13 @@ A sample app is available from the [example](https://github.com/wemap/react-nati
 You can run it as a regular RN project by typing (from root):
 
 ```
-cd example && yarn android|ios
+cd example && npm run android|ios
 ```
 
-OR with the shortcut
+Or with the shortcut:
 
 ```
-yarn example android|ios
+npm run example android|ios
 ```
 
 ## Documentation
