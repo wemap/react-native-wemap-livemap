@@ -84,16 +84,9 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
           ReadableMap introcardMap = mapConfig.getMap("introcard");
           if (introcardMap != null) {
               JSONObject introcard = ReactNativeJson.convertMapToJson(introcardMap);
-              livemapOptions.introcard = livemapOptions.introcard.fromJson(introcard);
-          }
-      } catch (JSONException | NullPointerException jsonProcessingException) {
-          jsonProcessingException.printStackTrace();
-      }
-      try {
-          ReadableArray urlParametersArray = mapConfig.getArray("urlParameters");
-          if (urlParametersArray != null) {
-              JSONArray urlParameters = ReactNativeJson.convertArrayToJson(urlParametersArray);
-              livemapOptions.urlParameter = livemapOptions.urlParameter.fromJson(urlParameters);
+              if (introcard.has("active")) {
+                livemapOptions.introcardActive = introcard.getBoolean("active");
+              }
           }
       } catch (JSONException | NullPointerException jsonProcessingException) {
           jsonProcessingException.printStackTrace();
