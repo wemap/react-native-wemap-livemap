@@ -1,5 +1,3 @@
-// IMPORTANT:
-// selectors without parameters must not have a column ":"
 
 import UIKit
 import livemap_ios_sdk
@@ -41,7 +39,8 @@ class WemapLivemap: UIView {
             token: self.mapConfig!["token"] as? String,
             mapId: self.mapConfig!["emmid"] as? Int,
             livemapRootUrl: self.mapConfig!["webappEndpoint"] as? String,
-            maxbounds: bounds
+            maxbounds: bounds,
+            introcardActive: self.mapConfig!["introcardActive"] as? Bool
         )).presentIn(view: self)
     }
 
@@ -129,6 +128,14 @@ class WemapLivemap: UIView {
 
     @objc func aroundMe() {
         wemap.aroundMe()
+    }
+
+    @objc func disableAnalytics() {
+        wemap.disableAnalytics()
+    }
+
+    @objc func enableAnalytics() {
+        wemap.enableAnalytics()
     }
 }
 
@@ -294,6 +301,14 @@ class WemapLivemapManager: RCTViewManager {
 
     @objc func aroundMeViaManager(_ node: NSNumber) {
         self.callLivemapMethod(node, selector: "aroundMe")
+    }
+
+    @objc func disableAnalyticsViaManager(_ node: NSNumber) {
+        self.callLivemapMethod(node, selector: "disableAnalytics")
+    }
+
+    @objc func enableAnalyticsViaManager(_ node: NSNumber) {
+        self.callLivemapMethod(node, selector: "enableAnalytics")
     }
 
     override func view() -> UIView! {

@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +80,7 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
       } catch (JSONException | NullPointerException jsonProcessingException) {
           jsonProcessingException.printStackTrace();
       }
+      livemapOptions.introcardActive = mapConfig.getBoolean("introcardActive");
     }
 
     view.setLivemapOptions(livemapOptions);
@@ -216,6 +218,12 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
         break;
       case "aroundMeViaManager":
           root.livemap.aroundMe();
+        break;
+      case "disableAnalyticsViaManager":
+          root.livemap.disableAnalytics();
+        break;
+      case "enableAnalyticsViaManager":
+          root.livemap.enableAnalytics();
         break;
     }
   }

@@ -84,4 +84,14 @@ export default interface LivemapRef {
    * @param {integer[]} sourceLists id of lists to be added to the map.
    */
   setSourceLists: (sourceLists: number[]) => void;
+
+  /**
+   * Enable analytics
+   */
+  enableAnalytics: () => void;
+
+  /**
+   * Disable analytics
+   */
+  disableAnalytics: () => void;
 }

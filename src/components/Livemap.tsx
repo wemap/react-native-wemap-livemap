@@ -47,6 +47,8 @@ const Livemap = forwardRef<LivemapRef, LivemapProps>((props, ref) => {
     signOut,
     setPinpoints,
     setSourceLists,
+    enableAnalytics,
+    disableAnalytics,
   }));
 
   const openEvent = (id: number): void => {
@@ -103,6 +105,14 @@ const Livemap = forwardRef<LivemapRef, LivemapProps>((props, ref) => {
 
   const setSourceLists = (sourceLists: number[]): void => {
     sendCommand('setSourceListsViaManager', [sourceLists]);
+  };
+
+  const enableAnalytics = (): void => {
+    sendCommand('enableAnalyticsViaManager');
+  };
+
+  const disableAnalytics = (): void => {
+    sendCommand('disableAnalyticsViaManager');
   };
 
   return (
