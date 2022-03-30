@@ -212,6 +212,33 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk4JSON")
+@interface JSON : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk11BoundingBox")
+@interface BoundingBox : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk19ContentUpdatedQuery")
+@interface ContentUpdatedQuery : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk11Coordinates")
+@interface Coordinates : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 @class NSCoder;
 
 SWIFT_CLASS("_TtC15livemap_ios_sdk12CustomARView")
@@ -222,9 +249,31 @@ SWIFT_CLASS("_TtC15livemap_ios_sdk12CustomARView")
 @end
 
 
+SWIFT_CLASS("_TtC15livemap_ios_sdk18IntroCardParameter")
+@interface IntroCardParameter : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk8MapMoved")
+@interface MapMoved : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk15PolylineOptions")
+@interface PolylineOptions : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 /// Create a Wemap Event
 SWIFT_CLASS("_TtC15livemap_ios_sdk10WemapEvent")
-@interface WemapEvent : NSObject
+@interface WemapEvent : JSON
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -232,7 +281,7 @@ SWIFT_CLASS("_TtC15livemap_ios_sdk10WemapEvent")
 
 /// Create a Wemap Pinpoint
 SWIFT_CLASS("_TtC15livemap_ios_sdk13WemapPinpoint")
-@interface WemapPinpoint : NSObject
+@interface WemapPinpoint : JSON
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -327,11 +376,16 @@ SWIFT_PROTOCOL("_TtP15livemap_ios_sdk20wemapsdkViewDelegate_")
 - (void)onUserLogin:(wemapsdk * _Nonnull)wemapController;
 - (void)onUserLogout:(wemapsdk * _Nonnull)wemapController;
 - (void)onUrlChange:(wemapsdk * _Nonnull)wemapController previousUrl:(NSString * _Nonnull)previousUrl nextUrl:(NSString * _Nonnull)nextUrl;
+- (void)onActionButtonClick:(wemapsdk * _Nonnull)wemapController pinpoint:(WemapPinpoint * _Nonnull)pinpoint actionType:(NSString * _Nonnull)actionType;
+- (void)onActionButtonClick:(wemapsdk * _Nonnull)wemapController event:(WemapEvent * _Nonnull)event actionType:(NSString * _Nonnull)actionType;
+- (void)onContentUpdated:(wemapsdk * _Nonnull)wemapController events:(NSArray<WemapEvent *> * _Nonnull)events contentUpdatedQuery:(ContentUpdatedQuery * _Nonnull)contentUpdatedQuery;
+- (void)onContentUpdated:(wemapsdk * _Nonnull)wemapController pinpoints:(NSArray<WemapPinpoint *> * _Nonnull)pinpoints contentUpdatedQuery:(ContentUpdatedQuery * _Nonnull)contentUpdatedQuery;
+- (void)onPolylineDrawn:(wemapsdk * _Nonnull)wemapController id:(NSString * _Nonnull)id;
 - (void)onBookEventClicked:(wemapsdk * _Nonnull)wemapController event:(WemapEvent * _Nonnull)event;
 - (void)onGoToPinpointClicked:(wemapsdk * _Nonnull)wemapController pinpoint:(WemapPinpoint * _Nonnull)pinpoint;
-- (void)onMapMoved:(wemapsdk * _Nonnull)wemapController json:(NSDictionary * _Nonnull)json;
-- (void)onMapClick:(wemapsdk * _Nonnull)wemapController json:(NSDictionary * _Nonnull)json;
-- (void)onMapLongClick:(wemapsdk * _Nonnull)wemapController json:(NSDictionary * _Nonnull)json;
+- (void)onMapMoved:(wemapsdk * _Nonnull)wemapController mapMoved:(MapMoved * _Nonnull)mapMoved;
+- (void)onMapClick:(wemapsdk * _Nonnull)wemapController coordinates:(Coordinates * _Nonnull)coordinates;
+- (void)onMapLongClick:(wemapsdk * _Nonnull)wemapController coordinates:(Coordinates * _Nonnull)coordinates;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -553,6 +607,33 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk4JSON")
+@interface JSON : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk11BoundingBox")
+@interface BoundingBox : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk19ContentUpdatedQuery")
+@interface ContentUpdatedQuery : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk11Coordinates")
+@interface Coordinates : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 @class NSCoder;
 
 SWIFT_CLASS("_TtC15livemap_ios_sdk12CustomARView")
@@ -563,9 +644,31 @@ SWIFT_CLASS("_TtC15livemap_ios_sdk12CustomARView")
 @end
 
 
+SWIFT_CLASS("_TtC15livemap_ios_sdk18IntroCardParameter")
+@interface IntroCardParameter : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk8MapMoved")
+@interface MapMoved : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk15PolylineOptions")
+@interface PolylineOptions : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 /// Create a Wemap Event
 SWIFT_CLASS("_TtC15livemap_ios_sdk10WemapEvent")
-@interface WemapEvent : NSObject
+@interface WemapEvent : JSON
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -573,7 +676,7 @@ SWIFT_CLASS("_TtC15livemap_ios_sdk10WemapEvent")
 
 /// Create a Wemap Pinpoint
 SWIFT_CLASS("_TtC15livemap_ios_sdk13WemapPinpoint")
-@interface WemapPinpoint : NSObject
+@interface WemapPinpoint : JSON
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -668,11 +771,16 @@ SWIFT_PROTOCOL("_TtP15livemap_ios_sdk20wemapsdkViewDelegate_")
 - (void)onUserLogin:(wemapsdk * _Nonnull)wemapController;
 - (void)onUserLogout:(wemapsdk * _Nonnull)wemapController;
 - (void)onUrlChange:(wemapsdk * _Nonnull)wemapController previousUrl:(NSString * _Nonnull)previousUrl nextUrl:(NSString * _Nonnull)nextUrl;
+- (void)onActionButtonClick:(wemapsdk * _Nonnull)wemapController pinpoint:(WemapPinpoint * _Nonnull)pinpoint actionType:(NSString * _Nonnull)actionType;
+- (void)onActionButtonClick:(wemapsdk * _Nonnull)wemapController event:(WemapEvent * _Nonnull)event actionType:(NSString * _Nonnull)actionType;
+- (void)onContentUpdated:(wemapsdk * _Nonnull)wemapController events:(NSArray<WemapEvent *> * _Nonnull)events contentUpdatedQuery:(ContentUpdatedQuery * _Nonnull)contentUpdatedQuery;
+- (void)onContentUpdated:(wemapsdk * _Nonnull)wemapController pinpoints:(NSArray<WemapPinpoint *> * _Nonnull)pinpoints contentUpdatedQuery:(ContentUpdatedQuery * _Nonnull)contentUpdatedQuery;
+- (void)onPolylineDrawn:(wemapsdk * _Nonnull)wemapController id:(NSString * _Nonnull)id;
 - (void)onBookEventClicked:(wemapsdk * _Nonnull)wemapController event:(WemapEvent * _Nonnull)event;
 - (void)onGoToPinpointClicked:(wemapsdk * _Nonnull)wemapController pinpoint:(WemapPinpoint * _Nonnull)pinpoint;
-- (void)onMapMoved:(wemapsdk * _Nonnull)wemapController json:(NSDictionary * _Nonnull)json;
-- (void)onMapClick:(wemapsdk * _Nonnull)wemapController json:(NSDictionary * _Nonnull)json;
-- (void)onMapLongClick:(wemapsdk * _Nonnull)wemapController json:(NSDictionary * _Nonnull)json;
+- (void)onMapMoved:(wemapsdk * _Nonnull)wemapController mapMoved:(MapMoved * _Nonnull)mapMoved;
+- (void)onMapClick:(wemapsdk * _Nonnull)wemapController coordinates:(Coordinates * _Nonnull)coordinates;
+- (void)onMapLongClick:(wemapsdk * _Nonnull)wemapController coordinates:(Coordinates * _Nonnull)coordinates;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -894,6 +1002,33 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk4JSON")
+@interface JSON : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk11BoundingBox")
+@interface BoundingBox : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk19ContentUpdatedQuery")
+@interface ContentUpdatedQuery : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk11Coordinates")
+@interface Coordinates : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 @class NSCoder;
 
 SWIFT_CLASS("_TtC15livemap_ios_sdk12CustomARView")
@@ -904,9 +1039,31 @@ SWIFT_CLASS("_TtC15livemap_ios_sdk12CustomARView")
 @end
 
 
+SWIFT_CLASS("_TtC15livemap_ios_sdk18IntroCardParameter")
+@interface IntroCardParameter : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk8MapMoved")
+@interface MapMoved : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC15livemap_ios_sdk15PolylineOptions")
+@interface PolylineOptions : JSON
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 /// Create a Wemap Event
 SWIFT_CLASS("_TtC15livemap_ios_sdk10WemapEvent")
-@interface WemapEvent : NSObject
+@interface WemapEvent : JSON
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -914,7 +1071,7 @@ SWIFT_CLASS("_TtC15livemap_ios_sdk10WemapEvent")
 
 /// Create a Wemap Pinpoint
 SWIFT_CLASS("_TtC15livemap_ios_sdk13WemapPinpoint")
-@interface WemapPinpoint : NSObject
+@interface WemapPinpoint : JSON
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1009,11 +1166,16 @@ SWIFT_PROTOCOL("_TtP15livemap_ios_sdk20wemapsdkViewDelegate_")
 - (void)onUserLogin:(wemapsdk * _Nonnull)wemapController;
 - (void)onUserLogout:(wemapsdk * _Nonnull)wemapController;
 - (void)onUrlChange:(wemapsdk * _Nonnull)wemapController previousUrl:(NSString * _Nonnull)previousUrl nextUrl:(NSString * _Nonnull)nextUrl;
+- (void)onActionButtonClick:(wemapsdk * _Nonnull)wemapController pinpoint:(WemapPinpoint * _Nonnull)pinpoint actionType:(NSString * _Nonnull)actionType;
+- (void)onActionButtonClick:(wemapsdk * _Nonnull)wemapController event:(WemapEvent * _Nonnull)event actionType:(NSString * _Nonnull)actionType;
+- (void)onContentUpdated:(wemapsdk * _Nonnull)wemapController events:(NSArray<WemapEvent *> * _Nonnull)events contentUpdatedQuery:(ContentUpdatedQuery * _Nonnull)contentUpdatedQuery;
+- (void)onContentUpdated:(wemapsdk * _Nonnull)wemapController pinpoints:(NSArray<WemapPinpoint *> * _Nonnull)pinpoints contentUpdatedQuery:(ContentUpdatedQuery * _Nonnull)contentUpdatedQuery;
+- (void)onPolylineDrawn:(wemapsdk * _Nonnull)wemapController id:(NSString * _Nonnull)id;
 - (void)onBookEventClicked:(wemapsdk * _Nonnull)wemapController event:(WemapEvent * _Nonnull)event;
 - (void)onGoToPinpointClicked:(wemapsdk * _Nonnull)wemapController pinpoint:(WemapPinpoint * _Nonnull)pinpoint;
-- (void)onMapMoved:(wemapsdk * _Nonnull)wemapController json:(NSDictionary * _Nonnull)json;
-- (void)onMapClick:(wemapsdk * _Nonnull)wemapController json:(NSDictionary * _Nonnull)json;
-- (void)onMapLongClick:(wemapsdk * _Nonnull)wemapController json:(NSDictionary * _Nonnull)json;
+- (void)onMapMoved:(wemapsdk * _Nonnull)wemapController mapMoved:(MapMoved * _Nonnull)mapMoved;
+- (void)onMapClick:(wemapsdk * _Nonnull)wemapController coordinates:(Coordinates * _Nonnull)coordinates;
+- (void)onMapLongClick:(wemapsdk * _Nonnull)wemapController coordinates:(Coordinates * _Nonnull)coordinates;
 @end
 
 #if __has_attribute(external_source_symbol)
