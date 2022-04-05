@@ -90,7 +90,6 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
     livemap.addGuidingStoppedListener(() -> sendNativeEvent("onGuidingStopped", e -> e = null));
     livemap.addMapMovedListener((mapMoved) -> sendNativeEvent("onMapMoved", e -> {
       e.putDouble("zoom", mapMoved.zoom);
-      //e.put("bounds", mapMoved.bounds.toJson());
       e.putDouble("latitude", mapMoved.point.getLat());
       e.putDouble("longitude", mapMoved.point.getLng());
       try {

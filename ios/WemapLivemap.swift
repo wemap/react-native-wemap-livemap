@@ -135,6 +135,10 @@ class WemapLivemap: UIView {
     @objc func _setCenter(_ params: [String : Any]) {
         wemap.setCenter(center: Coordinates.fromDictionary(params["center"] as! NSDictionary))
     }
+    
+    @objc func removePolyline(_ params: [String : Any]) {
+        wemap.removePolyline(id: params["id"] as! String)
+    }
 }
 
 extension WemapLivemap: wemapsdkViewDelegate {
@@ -258,14 +262,26 @@ extension WemapLivemap: wemapsdkViewDelegate {
 
 @objc (WemapLivemapManager)
 class WemapLivemapManager: RCTViewManager {
+    let livemap: WemapLivemap
+
+    override init() {
+        self.livemap = WemapLivemap()
+    }
+
+    override func view() -> UIView! {
+        let livemapModule: WemapLivemapModule = self.bridge.module(forName: "WemapLivemapModule") as! WemapLivemapModule
+        livemapModule.setLivemapView(livemapView: livemap)
+        
+        return livemap
+    }
+    
     override static func requiresMainQueueSetup() -> Bool {
         return true
     }
 
     @objc private func callLivemapMethod(_ node: NSNumber, selector: String, params: [String : Any]? = nil) {
         DispatchQueue.main.async {
-            let livemap = self.bridge.uiManager.view(forReactTag: node) as! WemapLivemap
-            livemap.perform(Selector((selector)), with: (params))
+            self.livemap.perform(Selector((selector)), with: (params))
         }
     }
 
@@ -333,8 +349,8 @@ class WemapLivemapManager: RCTViewManager {
     @objc func setCenterViaManager(_ node: NSNumber, center: NSDictionary) {
         self.callLivemapMethod(node, selector: "_setCenter:", params: ["center": center])
     }
-
-    override func view() -> UIView! {
-        return WemapLivemap()
+    
+    @objc func removePolylineViaManager(_ node: NSNumber, id: String) {
+        self.callLivemapMethod(node, selector: "removePolyline:", params: ["id": id])
     }
 }

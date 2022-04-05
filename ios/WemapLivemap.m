@@ -21,6 +21,7 @@
   RCT_EXTERN_METHOD(setSourceListsViaManager: (nonnull NSNumber *)node sourceLists: (nonnull NSArray *)sourceLists)
   RCT_EXTERN_METHOD(aroundMeViaManager: (nonnull NSNumber *)node)
   RCT_EXTERN_METHOD(setCenterViaManager: (nonnull NSNumber *)node center: (nonnull NSDictionary *)center)
+  RCT_EXTERN_METHOD(removePolylineViaManager: (nonnull NSNumber *)node id: (nonnull NSString *)id)
 
 
   RCT_EXPORT_VIEW_PROPERTY(onMapReady, RCTBubblingEventBlock)

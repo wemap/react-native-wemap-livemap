@@ -1,5 +1,11 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
-import { requireNativeComponent, HostComponent, UIManager, findNodeHandle } from 'react-native';
+import {
+  requireNativeComponent,
+  HostComponent,
+  UIManager,
+  findNodeHandle,
+  NativeModules,
+} from 'react-native';
 
 import type {
   Pinpoint,
@@ -8,6 +14,7 @@ import type {
   LivemapRef,
   LivemapEvent,
   Coordinates,
+  PolylineOptions,
 } from '../types';
 
 const NativeLivemap: HostComponent<NativeLivemapProps> = requireNativeComponent('WemapLivemap');
@@ -49,6 +56,8 @@ const Livemap = forwardRef<LivemapRef, LivemapProps>((props, ref) => {
     setPinpoints,
     setSourceLists,
     setCenter,
+    drawPolyline,
+    removePolyline,
   }));
 
   const openEvent = (id: number): void => {
@@ -109,6 +118,14 @@ const Livemap = forwardRef<LivemapRef, LivemapProps>((props, ref) => {
 
   const setCenter = (center: Coordinates): void => {
     sendCommand('setCenterViaManager', [center]);
+  };
+
+  const drawPolyline = (coordinatesList: [Coordinates], options: PolylineOptions): void => {
+    return NativeModules.WemapLivemapModule.drawPolylineViaModule(coordinatesList, options);
+  };
+
+  const removePolyline = (id: String): void => {
+    sendCommand('removePolylineViaManager', [id]);
   };
 
   return (
