@@ -1,6 +1,7 @@
 import type { ViewStyle } from 'react-native';
 
 import type Pinpoint from './Pinpoint';
+import type Event from './Event';
 import type MapView from './MapView';
 import type Coordinates from './Coordinates';
 import type NativeLivemapProps from './NativeLivemapProps';
@@ -22,6 +23,7 @@ export default interface LivemapProps
     | 'onMapMoved'
     | 'onMapClick'
     | 'onMapLongClick'
+    | 'onContentUpdated'
   > {
   /**
    * By default, your Livemap's instance fill with its container.
@@ -118,4 +120,15 @@ export default interface LivemapProps
    * @event
    */
   onMapLongClick?: (value: Coordinates) => void;
+
+  /**
+   * TODO:
+   *
+   * @event
+   */
+  onContentUpdated?: (value: {
+    type: 'events' | 'pinpoints';
+    items: [Pinpoint | Event];
+    query: Object;
+  }) => void;
 }

@@ -106,4 +106,11 @@ export default interface LivemapProps {
    * @event
    */
   onMapLongClick?: (livemapEvent: LivemapEvent) => void;
+
+  /**
+   * TODO:
+   *
+   * @event
+   */
+  onContentUpdated?: (livemapEvent: LivemapEvent) => void;
 }
