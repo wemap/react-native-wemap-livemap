@@ -121,5 +121,5 @@ repositories {
 dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"  // From node_modules
-  implementation fileTree(dir: "libs", include: ["*.aar"])
+  implementation 'com.getwemap:livemap-sdk:1.11.0'
 }
