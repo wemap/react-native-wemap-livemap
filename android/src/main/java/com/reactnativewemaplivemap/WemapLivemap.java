@@ -10,10 +10,18 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.getwemap.livemap.sdk.Livemap;
 import com.getwemap.livemap.sdk.LivemapView;
 import com.getwemap.livemap.sdk.OnLivemapReadyCallback;
+import com.getwemap.livemap.sdk.model.Event;
+import com.getwemap.livemap.sdk.model.Pinpoint;
+import com.getwemap.livemap.sdk.model.Query;
 import com.reactnativewemaplivemap.utils.ReactNativeJson;
+import com.getwemap.livemap.sdk.callbacks.ContentUpdatedListener;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.NullPointerException;
+import java.util.List;
 
 public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback {
 
@@ -24,7 +32,7 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
     this.getLivemapAsync(this);
   }
 
-  private void sendNativeEvent(String name, BuildEvent buildEvent) {
+  public void sendNativeEvent(String name, BuildEvent buildEvent) {
     WritableMap event = Arguments.createMap();
     WritableMap eventValue = Arguments.createMap();
 
@@ -35,7 +43,7 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
     reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), name + "Event", event);
   }
 
-  private void sendNativeEvent(String name) {
+  public void sendNativeEvent(String name) {
     ReactContext reactContext = (ReactContext) getContext();
     reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), name + "Event", null);
   }
@@ -98,6 +106,71 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
         e.putDouble("latitude", point.getLat());
         e.putDouble("longitude", point.getLng());
     }));
+    livemap.addContentUpdatedListener(new ContentUpdatedListener() {
+      @Override
+      public void onPinpointsUpdated(Query query, List<Pinpoint> pinpoints) {
+        sendNativeEvent("onContentUpdated", e -> {
+          e.putString("type", "pinpoints");
+
+          try {
+            JSONObject jsonQuery = new JSONObject();
+
+            jsonQuery.put("query", query.getQuery());
+            jsonQuery.put("tags", query.getTags());
+            jsonQuery.put("bounds", query.getBounds());
+            jsonQuery.put("minAltitude", query.getMinAltitude());
+            jsonQuery.put("maxAltitude", query.getMaxAltitude());
+
+            e.putMap("query", ReactNativeJson.convertJsonToMap(jsonQuery));
+          } catch (JSONException jsonException) {
+            jsonException.printStackTrace();
+          }
+
+          try {
+            JSONArray jsonArray = new JSONArray();
+            for (Pinpoint pinpoint : pinpoints) {
+              jsonArray.put(pinpoint.toJson());
+            }
+
+            e.putArray("items", ReactNativeJson.convertJsonToArray(jsonArray));
+          } catch (JSONException jsonException) {
+            jsonException.printStackTrace();
+          }
+        });
+      }
+
+      @Override
+      public void onEventsUpdated(Query query, List<Event> events) {
+        sendNativeEvent("onContentUpdated", e -> {
+          e.putString("type", "events");
+
+          try {
+            JSONObject jsonQuery = new JSONObject();
+
+            jsonQuery.put("query", query.getQuery());
+            jsonQuery.put("tags", query.getTags());
+            jsonQuery.put("bounds", query.getBounds());
+            jsonQuery.put("minAltitude", query.getMinAltitude());
+            jsonQuery.put("maxAltitude", query.getMaxAltitude());
+
+            e.putMap("query", ReactNativeJson.convertJsonToMap(jsonQuery));
+          } catch (JSONException jsonException) {
+            jsonException.printStackTrace();
+          }
+
+          try {
+            JSONArray jsonArray = new JSONArray();
+            for (Event event : events) {
+              jsonArray.put(event.toJson());
+            }
+
+            e.putArray("items", ReactNativeJson.convertJsonToArray(jsonArray));
+          } catch (JSONException jsonException) {
+            jsonException.printStackTrace();
+          }
+        });
+      }
+    });
 
     this.setUrlChangeListener((previousUrl, nextUrl) -> sendNativeEvent("onUrlChange", e -> {
       e.putString("previousUrl", previousUrl);
