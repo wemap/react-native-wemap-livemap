@@ -74,6 +74,11 @@ export default () => {
         onMapMoved={(json) => console.log('map moved', json)}
         onMapClick={(json) => console.log('map click', json)}
         onMapLongClick={(json) => console.log('map long click', json)}
+        onContentUpdated={(contentUpdated) => {
+          console.log(contentUpdated.type);
+          console.log(contentUpdated.query);
+          console.log(contentUpdated.items);
+        }}
       />
     </SafeAreaView>
   );
