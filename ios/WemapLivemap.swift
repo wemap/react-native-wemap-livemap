@@ -30,18 +30,17 @@ class WemapLivemap: UIView {
 
     override func didSetProps(_ changedProps: [String]!) {
         wemap.delegate = self
-
-        var bounds: BoundingBox? = nil
-        if let boundsDict = self.mapConfig!["maxbounds"] as? NSDictionary {
-            if let parsedStruct: BoundingBox = wemapsdk_config.boundingBoxFromNSDictionary(dict: boundsDict) {
-                bounds = parsedStruct
-            }
-        }
+        
+        let maxbounds: BoundingBox? = (self.mapConfig["maxbounds"] as? NSDictionary) != nil ? BoundingBox.fromDictionary(self.mapConfig["maxbounds"] as! NSDictionary) : nil
+        
+        let introcard: IntroCardParameter? = (self.mapConfig["introcard"] as? NSDictionary) != nil ? IntroCardParameter.fromDictionary(self.mapConfig["introcard"] as! NSDictionary) : nil
+                    
         _ = wemap.configure(config: wemapsdk_config(
             token: self.mapConfig!["token"] as? String,
             mapId: self.mapConfig!["emmid"] as? Int,
-            livemapRootUrl: self.mapConfig!["webappEndpoint"] as? String,
-            maxbounds: bounds
+            livemapRootUrl: self.mapConfig["webappEndpoint"] as? String,
+            maxbounds: maxbounds,
+            introcard: introcard
         )).presentIn(view: self)
     }
 
@@ -133,25 +132,25 @@ class WemapLivemap: UIView {
 }
 
 extension WemapLivemap: wemapsdkViewDelegate {
-    private func getLivemapEvent (json: [AnyHashable : Any]) -> [String: [AnyHashable : Any]] {
+    private func getLivemapEvent (json: [String : Any]) -> [String: [String : Any]] {
         return ["value": json]
     }
-
-    @objc func onMapMoved(_ wemapController: wemapsdk, json: NSDictionary) {
+    
+    @objc func onMapMoved(_ wemapController: wemapsdk, mapMoved: MapMoved) {
         if (self.onMapMoved == nil) { return }
-        let livemapEvent = getLivemapEvent(json: (json as? [AnyHashable : Any])!)
+        let livemapEvent = getLivemapEvent(json: mapMoved.toDictionary())
         self.onMapMoved!(livemapEvent)
     }
-
-    @objc func onMapClick(_ wemapController: wemapsdk, json: NSDictionary) {
+    
+    @objc func onMapClick(_ wemapController: wemapsdk, coordinates: Coordinates) {
         if (self.onMapClick == nil) { return }
-        let livemapEvent = getLivemapEvent(json: (json as? [AnyHashable : Any])!)
+        let livemapEvent = getLivemapEvent(json: coordinates.toDictionary())
         self.onMapClick!(livemapEvent)
     }
-
-    @objc func onMapLongClick(_ wemapController: wemapsdk, json: NSDictionary) {
+    
+    @objc func onMapLongClick(_ wemapController: wemapsdk, coordinates: Coordinates) {
         if (self.onMapLongClick == nil) { return }
-        let livemapEvent = getLivemapEvent(json: (json as? [AnyHashable : Any])!)
+        let livemapEvent = getLivemapEvent(json: coordinates.toDictionary())
         self.onMapLongClick!(livemapEvent)
     }
 
@@ -168,7 +167,7 @@ extension WemapLivemap: wemapsdkViewDelegate {
 
     @objc func onPinpointOpen(_ wemapController: wemapsdk, pinpoint: WemapPinpoint) {
         if(self.onPinpointOpen == nil) { return }
-        let livemapEvent = getLivemapEvent(json: (pinpoint.data as? [AnyHashable : Any])!)
+        let livemapEvent = getLivemapEvent(json: (pinpoint.data as? [String : Any])!)
         self.onPinpointOpen!(livemapEvent)
     }
 
