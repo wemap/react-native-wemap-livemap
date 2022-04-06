@@ -131,6 +131,7 @@ public struct wemapsdk_config {
   public init(northEast: livemap_ios_sdk.Coordinates, southWest: livemap_ios_sdk.Coordinates)
   public static func fromDictionary(_ dict: Foundation.NSDictionary) -> livemap_ios_sdk.BoundingBox
   override public func toDictionary() -> [Swift.String : Any]
+  public func toUrlParameter() -> Swift.String
   @objc deinit
 }
 @objc public class MapMoved : livemap_ios_sdk.JSON {
