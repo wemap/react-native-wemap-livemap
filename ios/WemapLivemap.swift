@@ -131,6 +131,10 @@ class WemapLivemap: UIView {
     @objc func aroundMe() {
         wemap.aroundMe()
     }
+    
+    @objc func _setCenter(_ params: [String : Any]) {
+        wemap.setCenter(center: Coordinates.fromDictionary(params["center"] as! NSDictionary))
+    }
 }
 
 extension WemapLivemap: wemapsdkViewDelegate {
@@ -324,6 +328,10 @@ class WemapLivemapManager: RCTViewManager {
 
     @objc func aroundMeViaManager(_ node: NSNumber) {
         self.callLivemapMethod(node, selector: "aroundMe")
+    }
+    
+    @objc func setCenterViaManager(_ node: NSNumber, center: NSDictionary) {
+        self.callLivemapMethod(node, selector: "_setCenter:", params: ["center": center])
     }
 
     override func view() -> UIView! {

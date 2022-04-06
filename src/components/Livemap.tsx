@@ -7,6 +7,7 @@ import type {
   LivemapProps,
   LivemapRef,
   LivemapEvent,
+  Coordinates,
 } from '../types';
 
 const NativeLivemap: HostComponent<NativeLivemapProps> = requireNativeComponent('WemapLivemap');
@@ -47,6 +48,7 @@ const Livemap = forwardRef<LivemapRef, LivemapProps>((props, ref) => {
     signOut,
     setPinpoints,
     setSourceLists,
+    setCenter,
   }));
 
   const openEvent = (id: number): void => {
@@ -103,6 +105,10 @@ const Livemap = forwardRef<LivemapRef, LivemapProps>((props, ref) => {
 
   const setSourceLists = (sourceLists: number[]): void => {
     sendCommand('setSourceListsViaManager', [sourceLists]);
+  };
+
+  const setCenter = (center: Coordinates): void => {
+    sendCommand('setCenterViaManager', [center]);
   };
 
   return (

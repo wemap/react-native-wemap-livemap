@@ -14,6 +14,7 @@ import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.getwemap.livemap.sdk.model.Filters;
+import com.getwemap.livemap.sdk.model.LatLngAlt;
 import com.getwemap.livemap.sdk.model.Pinpoint;
 import com.reactnativewemaplivemap.utils.ReactNativeJson;
 
@@ -218,6 +219,15 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
         break;
       case "aroundMeViaManager":
           root.livemap.aroundMe();
+        break;
+      case "setCenterViaManager":
+        try {
+          JSONObject jsonCenter = ReactNativeJson.convertMapToJson(args.getMap(0));
+          LatLngAlt center = LatLngAlt.fromJson(jsonCenter);
+          root.livemap.setCenter(center);
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
         break;
     }
   }

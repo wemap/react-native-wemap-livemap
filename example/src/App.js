@@ -56,6 +56,7 @@ export default () => {
     //   ['monument-historique', 'musee-de-france'],
     // ];
     // livemap.current.setFilters(...filters);
+    livemap.current.setCenter({ latitude: 60.609138, longitude: 10.884193 });
   };
 
   return (
