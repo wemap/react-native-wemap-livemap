@@ -10,6 +10,7 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.getwemap.livemap.sdk.Livemap;
 import com.getwemap.livemap.sdk.LivemapView;
 import com.getwemap.livemap.sdk.OnLivemapReadyCallback;
+import com.getwemap.livemap.sdk.callbacks.ActionButtonClickListener;
 import com.getwemap.livemap.sdk.model.Event;
 import com.getwemap.livemap.sdk.model.Pinpoint;
 import com.getwemap.livemap.sdk.model.Query;
@@ -165,6 +166,34 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
             }
 
             e.putArray("items", ReactNativeJson.convertJsonToArray(jsonArray));
+          } catch (JSONException jsonException) {
+            jsonException.printStackTrace();
+          }
+        });
+      }
+    });
+
+    livemap.addActionButtonClickedListener(new ActionButtonClickListener() {
+      @Override
+      public void onPinpointActionClicked(Pinpoint pinpoint, String s) {
+        sendNativeEvent("onActionButtonClick", e -> {
+          e.putString("itemType", "pinpoint");
+          e.putString("actionType", s);
+          try {
+            e.putMap("item", ReactNativeJson.convertJsonToMap(pinpoint.toJson()));
+          } catch (JSONException jsonException) {
+            jsonException.printStackTrace();
+          }
+        });
+      }
+
+      @Override
+      public void onEventActionClicked(Event event, String s) {
+        sendNativeEvent("onActionButtonClick", e -> {
+          e.putString("itemType", "event");
+          e.putString("actionType", s);
+          try {
+            e.putMap("item", ReactNativeJson.convertJsonToMap(event.toJson()));
           } catch (JSONException jsonException) {
             jsonException.printStackTrace();
           }

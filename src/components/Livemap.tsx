@@ -124,6 +124,7 @@ const Livemap = forwardRef<LivemapRef, LivemapProps>((props, ref) => {
       onMapClick={getNativeEventCallBack(props.onMapClick)}
       onMapLongClick={getNativeEventCallBack(props.onMapLongClick)}
       onContentUpdated={getNativeEventCallBack(props.onContentUpdated)}
+      onActionButtonClick={getNativeEventCallBack(props.onActionButtonClick)}
     />
   );
 });

@@ -28,6 +28,7 @@ class WemapLivemap: UIView {
     @objc var onMapClick: RCTBubblingEventBlock?
     @objc var onMapLongClick: RCTBubblingEventBlock?
     @objc var onContentUpdated: RCTBubblingEventBlock?
+    @objc var onActionButtonClick: RCTBubblingEventBlock?
 
     override func didSetProps(_ changedProps: [String]!) {
         wemap.delegate = self
@@ -234,6 +235,20 @@ extension WemapLivemap: wemapsdkViewDelegate {
         let query = contentUpdatedQuery.toDictionary()
         let livemapEvent = getLivemapEvent(json: ["type": "events", "items": items, "query": query])
         self.onContentUpdated!(livemapEvent)
+    }
+    
+    @objc func onActionButtonClick(_ wemapController: wemapsdk, event: WemapEvent, actionType: String) {
+        if (self.onActionButtonClick == nil) { return }
+        let event = event.toDictionary()
+        let livemapEvent = getLivemapEvent(json: ["itemType": "event", "item": event, "actionType": actionType])
+        self.onActionButtonClick!(livemapEvent)
+    }
+    
+    @objc func onActionButtonClick(_ wemapController: wemapsdk, pinpoint: WemapPinpoint, actionType: String) {
+        if (self.onActionButtonClick == nil) { return }
+        let pinpoint = pinpoint.toDictionary()
+        let livemapEvent = getLivemapEvent(json: ["itemType": "pinpoint", "item": pinpoint, "actionType": actionType])
+        self.onActionButtonClick!(livemapEvent)
     }
 }
 

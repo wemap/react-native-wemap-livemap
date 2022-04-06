@@ -74,10 +74,16 @@ export default () => {
         onMapMoved={(json) => console.log('map moved', json)}
         onMapClick={(json) => console.log('map click', json)}
         onMapLongClick={(json) => console.log('map long click', json)}
-        onContentUpdated={(contentUpdated) => {
-          console.log(contentUpdated.type);
-          console.log(contentUpdated.query);
-          console.log(contentUpdated.items);
+        // onContentUpdated={(contentUpdated) => {
+        //   console.log(contentUpdated.type);
+        //   console.log(contentUpdated.query);
+        //   console.log(contentUpdated.items);
+        // }}
+        onActionButtonClick={({ actionType, itemType, item }) => {
+          console.log(`action button click`);
+          console.log(itemType);
+          console.log(actionType);
+          console.log(item.id);
         }}
       />
     </SafeAreaView>

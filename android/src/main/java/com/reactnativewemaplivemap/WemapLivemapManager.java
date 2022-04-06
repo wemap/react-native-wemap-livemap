@@ -131,7 +131,8 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
       "onGuidingStarted",
       "onGuidingStopped",
       "onUrlChange",
-      "onContentUpdated"
+      "onContentUpdated",
+      "onActionButtonClick"
     };
 
     for (String eventName : eventNames) {

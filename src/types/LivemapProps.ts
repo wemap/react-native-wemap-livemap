@@ -24,6 +24,7 @@ export default interface LivemapProps
     | 'onMapClick'
     | 'onMapLongClick'
     | 'onContentUpdated'
+    | 'onActionButtonClick'
   > {
   /**
    * By default, your Livemap's instance fill with its container.
@@ -130,5 +131,16 @@ export default interface LivemapProps
     type: 'events' | 'pinpoints';
     items: [Pinpoint | Event];
     query: Object;
+  }) => void;
+
+  /**
+   * TODO:
+   *
+   * @event
+   */
+  onActionButtonClick?: (value: {
+    itemType: 'event' | 'pinpoint';
+    item: Pinpoint | Event;
+    actionType: String;
   }) => void;
 }
