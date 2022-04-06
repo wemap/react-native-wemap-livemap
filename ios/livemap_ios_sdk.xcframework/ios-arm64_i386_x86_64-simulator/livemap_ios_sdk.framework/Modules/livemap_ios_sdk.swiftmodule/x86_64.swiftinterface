@@ -87,6 +87,7 @@ extension livemap_ios_sdk.wemapsdk {
   @_Concurrency.MainActor(unsafe) public func enableAnalytics()
   @_Concurrency.MainActor(unsafe) public func drawPolyline(coordinatesList: [livemap_ios_sdk.Coordinates], options: livemap_ios_sdk.PolylineOptions? = nil)
   @_Concurrency.MainActor(unsafe) public func removePolyline(id: Swift.String)
+  @_Concurrency.MainActor(unsafe) public func setCenter(center: livemap_ios_sdk.Coordinates)
 }
 public struct WemapFilters : Swift.Codable {
   public init(tags: Swift.Array<Swift.String>? = nil, query: Swift.String? = nil, startDate: Swift.String? = nil, endDate: Swift.String? = nil)
