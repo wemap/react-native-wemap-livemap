@@ -234,6 +234,16 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
         String id = args.getString(0);
         root.livemap.removePolyline(id);
         break;
+      case "centerToViaManager":
+        try {
+          JSONObject jsonCenter = ReactNativeJson.convertMapToJson(args.getMap(0));
+          LatLngAlt center = LatLngAlt.fromJson(jsonCenter);
+          Double zoom = args.getDouble(1);
+          root.livemap.centerTo(center, zoom);
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+        break;
     }
   }
 }

@@ -58,6 +58,7 @@ const Livemap = forwardRef<LivemapRef, LivemapProps>((props, ref) => {
     setCenter,
     drawPolyline,
     removePolyline,
+    centerTo,
   }));
 
   const openEvent = (id: number): void => {
@@ -126,6 +127,10 @@ const Livemap = forwardRef<LivemapRef, LivemapProps>((props, ref) => {
 
   const removePolyline = (id: String): void => {
     sendCommand('removePolylineViaManager', [id]);
+  };
+
+  const centerTo = (center: Coordinates, zoom: Number): void => {
+    sendCommand('centerToViaManager', [center, zoom]);
   };
 
   return (

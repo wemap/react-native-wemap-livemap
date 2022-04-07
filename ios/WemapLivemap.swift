@@ -353,4 +353,10 @@ class WemapLivemapManager: RCTViewManager {
     @objc func removePolylineViaManager(_ node: NSNumber, id: String) {
         self.callLivemapMethod(node, selector: "removePolyline:", params: ["id": id])
     }
+    
+    @objc func centerToViaManager(_ node: NSNumber, center: NSDictionary, zoom: NSNumber) {
+        DispatchQueue.main.async {
+            self.livemap.wemap.centerTo(center: Coordinates.fromDictionary(center), zoom: Double(truncating: zoom))
+        }
+    }
 }

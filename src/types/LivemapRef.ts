@@ -1,3 +1,4 @@
+import type { Coordinates } from 'lib/typescript/types';
 import type Pinpoint from './Pinpoint';
 
 export default interface LivemapRef {
@@ -84,4 +85,9 @@ export default interface LivemapRef {
    * @param {integer[]} sourceLists id of lists to be added to the map.
    */
   setSourceLists: (sourceLists: number[]) => void;
+
+  /**
+   * TODO:
+   */
+  centerTo: (center: Coordinates, zoom: Number) => void;
 }

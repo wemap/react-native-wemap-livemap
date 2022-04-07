@@ -77,6 +77,16 @@ export default () => {
     //     livemap.current.removePolyline(id);
     //   }, 8000);
     // });
+
+    // setTimeout(() => {
+    //   livemap.current.centerTo(
+    //     {
+    //       latitude: 45.609138,
+    //       longitude: 3.884193,
+    //     },
+    //     16
+    //   );
+    // }, 8000);
   };
 
   return (
