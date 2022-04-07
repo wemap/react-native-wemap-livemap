@@ -12,6 +12,10 @@ import livemap_ios_sdk
 class WemapLivemapModule: NSObject {
     var livemapView: WemapLivemap? = nil
     
+    @objc static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+    
     internal func setLivemapView(livemapView: WemapLivemap) {
         self.livemapView = livemapView
     }
