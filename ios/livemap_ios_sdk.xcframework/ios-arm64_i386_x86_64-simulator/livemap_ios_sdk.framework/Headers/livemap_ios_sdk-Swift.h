@@ -380,7 +380,6 @@ SWIFT_PROTOCOL("_TtP15livemap_ios_sdk20wemapsdkViewDelegate_")
 - (void)onActionButtonClick:(wemapsdk * _Nonnull)wemapController event:(WemapEvent * _Nonnull)event actionType:(NSString * _Nonnull)actionType;
 - (void)onContentUpdated:(wemapsdk * _Nonnull)wemapController events:(NSArray<WemapEvent *> * _Nonnull)events contentUpdatedQuery:(ContentUpdatedQuery * _Nonnull)contentUpdatedQuery;
 - (void)onContentUpdated:(wemapsdk * _Nonnull)wemapController pinpoints:(NSArray<WemapPinpoint *> * _Nonnull)pinpoints contentUpdatedQuery:(ContentUpdatedQuery * _Nonnull)contentUpdatedQuery;
-- (void)onPolylineDrawn:(wemapsdk * _Nonnull)wemapController id:(NSString * _Nonnull)id;
 - (void)onBookEventClicked:(wemapsdk * _Nonnull)wemapController event:(WemapEvent * _Nonnull)event;
 - (void)onGoToPinpointClicked:(wemapsdk * _Nonnull)wemapController pinpoint:(WemapPinpoint * _Nonnull)pinpoint;
 - (void)onMapMoved:(wemapsdk * _Nonnull)wemapController mapMoved:(MapMoved * _Nonnull)mapMoved;
@@ -775,7 +774,6 @@ SWIFT_PROTOCOL("_TtP15livemap_ios_sdk20wemapsdkViewDelegate_")
 - (void)onActionButtonClick:(wemapsdk * _Nonnull)wemapController event:(WemapEvent * _Nonnull)event actionType:(NSString * _Nonnull)actionType;
 - (void)onContentUpdated:(wemapsdk * _Nonnull)wemapController events:(NSArray<WemapEvent *> * _Nonnull)events contentUpdatedQuery:(ContentUpdatedQuery * _Nonnull)contentUpdatedQuery;
 - (void)onContentUpdated:(wemapsdk * _Nonnull)wemapController pinpoints:(NSArray<WemapPinpoint *> * _Nonnull)pinpoints contentUpdatedQuery:(ContentUpdatedQuery * _Nonnull)contentUpdatedQuery;
-- (void)onPolylineDrawn:(wemapsdk * _Nonnull)wemapController id:(NSString * _Nonnull)id;
 - (void)onBookEventClicked:(wemapsdk * _Nonnull)wemapController event:(WemapEvent * _Nonnull)event;
 - (void)onGoToPinpointClicked:(wemapsdk * _Nonnull)wemapController pinpoint:(WemapPinpoint * _Nonnull)pinpoint;
 - (void)onMapMoved:(wemapsdk * _Nonnull)wemapController mapMoved:(MapMoved * _Nonnull)mapMoved;
@@ -1170,7 +1168,6 @@ SWIFT_PROTOCOL("_TtP15livemap_ios_sdk20wemapsdkViewDelegate_")
 - (void)onActionButtonClick:(wemapsdk * _Nonnull)wemapController event:(WemapEvent * _Nonnull)event actionType:(NSString * _Nonnull)actionType;
 - (void)onContentUpdated:(wemapsdk * _Nonnull)wemapController events:(NSArray<WemapEvent *> * _Nonnull)events contentUpdatedQuery:(ContentUpdatedQuery * _Nonnull)contentUpdatedQuery;
 - (void)onContentUpdated:(wemapsdk * _Nonnull)wemapController pinpoints:(NSArray<WemapPinpoint *> * _Nonnull)pinpoints contentUpdatedQuery:(ContentUpdatedQuery * _Nonnull)contentUpdatedQuery;
-- (void)onPolylineDrawn:(wemapsdk * _Nonnull)wemapController id:(NSString * _Nonnull)id;
 - (void)onBookEventClicked:(wemapsdk * _Nonnull)wemapController event:(WemapEvent * _Nonnull)event;
 - (void)onGoToPinpointClicked:(wemapsdk * _Nonnull)wemapController pinpoint:(WemapPinpoint * _Nonnull)pinpoint;
 - (void)onMapMoved:(wemapsdk * _Nonnull)wemapController mapMoved:(MapMoved * _Nonnull)mapMoved;

@@ -39,7 +39,6 @@ import _Concurrency
   @objc optional func onActionButtonClick(_ wemapController: livemap_ios_sdk.wemapsdk, event: livemap_ios_sdk.WemapEvent, actionType: Swift.String)
   @objc optional func onContentUpdated(_ wemapController: livemap_ios_sdk.wemapsdk, events: [livemap_ios_sdk.WemapEvent], contentUpdatedQuery: livemap_ios_sdk.ContentUpdatedQuery)
   @objc optional func onContentUpdated(_ wemapController: livemap_ios_sdk.wemapsdk, pinpoints: [livemap_ios_sdk.WemapPinpoint], contentUpdatedQuery: livemap_ios_sdk.ContentUpdatedQuery)
-  @objc optional func onPolylineDrawn(_ wemapController: livemap_ios_sdk.wemapsdk, id: Swift.String)
   @objc optional func onBookEventClicked(_ wemapController: livemap_ios_sdk.wemapsdk, event: livemap_ios_sdk.WemapEvent)
   @objc optional func onGoToPinpointClicked(_ wemapController: livemap_ios_sdk.wemapsdk, pinpoint: livemap_ios_sdk.WemapPinpoint)
   @objc optional func onMapMoved(_ wemapController: livemap_ios_sdk.wemapsdk, mapMoved: livemap_ios_sdk.MapMoved)
@@ -85,7 +84,8 @@ extension livemap_ios_sdk.wemapsdk {
   @_Concurrency.MainActor(unsafe) public func aroundMe()
   @_Concurrency.MainActor(unsafe) public func disableAnalytics()
   @_Concurrency.MainActor(unsafe) public func enableAnalytics()
-  @_Concurrency.MainActor(unsafe) public func drawPolyline(coordinatesList: [livemap_ios_sdk.Coordinates], options: livemap_ios_sdk.PolylineOptions? = nil)
+  @available(iOS 14.0, *)
+  @_Concurrency.MainActor(unsafe) public func drawPolyline(coordinatesList: [livemap_ios_sdk.Coordinates], options: livemap_ios_sdk.PolylineOptions? = nil, completion: ((Swift.String) -> ())? = nil)
   @_Concurrency.MainActor(unsafe) public func removePolyline(id: Swift.String)
   @_Concurrency.MainActor(unsafe) public func setCenter(center: livemap_ios_sdk.Coordinates)
 }
