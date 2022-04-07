@@ -230,38 +230,6 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
         } catch (JSONException e) {
           e.printStackTrace();
         }
-//      case "drawPolylineViaManager":
-//        ReadableArray coordinatesArray = args.getArray(0);
-//
-//        List<LatLngAlt> coordinatesList = new ArrayList();
-//        for (int i = 0; i < coordinatesArray.size(); i++) {
-//          ReadableMap coordinatesMap = coordinatesArray.getMap(i);
-//          try {
-//            JSONObject coordinatesJson = ReactNativeJson.convertMapToJson(coordinatesMap);
-//            LatLngAlt coordinates = LatLngAlt.fromJson(coordinatesJson);
-//            coordinatesList.add(coordinates);
-//          } catch (JSONException e) {
-//            e.printStackTrace();
-//          }
-//        }
-//
-//        ReadableMap optionsMap = args.getMap(1);
-//        PolylineOptions options = new PolylineOptions();
-////        options.color = optionsMap.getInt("color");
-////        options.opacity = (float) optionsMap.getDouble("opacity");
-////        options.width = (float) optionsMap.getDouble("width");
-////        options.useNetwork = optionsMap.getBoolean("useNetwork");
-//
-////        ReadableMap optionsMap = args.getDynamic(1);
-//
-//        // Integer nativeId = args.get(2);
-//
-//        root.livemap.drawPolyline(coordinatesList, options, id -> root.sendNativeEvent("onPolylineDrawn", e -> {
-//          // e.putInt("nativeId", nativeId);
-//          e.putString("id", id);
-//        }));
-//        break;
-
       case "removePolylineViaManager":
         String id = args.getString(0);
         root.livemap.removePolyline(id);
