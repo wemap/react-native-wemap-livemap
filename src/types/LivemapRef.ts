@@ -1,4 +1,4 @@
-import type { Coordinates } from 'lib/typescript/types';
+import type Coordinates from './Coordinates';
 import type Pinpoint from './Pinpoint';
 
 export default interface LivemapRef {
