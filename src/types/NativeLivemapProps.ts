@@ -3,7 +3,10 @@ import type { ViewStyle } from 'react-native';
 import type MapConfig from './MapConfig';
 import type LivemapEvent from './LivemapEvent';
 
-export default interface LivemapProps {
+/**
+ * @ignore
+ */
+export default interface NativeLivemapProps {
   /**
    * Your Livemap config. You have the choice between UFE and emmid mode.
    * If you don't provide any emmid, the default mode will be UFE.
