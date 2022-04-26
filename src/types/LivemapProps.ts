@@ -116,14 +116,14 @@ export default interface LivemapProps
   onMapClick?: (value: Coordinates) => void;
 
   /**
-   * Dispatched when the map is long clicked
+   * Dispatched when the map is long clicked.
    *
    * @event
    */
   onMapLongClick?: (value: Coordinates) => void;
 
   /**
-   * TODO:
+   * The content related to the map is updated.
    *
    * @event
    */
@@ -134,7 +134,7 @@ export default interface LivemapProps
   }) => void;
 
   /**
-   * TODO:
+   * A petal's button is clicked on an event or pinpoint.
    *
    * @event
    */

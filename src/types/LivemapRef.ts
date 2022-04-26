@@ -1,3 +1,4 @@
+import type PolylineOptions from './PolylineOptions';
 import type Coordinates from './Coordinates';
 import type Pinpoint from './Pinpoint';
 
@@ -76,18 +77,40 @@ export default interface LivemapRef {
 
   /**
    * Populates the map with given pinpoints.
-   * @param {Pinpoint[]} pinpoints Pinpoints to populate the map.
+   * @param {Pinpoint[]} pinpoints the pinpoints to populate the map.
    */
   setPinpoints: (pinpoints: Pinpoint[]) => void;
 
   /**
    * Define one or more lists to be displayed on the map in addition of the current pinpoints of the map.
-   * @param {integer[]} sourceLists id of lists to be added to the map.
+   * @param {[number]} sourceLists id of lists to be added to the map.
    */
-  setSourceLists: (sourceLists: number[]) => void;
+  setSourceLists: (sourceLists: [number]) => void;
 
   /**
-   * TODO:
+   * Draw a polyline on the map between multiple coordinates.
+   * You can either draw a raw array of coordinates or use our itinerary service to draw a route between multiple points.
+   * @param {[Coordinates]} coordinatesList id of lists to be added to the map.
+   * @param {PolylineOptions} options the polyline options. Please refer to the [JS documentation](/docs/javascript/livemap#livemapdrawpolyline) to check its default values.
+   */
+  drawPolyline: (coordinatesList: [Coordinates], options: PolylineOptions) => void;
+
+  /**
+   * Remove a polyline from the map.
+   * @param {string} id id of polyline.
+   */
+  removePolyline: (id: string) => void;
+
+  /**
+   * Center the map on the given position.
+   * @param center the new center.
+   */
+  setCenter: (center: Coordinates) => void;
+
+  /**
+   * Center the map on the given position and set the zoom level.
+   * @param center the new center.
+   * @param zoom the new zoom level.
    */
   centerTo: (center: Coordinates, zoom: Number) => void;
 }

@@ -101,21 +101,21 @@ export default interface LivemapProps {
   onMapClick?: (livemapEvent: LivemapEvent) => void;
 
   /**
-   * Dispatched when the map is long clicked
+   * Dispatched when the map is long clicked.
    *
    * @event
    */
   onMapLongClick?: (livemapEvent: LivemapEvent) => void;
 
   /**
-   * TODO:
+   * The content related to the map is updated.
    *
    * @event
    */
   onContentUpdated?: (livemapEvent: LivemapEvent) => void;
 
   /**
-   * TODO:
+   * A petal's button is clicked on an event or pinpoint.
    *
    * @event
    */
