@@ -121,7 +121,7 @@ const Livemap = forwardRef<LivemapRef, LivemapProps>((props, ref) => {
     sendCommand('setCenterViaManager', [center]);
   };
 
-  const drawPolyline = (coordinatesList: [Coordinates], options: PolylineOptions): void => {
+  const drawPolyline = async (coordinatesList: [Coordinates], options: PolylineOptions): Promise<String> => {
     return NativeModules.WemapLivemapModule.drawPolylineViaModule(coordinatesList, options);
   };
 

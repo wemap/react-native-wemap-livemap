@@ -93,7 +93,7 @@ export default interface LivemapRef {
    * @param {[Coordinates]} coordinatesList id of lists to be added to the map.
    * @param {PolylineOptions} options the polyline options. Please refer to the [JS documentation](/docs/javascript/livemap#livemapdrawpolyline) to check its default values.
    */
-  drawPolyline: (coordinatesList: [Coordinates], options: PolylineOptions) => void;
+  drawPolyline: (coordinatesList: [Coordinates], options: PolylineOptions) => Promise<String>;
 
   /**
    * Remove a polyline from the map.
