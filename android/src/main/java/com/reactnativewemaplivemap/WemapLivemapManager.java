@@ -164,7 +164,12 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
         root.livemap.closePinpoint();
         break;
       case "setFiltersViaManager":
-        Filters filters = new Filters(args.getString(0), args.getString(1), args.getString(2), (String[]) args.getArray(3).toArrayList().toArray());
+        String startDate = args.getString(0);
+        String endDate = args.getString(1);
+        String query = args.getString(2);
+        String[] tags = args.getArray(3).toArrayList().toArray(new String[0]);
+        Filters filters = new Filters(startDate, endDate, query, tags);
+        
         root.livemap.setFilters(filters);
         break;
       case "navigateToPinpointViaManager":
