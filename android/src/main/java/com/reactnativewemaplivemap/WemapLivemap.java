@@ -116,7 +116,7 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
             JSONObject jsonQuery = new JSONObject();
 
             jsonQuery.put("query", query.getQuery());
-            jsonQuery.put("tags", query.getTags());
+            jsonQuery.put("tags", new JSONArray(query.getTags()));
             jsonQuery.put("bounds", query.getBounds());
             jsonQuery.put("minAltitude", query.getMinAltitude());
             jsonQuery.put("maxAltitude", query.getMaxAltitude());
@@ -148,7 +148,7 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
             JSONObject jsonQuery = new JSONObject();
 
             jsonQuery.put("query", query.getQuery());
-            jsonQuery.put("tags", query.getTags());
+            jsonQuery.put("tags", new JSONArray(query.getTags()));
             jsonQuery.put("bounds", query.getBounds());
             jsonQuery.put("minAltitude", query.getMinAltitude());
             jsonQuery.put("maxAltitude", query.getMaxAltitude());
