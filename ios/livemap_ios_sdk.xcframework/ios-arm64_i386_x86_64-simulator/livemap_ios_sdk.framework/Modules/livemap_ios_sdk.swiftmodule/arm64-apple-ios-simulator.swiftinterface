@@ -1,13 +1,19 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
 // swift-module-flags: -target arm64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name livemap_ios_sdk
 import AVFoundation
+import CoreLocation
 import Foundation
 import Swift
 import UIKit
 import WebKit
 import _Concurrency
 @_exported import livemap_ios_sdk
+extension Swift.String : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
 @objc public protocol WemapSDKMapActionsDelegate {
   @objc optional func regionDidChanged(controller: livemap_ios_sdk.wemapsdk)
   @objc optional func openPinpoint(controller: livemap_ios_sdk.wemapsdk)
@@ -56,7 +62,12 @@ import _Concurrency
 }
 extension livemap_ios_sdk.wemapsdk : WebKit.WKNavigationDelegate {
   @_Concurrency.MainActor(unsafe) @objc dynamic open func webView(_ webView: WebKit.WKWebView, didFinish navigation: WebKit.WKNavigation!)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, didCommit navigation: WebKit.WKNavigation!)
   @_Concurrency.MainActor(unsafe) @objc dynamic open func webView(_ webView: WebKit.WKWebView, didFail navigation: WebKit.WKNavigation!, withError error: Swift.Error)
+  @available(iOS 15.0, *)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, requestMediaCapturePermissionFor origin: WebKit.WKSecurityOrigin, initiatedByFrame frame: WebKit.WKFrameInfo, type: WebKit.WKMediaCaptureType, decisionHandler: @escaping (WebKit.WKPermissionDecision) -> Swift.Void)
+  @available(iOS 15.0, *)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, requestDeviceOrientationAndMotionPermissionFor origin: WebKit.WKSecurityOrigin, initiatedByFrame frame: WebKit.WKFrameInfo, decisionHandler: @escaping (WebKit.WKPermissionDecision) -> Swift.Void)
 }
 extension livemap_ios_sdk.wemapsdk {
   @_Concurrency.MainActor(unsafe) public func configure(config: livemap_ios_sdk.wemapsdk_config) -> livemap_ios_sdk.wemapsdk
@@ -89,6 +100,22 @@ extension livemap_ios_sdk.wemapsdk {
   @_Concurrency.MainActor(unsafe) public func removePolyline(id: Swift.String)
   @_Concurrency.MainActor(unsafe) public func setCenter(center: livemap_ios_sdk.Coordinates)
   @_Concurrency.MainActor(unsafe) public func centerTo(center: livemap_ios_sdk.Coordinates, zoom: Swift.Double)
+  @_Concurrency.MainActor(unsafe) public func disablePositioningSystem()
+  @available(iOS 14.0, *)
+  @_Concurrency.MainActor(unsafe) public func disablePositioningSystem(completionHandler: (() -> ())? = nil)
+  @available(iOS 14.0, *)
+  @_Concurrency.MainActor(unsafe) public func getUserLocation(completionHandler: ((livemap_ios_sdk.Coordinates) -> ())? = nil)
+  @_Concurrency.MainActor(unsafe) public func setUserLocation(userLocation: livemap_ios_sdk.Coordinates)
+  @available(iOS 14.0, *)
+  @_Concurrency.MainActor(unsafe) public func setUserLocation(userLocation: livemap_ios_sdk.Coordinates, completionHandler: (() -> ())? = nil)
+  @available(iOS 14.0, *)
+  @_Concurrency.MainActor(unsafe) public func getDeviceAttitude(completionHandler: ((livemap_ios_sdk.Attitude) -> ())? = nil)
+  @_Concurrency.MainActor(unsafe) public func setDeviceAttitude(attitude: livemap_ios_sdk.Attitude)
+  @available(iOS 14.0, *)
+  @_Concurrency.MainActor(unsafe) public func setDeviceAttitude(attitude: livemap_ios_sdk.Attitude, completionHandler: (() -> ())? = nil)
+  @available(iOS 14.0, *)
+  @_Concurrency.MainActor(unsafe) public func addMarker(marker: livemap_ios_sdk.Marker, completion: ((Swift.String) -> ())? = nil)
+  @_Concurrency.MainActor(unsafe) public func removeMarker(id: Swift.String)
 }
 public struct WemapFilters : Swift.Codable {
   public init(tags: Swift.Array<Swift.String>? = nil, query: Swift.String? = nil, startDate: Swift.String? = nil, endDate: Swift.String? = nil)
@@ -101,7 +128,7 @@ public struct WemapLocation : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
 }
 public struct wemapsdk_config {
-  public init(token: Swift.String?, mapId: Swift.Int? = nil, livemapRootUrl: Swift.String? = nil, maxbounds: livemap_ios_sdk.BoundingBox? = nil, introcard: livemap_ios_sdk.IntroCardParameter? = nil, urlParameters: [Swift.String]? = nil)
+  public init(token: Swift.String?, mapId: Swift.Int? = nil, livemapRootUrl: Swift.String? = nil, maxbounds: livemap_ios_sdk.BoundingBox? = nil, introcard: livemap_ios_sdk.IntroCardParameter? = nil, urlParameters: [Swift.String]? = nil, enablePolestar: Swift.Bool = false)
   public static let defaultLivemapRootUrl: Swift.String
   public let token: Swift.String
   public let emmid: Swift.Int
@@ -110,10 +137,9 @@ public struct wemapsdk_config {
   public let maxbounds: livemap_ios_sdk.BoundingBox?
   public let introcard: livemap_ios_sdk.IntroCardParameter?
   public let urlParameters: [Swift.String]?
+  public let enablePolestar: Swift.Bool
 }
 @objc @_inheritsConvenienceInitializers public class JSON : ObjectiveC.NSObject {
-  public func toDictionary() -> [Swift.String : Any]
-  public func toJsonString() -> Swift.String
   @objc override dynamic public init()
   @objc deinit
 }
@@ -121,9 +147,20 @@ public struct wemapsdk_config {
   final public let latitude: Swift.Double
   final public let longitude: Swift.Double
   final public let altitude: Swift.Double?
-  public init(latitude: Swift.Double, longitude: Swift.Double, altitude: Swift.Double?)
+  final public let accuracy: Swift.Float?
+  public init(latitude: Swift.Double, longitude: Swift.Double, altitude: Swift.Double? = nil, accuracy: Swift.Float? = nil)
   public static func fromDictionary(_ dict: Foundation.NSDictionary) -> livemap_ios_sdk.Coordinates
-  override public func toDictionary() -> [Swift.String : Any]
+  @objc deinit
+}
+@objc public class PolestarCoordinates : livemap_ios_sdk.JSON {
+  final public let lat: Swift.Double
+  final public let lng: Swift.Double
+  final public let alt: Swift.Double?
+  final public let accuracy: Swift.Double
+  final public let time: Swift.Int
+  final public let bearing: Swift.Double
+  public init(lat: Swift.Double, lng: Swift.Double, alt: Swift.Double? = nil, accuracy: Swift.Double, time: Swift.Int, bearing: Swift.Double)
+  public static func fromDictionary(_ dict: Foundation.NSDictionary) -> livemap_ios_sdk.PolestarCoordinates
   @objc deinit
 }
 @objc public class BoundingBox : livemap_ios_sdk.JSON {
@@ -131,7 +168,6 @@ public struct wemapsdk_config {
   final public let southWest: livemap_ios_sdk.Coordinates
   public init(northEast: livemap_ios_sdk.Coordinates, southWest: livemap_ios_sdk.Coordinates)
   public static func fromDictionary(_ dict: Foundation.NSDictionary) -> livemap_ios_sdk.BoundingBox
-  override public func toDictionary() -> [Swift.String : Any]
   public func toUrlParameter() -> Swift.String
   @objc deinit
 }
@@ -142,7 +178,6 @@ public struct wemapsdk_config {
   final public let longitude: Swift.Double?
   public init(zoom: Swift.Double? = nil, bounds: livemap_ios_sdk.BoundingBox? = nil, latitude: Swift.Double? = nil, longitude: Swift.Double? = nil)
   public static func fromDictionary(_ dict: Foundation.NSDictionary) -> livemap_ios_sdk.MapMoved
-  override public func toDictionary() -> [Swift.String : Any]
   @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers public class ContentUpdatedQuery : livemap_ios_sdk.JSON {
@@ -152,13 +187,11 @@ public struct wemapsdk_config {
   final public let minAltitude: Swift.Int?
   final public let maxAltitude: Swift.Int?
   public static func fromDictionary(_ dict: Foundation.NSDictionary) -> livemap_ios_sdk.ContentUpdatedQuery
-  override public func toDictionary() -> [Swift.String : Any]
   @objc deinit
 }
 @objc public class IntroCardParameter : livemap_ios_sdk.JSON {
   public init(active: Swift.Bool? = nil)
   public static func fromDictionary(_ dict: Foundation.NSDictionary) -> livemap_ios_sdk.IntroCardParameter
-  override public func toDictionary() -> [Swift.String : Any]
   @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers public class PolylineOptions : livemap_ios_sdk.JSON {
@@ -167,7 +200,6 @@ public struct wemapsdk_config {
   final public let width: Swift.Float?
   final public let useNetwork: Swift.Bool?
   public static func fromDictionary(_ dict: Foundation.NSDictionary) -> livemap_ios_sdk.PolylineOptions
-  override public func toDictionary() -> [Swift.String : Any]
   @objc deinit
 }
 @objc public class WemapPinpoint : livemap_ios_sdk.JSON {
@@ -178,8 +210,12 @@ public struct wemapsdk_config {
   final public let name: Swift.String
   final public let pinpointDescription: Swift.String
   final public let external_data: Foundation.NSDictionary?
+  final public let image_url: Swift.String
+  final public let media_url: Swift.String
+  final public let media_type: Swift.String
+  final public let geo_entity_shape: Foundation.NSDictionary?
+  final public let tags: [Swift.String]?
   public init(_ json: Foundation.NSDictionary)
-  override public func toDictionary() -> [Swift.String : Any]
   @objc deinit
 }
 @objc public class WemapEvent : livemap_ios_sdk.JSON {
@@ -189,6 +225,18 @@ public struct wemapsdk_config {
   final public let pinpoint: livemap_ios_sdk.WemapPinpoint?
   final public let external_data: Foundation.NSDictionary?
   public init(_ json: Foundation.NSDictionary)
-  override public func toDictionary() -> [Swift.String : Any]
+  @objc deinit
+}
+@objc public class Attitude : livemap_ios_sdk.JSON {
+  public init(quaternion: [Swift.Float])
+  public static func fromArray(_ array: [Swift.Float]) -> livemap_ios_sdk.Attitude
+  @objc deinit
+}
+@objc public class Marker : livemap_ios_sdk.JSON {
+  final public let coordinates: livemap_ios_sdk.Coordinates
+  final public let img: Swift.String
+  final public let label: Swift.String?
+  public init(coordinates: livemap_ios_sdk.Coordinates, img: Swift.String, label: Swift.String? = nil)
+  public static func fromDictionary(_ dict: Foundation.NSDictionary) -> livemap_ios_sdk.Marker
   @objc deinit
 }
