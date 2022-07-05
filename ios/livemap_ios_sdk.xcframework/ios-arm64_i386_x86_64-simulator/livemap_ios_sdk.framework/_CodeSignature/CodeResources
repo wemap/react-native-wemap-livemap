@@ -26,11 +26,11 @@
 		</data>
 		<key>Modules/livemap_ios_sdk.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		vrM3pMbnXzrmG1Zxlh3Ozazd28g=
+		wZ+T3WmLpe5D7hhXXZImJqHF2B0=
 		</data>
 		<key>Modules/livemap_ios_sdk.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		rwp174xKsiF1pOR0YI1PXhu26xY=
+		Lal4JH0bGgRh9+ASQ+JK1Ta7+9s=
 		</data>
 		<key>Modules/livemap_ios_sdk.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -38,11 +38,11 @@
 		</data>
 		<key>Modules/livemap_ios_sdk.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<data>
-		p6ye/JVhciDWh8WfDngEkGXvXr8=
+		5jAW6NCA+0TcOzEUtclB7ruwGDM=
 		</data>
 		<key>Modules/livemap_ios_sdk.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<data>
-		fyyPFdcpklaG331CE7D3j9GcuB4=
+		6Jmn8xyFgeWpdUxhby208195YVw=
 		</data>
 		<key>Modules/livemap_ios_sdk.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -50,11 +50,11 @@
 		</data>
 		<key>Modules/livemap_ios_sdk.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		MojSj5jKpMqxOKr6hgOclMV8O00=
+		UvpH2BuCRluFaS0gxAnRlfPUgVI=
 		</data>
 		<key>Modules/livemap_ios_sdk.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		uqAqFSqEPBwnP/QObXnezeOnAI8=
+		jbzV50C8F8ggLxpeHLnfL46iMRE=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -111,22 +111,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			vrM3pMbnXzrmG1Zxlh3Ozazd28g=
+			wZ+T3WmLpe5D7hhXXZImJqHF2B0=
 			</data>
 			<key>hash2</key>
 			<data>
-			HMjBYJGUmhbTEsArNJ8yraO0AlXFOLbD5uHoWG34Ejc=
+			gGGoJFwaUC88bcAZH9Z5+CPIWkV3xQm0BoQbyJ0WRZY=
 			</data>
 		</dict>
 		<key>Modules/livemap_ios_sdk.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			rwp174xKsiF1pOR0YI1PXhu26xY=
+			Lal4JH0bGgRh9+ASQ+JK1Ta7+9s=
 			</data>
 			<key>hash2</key>
 			<data>
-			W/BbQqEAIJ7RUlTQU2ZClAHEc1n3YWKmunytayN+xfQ=
+			zWjIp2h5zqCu3ftpS5xOktrR9wzLw6yCswEtFM73raA=
 			</data>
 		</dict>
 		<key>Modules/livemap_ios_sdk.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
@@ -144,22 +144,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			p6ye/JVhciDWh8WfDngEkGXvXr8=
+			5jAW6NCA+0TcOzEUtclB7ruwGDM=
 			</data>
 			<key>hash2</key>
 			<data>
-			4fRC5smBb6tb0poo8OnF6iPEZVbDLyXwrin2AUMD7fs=
+			TXDCjlo/CH7zWEbWBIvObumBIw0d6cXHijHy8NMtPPI=
 			</data>
 		</dict>
 		<key>Modules/livemap_ios_sdk.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			fyyPFdcpklaG331CE7D3j9GcuB4=
+			6Jmn8xyFgeWpdUxhby208195YVw=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ku1yfB0ZOHVDAatLWMrUV7RY/KhZepg9t54XpQA2CzU=
+			Yyn/bwqKWWdHd5RecKEMZCo99DUA4jit60HVsppkuBc=
 			</data>
 		</dict>
 		<key>Modules/livemap_ios_sdk.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -177,22 +177,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			MojSj5jKpMqxOKr6hgOclMV8O00=
+			UvpH2BuCRluFaS0gxAnRlfPUgVI=
 			</data>
 			<key>hash2</key>
 			<data>
-			I63Q7S/NFnecmYpjxBj0X3TDNNHT1BuTDqOT5Qb91CQ=
+			qkgUy+oBm67z2Tze8m9zeTIk+/rR4sJRm5wx4uEGtZk=
 			</data>
 		</dict>
 		<key>Modules/livemap_ios_sdk.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			uqAqFSqEPBwnP/QObXnezeOnAI8=
+			jbzV50C8F8ggLxpeHLnfL46iMRE=
 			</data>
 			<key>hash2</key>
 			<data>
-			R/0YL649reoVQkzCviqbCCJ0nik40ulQWKG2ZeBEh9g=
+			2dkyH5hVv8H7pVNbnxtIjKspe+2aWqcepZSzgjsw4Us=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
