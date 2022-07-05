@@ -148,19 +148,19 @@ extension WemapLivemap: wemapsdkViewDelegate {
     
     @objc func onMapMoved(_ wemapController: wemapsdk, mapMoved: MapMoved) {
         if (self.onMapMoved == nil) { return }
-        let livemapEvent = getLivemapEvent(json: mapMoved.toDictionary())
+        let livemapEvent = getLivemapEvent(json: mapMoved.toJSONObject() as! [String : Any])
         self.onMapMoved!(livemapEvent)
     }
     
     @objc func onMapClick(_ wemapController: wemapsdk, coordinates: Coordinates) {
         if (self.onMapClick == nil) { return }
-        let livemapEvent = getLivemapEvent(json: coordinates.toDictionary())
+        let livemapEvent = getLivemapEvent(json: coordinates.toJSONObject() as! [String : Any])
         self.onMapClick!(livemapEvent)
     }
     
     @objc func onMapLongClick(_ wemapController: wemapsdk, coordinates: Coordinates) {
         if (self.onMapLongClick == nil) { return }
-        let livemapEvent = getLivemapEvent(json: coordinates.toDictionary())
+        let livemapEvent = getLivemapEvent(json: coordinates.toJSONObject() as! [String : Any])
         self.onMapLongClick!(livemapEvent)
     }
 
@@ -231,30 +231,30 @@ extension WemapLivemap: wemapsdkViewDelegate {
     
     @objc func onContentUpdated(_ wemapController: wemapsdk, events: [WemapEvent], contentUpdatedQuery: ContentUpdatedQuery) {
         if (self.onContentUpdated == nil) { return }
-        let items = events.map({ $0.toDictionary() })
-        let query = contentUpdatedQuery.toDictionary()
+        let items = events.map({ $0.toJSONObject() })
+        let query = contentUpdatedQuery.toJSONObject()
         let livemapEvent = getLivemapEvent(json: ["type": "events", "items": items, "query": query])
         self.onContentUpdated!(livemapEvent)
     }
     
     @objc func onContentUpdated(_ wemapController: wemapsdk, pinpoints: [WemapPinpoint], contentUpdatedQuery: ContentUpdatedQuery) {
         if (self.onContentUpdated == nil) { return }
-        let items = pinpoints.map({ $0.toDictionary() })
-        let query = contentUpdatedQuery.toDictionary()
+        let items = pinpoints.map({ $0.toJSONObject() })
+        let query = contentUpdatedQuery.toJSONObject()
         let livemapEvent = getLivemapEvent(json: ["type": "events", "items": items, "query": query])
         self.onContentUpdated!(livemapEvent)
     }
     
     @objc func onActionButtonClick(_ wemapController: wemapsdk, event: WemapEvent, actionType: String) {
         if (self.onActionButtonClick == nil) { return }
-        let event = event.toDictionary()
+        let event = event.toJSONObject()
         let livemapEvent = getLivemapEvent(json: ["itemType": "event", "item": event, "actionType": actionType])
         self.onActionButtonClick!(livemapEvent)
     }
     
     @objc func onActionButtonClick(_ wemapController: wemapsdk, pinpoint: WemapPinpoint, actionType: String) {
         if (self.onActionButtonClick == nil) { return }
-        let pinpoint = pinpoint.toDictionary()
+        let pinpoint = pinpoint.toJSONObject()
         let livemapEvent = getLivemapEvent(json: ["itemType": "pinpoint", "item": pinpoint, "actionType": actionType])
         self.onActionButtonClick!(livemapEvent)
     }
