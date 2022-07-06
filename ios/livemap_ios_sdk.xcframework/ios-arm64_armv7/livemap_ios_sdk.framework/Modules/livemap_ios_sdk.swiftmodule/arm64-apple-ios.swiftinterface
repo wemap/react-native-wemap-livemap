@@ -217,9 +217,9 @@ public struct wemapsdk_config {
   final public let name: Swift.String
   final public let pinpointDescription: Swift.String
   final public let external_data: Foundation.NSDictionary?
-  final public let image_url: Swift.String
-  final public let media_url: Swift.String
-  final public let media_type: Swift.String
+  final public let image_url: Swift.String?
+  final public let media_url: Swift.String?
+  final public let media_type: Swift.String?
   final public let geo_entity_shape: Foundation.NSDictionary?
   final public let tags: [Swift.String]?
   public init(_ json: Foundation.NSDictionary)
