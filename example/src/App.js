@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native';
 import Livemap from '@wemap/react-native-wemap-livemap';
 
 const INITIAL_MAP_CONFIG = {
-  emmid: 9432,
+  emmid: 23225,
   token: null,
   // maxbounds: {
   //   northEast: {
