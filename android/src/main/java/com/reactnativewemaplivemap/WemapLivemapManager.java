@@ -10,23 +10,25 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.modules.core.PermissionAwareActivity;
-import com.getwemap.livemap.sdk.LivemapOptions;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
+import com.getwemap.livemap.sdk.model.Coordinates;
 import com.getwemap.livemap.sdk.model.Filters;
-import com.getwemap.livemap.sdk.model.LatLngAlt;
 import com.getwemap.livemap.sdk.model.Pinpoint;
-import com.getwemap.livemap.sdk.model.PolylineOptions;
+import com.getwemap.livemap.sdk.options.LivemapOptions;
+import com.getwemap.livemap.sdk.options.OfflineOptions;
 import com.reactnativewemaplivemap.utils.ReactNativeJson;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,10 +66,6 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
       livemapOptions.webappEndpoint = mapConfig.getString("webappEndpoint");
     }
 
-    if (mapConfig.hasKey("enableProviders")) {
-      livemapOptions.enableProviders = mapConfig.getBoolean("enableProviders");
-    }
-
     if (mapConfig.hasKey("ufe") && mapConfig.getBoolean("ufe")) {
       livemapOptions.ufe = mapConfig.getBoolean("ufe");
     } else {
@@ -78,6 +76,36 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
           if (boundsMap != null) {
               JSONObject maxbounds = ReactNativeJson.convertMapToJson(boundsMap);
               livemapOptions.maxbounds = livemapOptions.maxbounds.fromJson(maxbounds);
+          }
+      } catch (JSONException | NullPointerException jsonProcessingException) {
+          jsonProcessingException.printStackTrace();
+      }
+
+      try {
+          ReadableMap offlineMap = mapConfig.getMap("offlineOptions");
+
+          if (offlineMap != null) {
+              JSONObject offlineOptions = ReactNativeJson.convertMapToJson(offlineMap);
+              ArrayList<Integer> blacklist = new ArrayList<Integer>();
+              String tiles = null;
+              HashMap<String, Object> hashMap = offlineMap.toHashMap();
+
+              if(hashMap.get("blacklist") != null){
+                JSONArray jsonArray = offlineOptions.getJSONArray("blacklist");
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                  blacklist.add(jsonArray.getInt(i));
+                }
+              }
+              if(hashMap.get("tiles") != null){
+                tiles = (String) hashMap.get("tiles");
+              }
+
+                livemapOptions.offlineOptions = new OfflineOptions(
+                  offlineOptions.getBoolean("enable"),
+                  tiles,
+                  blacklist
+                );
           }
       } catch (JSONException | NullPointerException jsonProcessingException) {
           jsonProcessingException.printStackTrace();
@@ -169,7 +197,7 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
         String query = args.getString(2);
         String[] tags = args.getArray(3).toArrayList().toArray(new String[0]);
         Filters filters = new Filters(startDate, endDate, query, tags);
-        
+
         root.livemap.setFilters(filters);
         break;
       case "navigateToPinpointViaManager":
@@ -230,7 +258,7 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
       case "setCenterViaManager":
         try {
           JSONObject jsonCenter = ReactNativeJson.convertMapToJson(args.getMap(0));
-          LatLngAlt center = LatLngAlt.fromJson(jsonCenter);
+          Coordinates center = Coordinates.fromJson(jsonCenter);
           root.livemap.setCenter(center);
         } catch (JSONException e) {
           e.printStackTrace();
@@ -242,7 +270,7 @@ public class WemapLivemapManager extends SimpleViewManager<WemapLivemap> {
       case "centerToViaManager":
         try {
           JSONObject jsonCenter = ReactNativeJson.convertMapToJson(args.getMap(0));
-          LatLngAlt center = LatLngAlt.fromJson(jsonCenter);
+          Coordinates center = Coordinates.fromJson(jsonCenter);
           Double zoom = args.getDouble(1);
           root.livemap.centerTo(center, zoom);
         } catch (JSONException e) {

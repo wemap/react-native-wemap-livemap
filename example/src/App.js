@@ -7,6 +7,12 @@ import Livemap from '@wemap/react-native-wemap-livemap';
 const INITIAL_MAP_CONFIG = {
   emmid: 23225,
   token: null,
+  // offlineOptions: {
+  //   enable: true,
+  //   tiles: "https://test.com",
+  //   blacklist: [1, 2, 3]
+  // }
+
   // maxbounds: {
   //   northEast: {
   //     latitude: 52.526714,
