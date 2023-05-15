@@ -36,13 +36,17 @@ class WemapLivemap: UIView {
         let maxbounds: BoundingBox? = (self.mapConfig["maxbounds"] as? NSDictionary) != nil ? BoundingBox.fromDictionary(self.mapConfig["maxbounds"] as! NSDictionary) : nil
         
         let introcard: IntroCardParameter? = (self.mapConfig["introcard"] as? NSDictionary) != nil ? IntroCardParameter.fromDictionary(self.mapConfig["introcard"] as! NSDictionary) : nil
+        
+        let offlineOptions: OfflineOptions? = (self.mapConfig["offlineOptions"] as? NSDictionary) != nil ?
+            OfflineOptions.fromDictionary(self.mapConfig["offlineOptions"] as!  NSDictionary) : nil
                     
         _ = wemap.configure(config: wemapsdk_config(
             token: self.mapConfig!["token"] as? String,
             mapId: self.mapConfig!["emmid"] as? Int,
             livemapRootUrl: self.mapConfig["webappEndpoint"] as? String,
             maxbounds: maxbounds,
-            introcard: introcard
+            introcard: introcard,
+            offlineOptions: offlineOptions
         )).presentIn(view: self)
     }
 

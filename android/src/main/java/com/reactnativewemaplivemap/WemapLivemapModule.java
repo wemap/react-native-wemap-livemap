@@ -12,8 +12,8 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.module.annotations.ReactModule;
-import com.getwemap.livemap.sdk.model.LatLngAlt;
-import com.getwemap.livemap.sdk.model.PolylineOptions;
+import com.getwemap.livemap.sdk.model.Coordinates;
+import com.getwemap.livemap.sdk.options.PolylineOptions;
 import com.reactnativewemaplivemap.utils.ReactNativeJson;
 
 import org.json.JSONException;
@@ -44,12 +44,12 @@ public class WemapLivemapModule extends ReactContextBaseJavaModule implements Ac
 
   @ReactMethod
   public void drawPolylineViaModule(ReadableArray coordinatesReadableArray, ReadableMap optionsReadableMap, Promise promise) {
-    List<LatLngAlt> coordinatesList = new ArrayList();
+    List<Coordinates> coordinatesList = new ArrayList();
     for (int i = 0; i < coordinatesReadableArray.size(); i++) {
       ReadableMap coordinatesMap = coordinatesReadableArray.getMap(i);
       try {
         JSONObject coordinatesJson = ReactNativeJson.convertMapToJson(coordinatesMap);
-        LatLngAlt coordinates = LatLngAlt.fromJson(coordinatesJson);
+        Coordinates coordinates = Coordinates.fromJson(coordinatesJson);
         coordinatesList.add(coordinates);
       } catch (JSONException e) {
         e.printStackTrace();

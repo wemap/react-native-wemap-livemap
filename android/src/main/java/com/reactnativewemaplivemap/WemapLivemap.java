@@ -5,17 +5,23 @@ import android.util.Log;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.getwemap.livemap.sdk.Livemap;
 import com.getwemap.livemap.sdk.LivemapView;
-import com.getwemap.livemap.sdk.OnLivemapReadyCallback;
-import com.getwemap.livemap.sdk.callbacks.ActionButtonClickListener;
+import com.getwemap.livemap.sdk.callback.LivemapReadyCallback;
+import com.getwemap.livemap.sdk.listener.ActionButtonClickListener;
+import com.getwemap.livemap.sdk.listener.ContentUpdatedListener;
+import com.getwemap.livemap.sdk.listener.MapMovedListener;
+import com.getwemap.livemap.sdk.model.BoundingBox;
+import com.getwemap.livemap.sdk.model.Coordinates;
 import com.getwemap.livemap.sdk.model.Event;
 import com.getwemap.livemap.sdk.model.Pinpoint;
 import com.getwemap.livemap.sdk.model.Query;
 import com.reactnativewemaplivemap.utils.ReactNativeJson;
-import com.getwemap.livemap.sdk.callbacks.ContentUpdatedListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,7 +30,7 @@ import org.json.JSONObject;
 import java.lang.NullPointerException;
 import java.util.List;
 
-public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback {
+public class WemapLivemap extends LivemapView implements LivemapReadyCallback {
 
   public Livemap livemap;
 
@@ -55,7 +61,6 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
     this.livemap = livemap;
 
     sendNativeEvent("onMapReady");
-
     livemap.addPinpointOpenListener((pinpoint) -> sendNativeEvent("onPinpointOpen", e -> {
       e.putInt("id", pinpoint.getId());
       e.putString("name", pinpoint.getName());
@@ -65,16 +70,19 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
       e.putString("image_url", pinpoint.getImageUrl());
       e.putString("media_url", pinpoint.getMediaUrl());
       e.putString("media_type", pinpoint.getMediaType());
-      try {
-        e.putArray("tags", ReactNativeJson.convertJsonToArray(pinpoint.getTags()));
-      } catch (JSONException | NullPointerException jsonProcessingException) {
-        jsonProcessingException.printStackTrace();
+
+      WritableArray writableArray = new WritableNativeArray();
+      for (String str : pinpoint.getTags()) {
+        writableArray.pushString(str);
       }
+      e.putArray("tags",writableArray);
+
       try {
         e.putMap("geo_entity_shape", ReactNativeJson.convertJsonToMap(pinpoint.getGeoEntityShape()));
       } catch (JSONException | NullPointerException jsonProcessingException) {
         jsonProcessingException.printStackTrace();
       }
+
       try {
         e.putMap("external_data", ReactNativeJson.convertJsonToMap(pinpoint.getExternalData()));
       } catch (JSONException | NullPointerException jsonProcessingException) {
@@ -88,16 +96,17 @@ public class WemapLivemap extends LivemapView implements OnLivemapReadyCallback 
     livemap.addEventCloseListener(() -> sendNativeEvent("onEventClose", e -> e = null));
     livemap.addGuidingStartedListener(() -> sendNativeEvent("onGuidingStarted", e -> e = null));
     livemap.addGuidingStoppedListener(() -> sendNativeEvent("onGuidingStopped", e -> e = null));
-    livemap.addMapMovedListener((mapMoved) -> sendNativeEvent("onMapMoved", e -> {
-      e.putDouble("zoom", mapMoved.zoom);
-      e.putDouble("latitude", mapMoved.point.getLat());
-      e.putDouble("longitude", mapMoved.point.getLng());
+    livemap.addMapMovedListener((aDouble, boundingBox, coordinates) -> sendNativeEvent("onMapMoved", e -> {
+      e.putDouble("zoom", aDouble);
+      e.putDouble("latitude", coordinates.getLat());
+      e.putDouble("longitude", coordinates.getLng());
       try {
-          e.putMap("bounds", ReactNativeJson.convertJsonToMap(mapMoved.bounds.toJson(mapMoved.bounds)));
+        e.putMap("bounds", ReactNativeJson.convertJsonToMap(boundingBox.toJson(boundingBox)));
       } catch (JSONException | NullPointerException jsonProcessingException) {
-          jsonProcessingException.printStackTrace();
+        jsonProcessingException.printStackTrace();
       }
     }));
+
     livemap.addMapClickListener((point) -> sendNativeEvent("onMapClick", e -> {
         e.putDouble("latitude", point.getLat());
         e.putDouble("longitude", point.getLng());

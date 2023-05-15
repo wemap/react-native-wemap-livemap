@@ -5,8 +5,14 @@ import { SafeAreaView } from 'react-native';
 import Livemap from '@wemap/react-native-wemap-livemap';
 
 const INITIAL_MAP_CONFIG = {
-  emmid: 9432,
+  emmid: 23225,
   token: null,
+   offlineOptions: {
+     enable: true,
+     tiles: "https://tst.com",
+     blacklist: [1, 2, 3]
+   }
+
   // maxbounds: {
   //   northEast: {
   //     latitude: 52.526714,

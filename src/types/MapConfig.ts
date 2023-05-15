@@ -1,4 +1,5 @@
 import type MapBounds from './MapBounds';
+import type OfflineOptions from './OfflineOptions';
 
 export default interface MapConfig {
   /** the emmid of your map */
@@ -11,4 +12,6 @@ export default interface MapConfig {
   ufe?: boolean;
   /** the Wemap endpoint you want to request */
   webappEndpoint?: string;
+  /** the offline configuration */
+  offlineOptions?: OfflineOptions
 }
