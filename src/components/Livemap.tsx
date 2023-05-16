@@ -16,6 +16,7 @@ import type {
   Coordinates,
   PolylineOptions,
 } from '../types';
+import type UserLocation from 'src/types/UserLocation';
 
 const NativeLivemap: HostComponent<NativeLivemapProps> = requireNativeComponent('WemapLivemap');
 
@@ -59,6 +60,7 @@ const Livemap = forwardRef<LivemapRef, LivemapProps>((props, ref) => {
     drawPolyline,
     removePolyline,
     centerTo,
+    getUserLocation
   }));
 
   const openEvent = (id: number): void => {
@@ -134,6 +136,17 @@ const Livemap = forwardRef<LivemapRef, LivemapProps>((props, ref) => {
 
   const centerTo = (center: Coordinates, zoom: Number): void => {
     sendCommand('centerToViaManager', [center, zoom]);
+  };
+
+  const getUserLocation = async (): Promise<UserLocation> => {
+    let nativeUserLocation = await NativeModules.WemapLivemapModule.getUserLocationModule();
+    let userLocation: UserLocation = {
+      latitude: nativeUserLocation.latitude,
+      longitude: nativeUserLocation.longitude,
+      altitude: nativeUserLocation.altitude,
+      accuracy: nativeUserLocation.accuracy
+    };
+    return userLocation;
   };
 
   return (

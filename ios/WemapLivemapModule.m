@@ -14,4 +14,8 @@ RCT_EXTERN_METHOD(
                   resolve: (RCTPromiseResolveBlock)resolve
                   reject: (RCTPromiseRejectBlock)reject
 )
+RCT_EXTERN_METHOD(
+                  getUserLocationModule: (RCTPromiseResolveBlock)resolve
+                  reject: (RCTPromiseRejectBlock)reject
+)
 @end

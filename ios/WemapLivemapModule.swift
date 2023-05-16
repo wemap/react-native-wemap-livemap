@@ -35,4 +35,29 @@ class WemapLivemapModule: NSObject {
             )
         }
     }
+    
+    @available(iOS 14.0, *)
+    @objc func getUserLocationModule(_ resolve: @escaping RCTPromiseResolveBlock,
+                                     reject: RCTPromiseRejectBlock
+    ) -> Void {
+        func resolveLocationDict(coords: Coordinates){
+            let dict = NSDictionary(dictionary:
+                [
+                    "latitude": coords.latitude,
+                    "longitude": coords.longitude,
+                    "altitude": coords.altitude,
+                    "accuracy": coords.accuracy
+                ]
+            )
+            resolve(dict)
+        }
+        self.livemapView?.wemap.getUserLocation(
+            completionHandler: { coordinates in
+                resolveLocationDict(coords: coordinates)
+            }
+        )
+
+    }
+
+    
 }

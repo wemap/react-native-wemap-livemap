@@ -5,14 +5,18 @@ import android.content.Intent;
 import android.graphics.Color;
 
 import com.facebook.react.bridge.ActivityEventListener;
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.module.annotations.ReactModule;
+import com.getwemap.livemap.sdk.callback.GetUserLocationCallback;
 import com.getwemap.livemap.sdk.model.Coordinates;
+import com.getwemap.livemap.sdk.model.UserLocation;
 import com.getwemap.livemap.sdk.options.PolylineOptions;
 import com.reactnativewemaplivemap.utils.ReactNativeJson;
 
@@ -20,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @ReactModule(name = WemapLivemapModule.MODULE_NAME)
@@ -74,6 +79,21 @@ public class WemapLivemapModule extends ReactContextBaseJavaModule implements Ac
     }
 
     mLivemapView.livemap.drawPolyline(coordinatesList, options, id -> promise.resolve(id));
+  }
+  @ReactMethod
+  public void getUserLocationModule(Promise promise){
+    mLivemapView.livemap.getUserLocation(new GetUserLocationCallback() {
+      @Override
+      public void callback(UserLocation userLocation) {
+        WritableMap locationMap = Arguments.createMap();
+        locationMap.putDouble("latitude", userLocation.getLat());
+        locationMap.putDouble("longitude",userLocation.getLng());
+        locationMap.putDouble("altitude",userLocation.getAlt());
+        locationMap.putDouble("accuracy",userLocation.getAccuracy());
+
+        promise.resolve(locationMap);
+      }
+    });
   }
 
   @Override

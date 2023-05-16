@@ -76,12 +76,28 @@ export default () => {
     // livemap.current.setFilters(...filters);
     // livemap.current.setCenter({ latitude: 60.609138, longitude: 10.884193 });
 
+    // livemap.current.centerTo(
+    //       {
+    //         latitude: 43.609138,
+    //         longitude: 3.884193,
+    //       },
+    //       16
+    //     );
+
     // livemap.current.drawPolyline(polyline, { color: '#222222' }).then((id) => {
     //   console.log('Polyline drawn: ' + id);
-    //   setTimeout(() => {
-    //     console.log('Polyline removed: ' + id);
-    //     livemap.current.removePolyline(id);
-    //   }, 8000);
+    //   // setTimeout(() => {
+    //   //   console.log('Polyline removed: ' + id);
+    //   //   livemap.current.removePolyline(id);
+    //   // }, 8000);
+    // });
+
+    // livemap.current.getUserLocation().then((userLocation) => {
+    //   console.log('lat : ' + userLocation.latitude);
+    //   console.log('lng : ' + userLocation.longitude);
+    //   console.log('alt : ' + userLocation.altitude);
+    //   console.log('acc : ' + userLocation.accuracy);
+
     // });
 
     // setTimeout(() => {

@@ -1,6 +1,7 @@
 import type PolylineOptions from './PolylineOptions';
 import type Coordinates from './Coordinates';
 import type Pinpoint from './Pinpoint';
+import type UserLocation from './UserLocation';
 
 export default interface LivemapRef {
   /**
@@ -113,4 +114,10 @@ export default interface LivemapRef {
    * @param zoom the new zoom level.
    */
   centerTo: (center: Coordinates, zoom: Number) => void;
+
+  /**
+   * Get the user location. 
+   * @returns a promise with the user location if the user accepts to share his location.
+   */
+  getUserLocation: () => Promise<UserLocation>;
 }
