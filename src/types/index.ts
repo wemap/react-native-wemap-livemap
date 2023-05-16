@@ -9,6 +9,7 @@ import type Pinpoint from './Pinpoint';
 import type LivemapEvent from './LivemapEvent';
 import type LivemapDefaultStyle from './LivemapDefaultStyle';
 import type PolylineOptions from './PolylineOptions';
+import type OfflineOptions from './OfflineOptions';
 
 export {
   Coordinates,
@@ -22,4 +23,5 @@ export {
   LivemapEvent,
   LivemapDefaultStyle,
   PolylineOptions,
+  OfflineOptions
 };
