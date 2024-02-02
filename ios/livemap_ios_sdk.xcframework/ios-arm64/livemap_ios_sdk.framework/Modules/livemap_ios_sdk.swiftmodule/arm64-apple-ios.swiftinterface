@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)
+// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
 // swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name livemap_ios_sdk
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import AVFoundation
@@ -34,6 +34,8 @@ extension Swift.String : Foundation.LocalizedError {
   @objc optional func onIndoorFeatureClick(_ wemapController: livemap_ios_sdk.wemapsdk, data: [Swift.String : Any])
   @objc optional func onIndoorLevelChanged(_ wemapController: livemap_ios_sdk.wemapsdk, data: [Swift.String : Any])
   @objc optional func onIndoorLevelsChanged(_ wemapController: livemap_ios_sdk.wemapsdk, data: Swift.Array<Any>)
+  @objc optional func onPermissionsDenied(_ wemapController: livemap_ios_sdk.wemapsdk, deniedPermissions: [Swift.String])
+  @objc optional func onInaccurateMagnetometer(_ wemapController: livemap_ios_sdk.wemapsdk)
   @objc optional func onBookEventClicked(_ wemapController: livemap_ios_sdk.wemapsdk, event: livemap_ios_sdk.WemapEvent)
   @objc optional func onGoToPinpointClicked(_ wemapController: livemap_ios_sdk.wemapsdk, pinpoint: livemap_ios_sdk.WemapPinpoint)
   @objc optional func onMapMoved(_ wemapController: livemap_ios_sdk.wemapsdk, mapMoved: livemap_ios_sdk.MapMoved)
@@ -91,13 +93,15 @@ extension livemap_ios_sdk.wemapsdk {
   @_Concurrency.MainActor(unsafe) public func removePolyline(id: Swift.String)
   @_Concurrency.MainActor(unsafe) public func setCenter(center: livemap_ios_sdk.Coordinates)
   @_Concurrency.MainActor(unsafe) public func centerTo(center: livemap_ios_sdk.Coordinates, zoom: Swift.Double)
-  @_Concurrency.MainActor(unsafe) public func easeTo(center: livemap_ios_sdk.Coordinates, zoom: Swift.Double?, padding: [Swift.String : Swift.Double]?)
+  @_Concurrency.MainActor(unsafe) public func easeTo(center: livemap_ios_sdk.Coordinates, zoom: Swift.Double?, padding: [Swift.String : Swift.Double]? = nil, bearing: Swift.Double? = nil, pitch: Swift.Double? = nil, duration: Swift.Double? = nil, animate: Swift.Bool? = nil)
   @_Concurrency.MainActor(unsafe) public func fitBounds(bounds: livemap_ios_sdk.BoundingBox, options: [Swift.String : [Swift.String : Swift.Double]])
   @_Concurrency.MainActor(unsafe) public func disablePositioningSystem()
   @available(iOS 14.0, *)
   @_Concurrency.MainActor(unsafe) public func disablePositioningSystem(completionHandler: (() -> ())? = nil)
   @available(iOS 14.0, *)
   @_Concurrency.MainActor(unsafe) public func getUserLocation(completionHandler: ((livemap_ios_sdk.Coordinates) -> ())? = nil)
+  @available(iOS 14.0, *)
+  @_Concurrency.MainActor(unsafe) public func getZoom(completionHandler: ((Swift.Double) -> ())? = nil)
   @_Concurrency.MainActor(unsafe) public func setUserLocation(userLocation: livemap_ios_sdk.Coordinates)
   @available(iOS 14.0, *)
   @_Concurrency.MainActor(unsafe) public func setUserLocation(userLocation: livemap_ios_sdk.Coordinates, completionHandler: (() -> ())? = nil)
@@ -109,6 +113,7 @@ extension livemap_ios_sdk.wemapsdk {
   @available(iOS 14.0, *)
   @_Concurrency.MainActor(unsafe) public func addMarker(marker: livemap_ios_sdk.Marker, completion: ((Swift.String) -> ())? = nil)
   @_Concurrency.MainActor(unsafe) public func removeMarker(id: Swift.String)
+  @_Concurrency.MainActor(unsafe) public func forceARViewMode(mode: livemap_ios_sdk.ARViewMode)
 }
 public struct WemapFilters : Swift.Codable {
   public init(tags: Swift.Array<Swift.String>? = nil, query: Swift.String? = nil, startDate: Swift.String? = nil, endDate: Swift.String? = nil)
@@ -262,6 +267,14 @@ public struct wemapsdk_config {
   public func toJSONObject() -> Any
   @objc deinit
 }
+public enum ARViewMode {
+  case ON, OFF, AUTO
+  public static func == (a: livemap_ios_sdk.ARViewMode, b: livemap_ios_sdk.ARViewMode) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class CustomARView : UIKit.UIView {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
@@ -278,3 +291,5 @@ public struct wemapsdk_config {
   @objc optional func sharePinpoint(controller: livemap_ios_sdk.wemapsdk)
   @objc optional func shareMap(controller: livemap_ios_sdk.wemapsdk)
 }
+extension livemap_ios_sdk.ARViewMode : Swift.Equatable {}
+extension livemap_ios_sdk.ARViewMode : Swift.Hashable {}
