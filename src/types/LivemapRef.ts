@@ -92,7 +92,7 @@ export default interface LivemapRef {
    * Draw a polyline on the map between multiple coordinates.
    * You can either draw a raw array of coordinates or use our itinerary service to draw a route between multiple points.
    * @param {[Coordinates]} coordinatesList id of lists to be added to the map.
-   * @param {PolylineOptions} options the polyline options. Please refer to the [JS documentation](/docs/javascript/livemap#livemapdrawpolyline) to check its default values.
+   * @param {PolylineOptions} options the polyline options. Please refer to the Embed SDK documentation to check its default values.
    */
   drawPolyline: (coordinatesList: [Coordinates], options: PolylineOptions) => Promise<String>;
 
